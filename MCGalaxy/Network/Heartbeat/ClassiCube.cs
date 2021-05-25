@@ -59,6 +59,7 @@ namespace MCGalaxy.Network {
         }
 
         public override string GetHeartbeatData()  {
+            if (Server.Config.PVN < 7) return "";
             string name = Server.Config.Name;
             OnSendingHeartbeatEvent.Call(this, ref name);
             name = Colors.StripUsed(name);

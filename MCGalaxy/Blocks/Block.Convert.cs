@@ -21,7 +21,6 @@ using BlockRaw = System.Byte;
 
 namespace MCGalaxy {
     public static partial class Block {
-        
         internal static string[] coreNames = new string[Block.Count];
         public static bool Undefined(BlockID block) { return IsPhysicsType(block) && coreNames[block].CaselessEq("unknown"); }
         
@@ -74,7 +73,55 @@ namespace MCGalaxy {
             }
             return Block.Invalid;
         }
+
+        public static byte Convert5(byte block) {
+            switch (block) {
+                case Glass: return Leaves;
+                case Sponge: return Grass;
+                default: return block;
+            }
+        }
         
+        public static byte Convert6(byte block) {
+            switch (block) {
+                case Red: return Lava;
+                case Orange: return Dirt;
+                case Yellow: return Sponge;
+                case Lime: return Sand;
+                case Green: return Leaves;
+                case Teal: return Grass;
+                case Aqua: return Water;
+                case Cyan: return Water;
+                case Blue: return Water;
+                case Indigo: return Lava;
+                case Violet: return Lava;
+                case Magenta: return Lava;
+                case Pink: return Lava;
+                case Black: return Bedrock;
+                case Gray: return Gravel;
+                case White: return Stone;
+                case Rose: return Air;
+                case Dandelion: return Air;
+                case Mushroom: return Air;
+                case RedMushroom: return Air;
+                default: return block;
+            }
+        }
+
+        public static byte Convert7(byte block) {
+            switch (block) {
+                case Iron: return Gold;
+                case DoubleSlab: return Stone;
+                case Slab: return Stone;
+                case Brick: return Stone;
+                case TNT: return Red;
+                case Bookshelf: return Wood;
+                case MossyRocks: return Cobblestone;
+                case Obsidian: return Black;
+                default: return block;
+            }
+        }
+
         public static byte ConvertCPE(byte block) {
             switch (block) {
                 case CobblestoneSlab: return Slab;

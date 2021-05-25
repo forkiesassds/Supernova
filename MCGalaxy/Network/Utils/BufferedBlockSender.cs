@@ -112,6 +112,9 @@ namespace MCGalaxy.Network {
                 return noBlockDefs;
             } else {
                 if (original == null) original = MakeOriginalOnly();
+                if (Server.Config.PVN == 6) original = Make6Only();
+                if (Server.Config.PVN == 5) original = Make5Only();
+                if (Server.Config.PVN < 5) original = Make4Only();
                 return original;
             }
         }
@@ -236,6 +239,54 @@ namespace MCGalaxy.Network {
                 data[j++] = (byte)(y >> 8); data[j++] = (byte)y;
                 data[j++] = (byte)(z >> 8); data[j++] = (byte)z;
                 data[j++] = Block.ConvertCPE(level.GetFallback(blocks[i]));
+            }
+            return data;
+        }
+        byte[] Make6Only() {
+            byte[] data = new byte[count * 8];
+            for (int i = 0, j = 0; i < count; i++) {
+                int index = indices[i];
+                int x = (index % level.Width);
+                int y = (index / level.Width) / level.Length;
+                int z = (index / level.Width) % level.Length;
+                
+                data[j++] = Opcode.SetBlock;
+                data[j++] = (byte)(x >> 8); data[j++] = (byte)x;
+                data[j++] = (byte)(y >> 8); data[j++] = (byte)y;
+                data[j++] = (byte)(z >> 8); data[j++] = (byte)z;
+                data[j++] = Block.Convert7(Block.ConvertCPE(level.GetFallback(blocks[i])));
+            }
+            return data;
+        }
+        byte[] Make5Only() {
+            byte[] data = new byte[count * 8];
+            for (int i = 0, j = 0; i < count; i++) {
+                int index = indices[i];
+                int x = (index % level.Width);
+                int y = (index / level.Width) / level.Length;
+                int z = (index / level.Width) % level.Length;
+                
+                data[j++] = Opcode.SetBlock;
+                data[j++] = (byte)(x >> 8); data[j++] = (byte)x;
+                data[j++] = (byte)(y >> 8); data[j++] = (byte)y;
+                data[j++] = (byte)(z >> 8); data[j++] = (byte)z;
+                data[j++] = Block.Convert6(Block.Convert7(Block.ConvertCPE(level.GetFallback(blocks[i]))));
+            }
+            return data;
+        }
+        byte[] Make4Only() {
+            byte[] data = new byte[count * 8];
+            for (int i = 0, j = 0; i < count; i++) {
+                int index = indices[i];
+                int x = (index % level.Width);
+                int y = (index / level.Width) / level.Length;
+                int z = (index / level.Width) % level.Length;
+                
+                data[j++] = Opcode.SetBlock;
+                data[j++] = (byte)(x >> 8); data[j++] = (byte)x;
+                data[j++] = (byte)(y >> 8); data[j++] = (byte)y;
+                data[j++] = (byte)(z >> 8); data[j++] = (byte)z;
+                data[j++] = Block.Convert5(Block.Convert6(Block.Convert7(Block.ConvertCPE(level.GetFallback(blocks[i])))));
             }
             return data;
         }

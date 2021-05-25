@@ -29,8 +29,9 @@ namespace MCGalaxy.Network {
         
         public static byte[] Motd(Player p, string motd) {
             byte[] buffer = new byte[131];
+            if (Server.Config.PVN < 6) buffer = new byte[130];
             buffer[0] = Opcode.Handshake;
-            buffer[1] = Server.version;
+            buffer[1] = Server.Config.PVN;
             
             if (motd.Length > NetUtils.StringSize) {
                 NetUtils.Write(motd, buffer, 2, p.hasCP437);
@@ -40,7 +41,7 @@ namespace MCGalaxy.Network {
                 NetUtils.Write(motd, buffer, 66, p.hasCP437);
             }
 
-            buffer[130] = p.UserType();
+            if (Server.Config.PVN >= 6) buffer[130] = p.UserType();
             return buffer;
         }
         

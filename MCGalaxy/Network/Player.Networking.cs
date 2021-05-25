@@ -50,7 +50,7 @@ namespace MCGalaxy {
         
         int PacketSize(byte opcode) {
             switch (opcode) {
-                case Opcode.Handshake:      return 1 + 1 + 64 + 64 + 1;
+                case Opcode.Handshake:      return 1 + 1 + 64 + 64 + (Server.Config.PVN >= 6 ? 1 : 0);
                 case Opcode.SetBlockClient: return 1 + 6 + 1 + (hasExtBlocks ? 2 : 1);
                 case Opcode.EntityTeleport: return 1 + 6 + 2 + (hasExtPositions ? 6 : 0) + (hasExtBlocks ? 2 : 1);
                 case Opcode.Message:        return 1 + 1 + 64;
@@ -345,6 +345,9 @@ namespace MCGalaxy {
             }
             
             if (!hasCustomBlocks) raw = Block.ConvertCPE((BlockRaw)raw);
+            if (Server.Config.PVN == 6) raw = Block.Convert7(Block.ConvertCPE((BlockRaw)raw));
+            if (Server.Config.PVN == 5) raw = Block.Convert6(Block.Convert7(Block.ConvertCPE((BlockRaw)raw)));
+            if (Server.Config.PVN < 5) raw = Block.Convert5(Block.Convert6(Block.Convert7(Block.ConvertCPE((BlockRaw)raw))));
             return raw;
         }
     }

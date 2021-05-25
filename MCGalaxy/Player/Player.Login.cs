@@ -18,6 +18,7 @@ using System.Data;
 using System.IO;
 using MCGalaxy.Commands;
 using MCGalaxy.DB;
+using MCGalaxy.Eco;
 using MCGalaxy.Events.PlayerEvents;
 using MCGalaxy.Games;
 using MCGalaxy.Maths;
@@ -28,12 +29,12 @@ using MCGalaxy.Util;
 
 namespace MCGalaxy {
     public partial class Player : IDisposable {
-        
+        System.Timers.Timer extraTimer = new System.Timers.Timer(22000);
         void HandleLogin(byte[] buffer, int offset) {
             LastAction = DateTime.UtcNow;
             if (loggedIn) return;
             byte version = buffer[offset + 1];
-            if (version != Server.version) { Leave(null, "Wrong version!", true); return; }
+            if (version != Server.Config.PVN) { Leave(null, "Wrong version!", true); return; }
             
             name = NetUtils.ReadString(buffer, offset + 2);
             SkinName = name; DisplayName = name; truename = name;
@@ -42,7 +43,7 @@ namespace MCGalaxy {
             string mppass = NetUtils.ReadString(buffer, offset + 66);
             OnPlayerStartConnectingEvent.Call(this, mppass);
             if (cancelconnecting) { cancelconnecting = false; return; }
-            
+            if (Server.Config.PVN < 7) Server.Config.EnableCPE = false;
             hasCpe = buffer[offset + 130] == 0x42 && Server.Config.EnableCPE;
             level = Server.mainLevel;
             Loading = true;
@@ -95,6 +96,7 @@ namespace MCGalaxy {
             LastLogin = DateTime.Now;
             TotalTime = TimeSpan.FromSeconds(1);
             GetPlayerStats();
+            extraTimer.Start();
             ShowWelcome();
             
             Server.Background.QueueOnce(ShowAltsTask, name, TimeSpan.Zero);
@@ -218,6 +220,16 @@ namespace MCGalaxy {
             } else {
                 ((PlayerData)raw).ApplyTo(this);
                 Message("Welcome back " + FullName + "&S! You've been here " + TimesVisited + " times!");
+                extraTimer.Elapsed += delegate {
+                    extraTimer.Stop();
+                    if ( Command.Find("pay") != null && Command.Find("give") != null && Command.Find("take") != null ) Message("You currently have &a" + money + Server.Config.DefaultColor + " " + Server.Config.Currency);
+                    Message("You have modified &a" + TotalModified + Server.Config.DefaultColor + " blocks!");
+                    if ( PlayerInfo.Online.list.Count == 1 )
+                        Message("There is currently &a" + PlayerInfo.Online.list.Count + " player online.");
+                    else
+                        Message("There are currently &a" + PlayerInfo.Online.list.Count + " players online.");
+                    if ( Command.Find("award") != null && Command.Find("awards") != null && Command.Find("awardmod") != null ) Message("You have " + Awards.GetCurrentPlayerAwards(name).Count + " awards.");
+                };
             }
             gotSQLData = true;
         }

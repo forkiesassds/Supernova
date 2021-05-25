@@ -31,10 +31,9 @@ namespace MCGalaxy.Network {
 
         /// <summary> The max number of retries attempted for a heartbeat. </summary>
         public const int MAX_RETRIES = 3;
-        
         /// <summary> List of all heartbeats to pump. </summary>
-        public static List<Heartbeat> Heartbeats = new List<Heartbeat>() { new ClassiCubeBeat() };
-        
+        public static List<Heartbeat> Heartbeats = new List<Heartbeat>() { new ClassiCubeBeat(), new BetaCraftBeat() };
+
         
         /// <summary> Gets the URL the heartbeat is sent to. </summary>
         public abstract string URL { get; }

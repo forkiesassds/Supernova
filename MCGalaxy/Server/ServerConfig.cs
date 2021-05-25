@@ -38,6 +38,8 @@ namespace MCGalaxy {
         public int Port = 25565;
         [ConfigBool("public", "Server", false)]
         public bool Public = false;
+        [ConfigByte("pvn", "Server")]
+        public byte PVN = 7;
         [ConfigBool("verify-names", "Server", true)]
         public bool VerifyNames = true;
         [ConfigBool("support-web-client", "Server", true)]

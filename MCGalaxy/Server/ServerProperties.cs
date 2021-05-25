@@ -152,6 +152,7 @@ namespace MCGalaxy {
             w.WriteLine("#   port                          = The port to operate from");
             w.WriteLine("#   verify-names                  = Verify the validity of names");
             w.WriteLine("#   public                        = Set to true to appear in the public server list");
+            w.WriteLine("#   pvn                           = Allows older versions of Minecraft Classic to connect, DO NOT CHANGE IF YOU DON'T KNOW WHAT YOU ARE DOING");
             w.WriteLine("#   max-players                   = The maximum number of connections");
             w.WriteLine("#   max-guests                    = The maximum number of guests allowed");
             w.WriteLine("#   max-maps                      = The maximum number of maps loaded at once");
