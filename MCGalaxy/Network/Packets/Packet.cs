@@ -114,6 +114,7 @@ namespace MCGalaxy.Network {
         }
 
         public static byte[] UserType(byte type) {
+            if (Server.Config.PVN < 7) return new byte[] { Opcode.Ping };
             return new byte[] { Opcode.SetPermission, type };
         }
         
