@@ -222,13 +222,13 @@ namespace MCGalaxy {
                 Message("Welcome back " + FullName + "&S! You've been here " + TimesVisited + " times!");
                 extraTimer.Elapsed += delegate {
                     extraTimer.Stop();
-                    if ( Command.Find("pay") != null && Command.Find("give") != null && Command.Find("take") != null ) Message("You currently have &a" + money + Server.Config.DefaultColor + " " + Server.Config.Currency);
+                    if ( Economy.Enabled ) Message("You currently have &a" + money + Server.Config.DefaultColor + " " + Server.Config.Currency);
                     Message("You have modified &a" + TotalModified + Server.Config.DefaultColor + " blocks!");
                     if ( PlayerInfo.Online.list.Count == 1 )
                         Message("There is currently &a" + PlayerInfo.Online.list.Count + " player online.");
                     else
                         Message("There are currently &a" + PlayerInfo.Online.list.Count + " players online.");
-                    if ( Command.Find("award") != null && Command.Find("awards") != null && Command.Find("awardmod") != null ) Message("You have " + Awards.GetCurrentPlayerAwards(name).Count + " awards.");
+                    if ( CanUse("awards") ) Message("You have " + Awards.GetCurrentPlayerAwards(name).Count + " awards.");
                 };
             }
             gotSQLData = true;
