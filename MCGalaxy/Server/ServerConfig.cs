@@ -66,8 +66,6 @@ namespace MCGalaxy {
         [ConfigString("HeartbeatURL", "Other", "http://www.classicube.net/heartbeat.jsp", false, ":/.")]
         public string HeartbeatURL = "http://www.classicube.net/heartbeat.jsp";
         
-        [ConfigBool("core-secret-commands", "Other", true)]
-        public bool CoreSecretCommands = true;
         [ConfigBool("restart-on-error", "Error handling", true)]
         public bool restartOnError = true;
         [ConfigBool("software-staff-prefixes", "Other", true)]
