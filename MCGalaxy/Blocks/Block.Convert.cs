@@ -87,6 +87,7 @@ namespace MCGalaxy {
                 case Red: return Lava;
                 case Orange: return Dirt;
                 case Yellow: return Sponge;
+                case Gold: return Sponge;
                 case Lime: return Sand;
                 case Green: return Leaves;
                 case Teal: return Grass;
