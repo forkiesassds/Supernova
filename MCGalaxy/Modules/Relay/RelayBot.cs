@@ -98,7 +98,7 @@ namespace MCGalaxy.Modules.Relay {
             return message;
         }
         /// <summary> Sends a chat message to the given channel </summary>
-        /// <remarks> The message has already been formatted using ConvertMessage </remarks>
+        /// <remarks> Assumes the message has already been formatted using ConvertMessage </remarks>
         protected abstract void DoSendMessage(string channel, string message);
         
         
@@ -156,6 +156,12 @@ namespace MCGalaxy.Modules.Relay {
                     // SocketException is usually due to complete connection dropout
                     retries = 0;
                     Thread.Sleep(30 * 1000);
+                } catch (IOException ex) {
+                    // IOException is an expected error, so don't log full details
+                    Logger.Log(LogType.Warning, "{0} read error ({1})", RelayName, ex.Message);
+                } catch (ObjectDisposedException ex) {
+                    // ObjectDisposedException is an expected error, so don't log full details
+                    Logger.Log(LogType.Warning, "{0} read error ({1})", RelayName, ex.Message);
                 } catch (Exception ex) {
                     Logger.LogError(RelayName + " relay error", ex);
                 }               
@@ -340,9 +346,12 @@ namespace MCGalaxy.Modules.Relay {
             
             string[] parts = message.SplitSpaces(3);
             string rawCmd  = parts[0].ToLower();
+            bool chat      = Channels.CaselessContains(channel);
             bool opchat    = OpChannels.CaselessContains(channel);
             
-            if (HandleListPlayers(user, channel, rawCmd, opchat)) return;
+            // Only reply to .who on channels configured to listen on
+            if ((chat || opchat) && HandleListPlayers(user, channel, rawCmd, opchat)) return;
+            
             if (rawCmd.CaselessEq(Server.Config.IRCCommandPrefix)) {
                 if (!HandleCommand(user, channel, message, parts)) return;
             }
@@ -351,8 +360,7 @@ namespace MCGalaxy.Modules.Relay {
                 Logger.Log(LogType.RelayChat, "(OPs): ({0}) {1}: {2}", RelayName, user.Nick, message);
                 Chat.MessageOps(string.Format("To Ops &f-&I({0}) {1}&f- {2}", RelayName, user.Nick,
                                               Server.Config.ProfanityFiltering ? ProfanityFilter.Parse(message) : message));
-            } else if (Channels.CaselessContains(channel)) {
-                // ignore message if it is not from a configured channel
+            } else if (chat) {
                 Logger.Log(LogType.RelayChat, "({0}) {1}: {2}", RelayName, user.Nick, message);
                 MessageInGame(user.Nick, string.Format("&I({0}) {1}: &f{2}", RelayName, user.Nick,
                                                        Server.Config.ProfanityFiltering ? ProfanityFilter.Parse(message) : message));
@@ -360,7 +368,7 @@ namespace MCGalaxy.Modules.Relay {
         }
         
         bool HandleListPlayers(RelayUser user, string channel, string cmd, bool opchat) {
-            bool isWho = cmd == ".who" || cmd == ".players" || cmd == "!players";
+            bool isWho    = cmd == ".who" || cmd == ".players" || cmd == "!players";
             DateTime last = opchat ? lastOpWho : lastWho;
             if (!isWho || (DateTime.UtcNow - last).TotalSeconds <= 5) return false;
             
@@ -400,7 +408,7 @@ namespace MCGalaxy.Modules.Relay {
         bool ExecuteCommand(RelayUser user, string channel, string cmdName, string cmdArgs) {
             Command cmd = Command.Find(cmdName);
             Player p = new RelayPlayer(channel, user, this);
-            if (cmd == null) { p.Message("Unknown command!"); return false; }
+            if (cmd == null) { p.Message("Unknown command \"{0}\"", cmdName); return false; }
 
             string logCmd = cmdArgs.Length == 0 ? cmdName : cmdName + " " + cmdArgs;
             Logger.Log(LogType.CommandUsage, "/{0} (by {1} from {2})", logCmd, user.Nick, RelayName);

@@ -34,9 +34,16 @@ namespace MCGalaxy.Modules.Relay.Discord {
         
         /// <summary> Authorisation token for the bot account </summary>
         public string Token;
+        public bool CanReconnect = true;
+        
+        /// <summary> Whether presence support is enabled </summary>
+        public bool Presence = true;
+        /// <summary> Presence status (E.g. online) </summary>
+        public PresenceStatus Status;
+        /// <summary> Presence activity (e.g. Playing) </summary>
+        public PresenceActivity Activity;
         /// <summary> Callback function to retrieve the activity status message </summary>
         public Func<string> GetStatus;
-        public bool CanReconnect = true;
         
         /// <summary> Callback invoked when a ready event has been received </summary>
         public Action<JsonObject> OnReady;
@@ -47,7 +54,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
         
         readonly object sendLock = new object();
         SchedulerTask heartbeat;
-        string lastSequence;
+        string lastSequence, sessionID;
         TcpClient client;
         SslStream stream;
         
@@ -97,18 +104,13 @@ namespace MCGalaxy.Modules.Relay.Discord {
         
         const int REASON_INVALID_TOKEN = 4004;
         
-        protected override void Disconnect(int reason) {
+        protected override void OnDisconnected(int reason) {
             if (reason == REASON_INVALID_TOKEN) {
                 Logger.Log(LogType.Warning, "Discord relay: Invalid bot token provided - unable to connect");
                 CanReconnect = false;
             }
-            Logger.Log(LogType.SystemActivity, "Discord relay bot closing: " + reason);
             
-            try {
-                base.Disconnect(reason);
-            } catch {
-                // try to cleanly close connection when possible
-            }
+            Logger.Log(LogType.SystemActivity, "Discord relay bot closing: " + reason);
             Close();
         }
         
@@ -117,7 +119,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
             byte[] data = new byte[4096];
             for (;;) {
                 int len = stream.Read(data, 0, 4096);
-                if (len == 0) throw new EndOfStreamException("stream.Read returned 0");
+                if (len == 0) throw new IOException("stream.Read returned 0");
                 
                 HandleReceived(data, len);
             }
@@ -134,8 +136,14 @@ namespace MCGalaxy.Modules.Relay.Discord {
         }
         
         void DispatchPacket(int opcode, JsonObject obj) {
-            if (opcode == OPCODE_DISPATCH) HandleDispatch(obj);
-            if (opcode == OPCODE_HELLO)    HandleHello(obj);
+            if (opcode == OPCODE_DISPATCH) {
+                HandleDispatch(obj);
+            } else if (opcode == OPCODE_HELLO) {
+                HandleHello(obj);
+            } else if (opcode == OPCODE_INVALID_SESSION) {
+                // session no longer valid for whatever reason
+                sessionID = null;
+            }
         }
         
         
@@ -160,6 +168,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
             
             if (eventName == "READY") {
                 data = (JsonObject)obj["d"];
+                HandleReady(data);
                 OnReady(data);
             } else if (eventName == "MESSAGE_CREATE") {
                 data = (JsonObject)obj["d"];
@@ -168,6 +177,12 @@ namespace MCGalaxy.Modules.Relay.Discord {
                 data = (JsonObject)obj["d"];
                 OnChannelCreate(data);
             }
+        }
+        
+        void HandleReady(JsonObject data) {
+            object session;
+            if (data.TryGetValue("session_id", out session)) 
+                sessionID = (string)session;
         }
         
         
@@ -228,16 +243,18 @@ namespace MCGalaxy.Modules.Relay.Discord {
         }
         
         JsonObject MakePresence() {
+            if (!Presence) return null;
+        	
             JsonObject activity = new JsonObject()
             {
                 { "name", GetStatus() },
-                { "type", 0 }
+                { "type", (int)Activity }
             };
             JsonObject obj = new JsonObject()
             {
                 { "since",      null },
                 { "activities", new JsonArray() { activity } },
-                { "status",     "online" },
+                { "status",     Status.ToString() },
                 { "afk",        false }
             };
             return obj;

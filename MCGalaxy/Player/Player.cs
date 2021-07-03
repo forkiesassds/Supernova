@@ -59,14 +59,15 @@ namespace MCGalaxy {
             truename    = playername;
             DisplayName = playername;
             
-            IP        = IPAddress.Loopback;
+            SetIP(IPAddress.Loopback);
             SessionID = Interlocked.Increment(ref sessionCounter) & SessionIDMask;
             IsSuper   = true;
         }
 
         internal Player(INetSocket socket) {
-            Socket      = socket;
-            IP          = socket.IP;
+            Socket = socket;
+            SetIP(Socket.IP);
+            
             spamChecker = new SpamChecker(this);
             SessionID   = Interlocked.Increment(ref sessionCounter) & SessionIDMask;
             
@@ -177,6 +178,15 @@ namespace MCGalaxy {
                                 drawn, TimesBeenKicked, (long)TotalTime.TotalSeconds, TotalMessagesSent, name);
         }
         
+        public void SetIP(IPAddress addr) {
+            // Convert IPv4 mapped addresses to IPv4 addresses for consistency
+            //  (e.g. so IPv4 mapped LAN IPs are treated as LAN IPs)
+            if (IPUtil.IsIPv4Mapped(addr)) addr = IPUtil.MapToIPV4(addr);
+            
+            IP = addr;
+            ip = addr.ToString();
+        }
+        
         public bool CanUse(Command cmd) { return group.Commands.Contains(cmd); }
         public bool CanUse(string cmdName) {
             Command cmd = Command.Find(cmdName);
@@ -242,7 +252,7 @@ namespace MCGalaxy {
             // Disconnected before sent handshake
             if (name == null) {
                 if (Socket != null) Socket.Close();
-                Logger.Log(LogType.UserActivity, "{0} disconnected.", ip);
+                Logger.Log(LogType.UserActivity, "{0} disconnected.", IP);
                 return;
             }
             
@@ -269,8 +279,7 @@ namespace MCGalaxy {
                 
                 if (!loggedIn) {
                     PlayerInfo.Online.Remove(this);
-                    string user = truename + " (" + ip + ")";
-                    Logger.Log(LogType.UserActivity, "{0} disconnected. ({1})", user, discMsg);
+                    Logger.Log(LogType.UserActivity, "{0} ({1}) disconnected. ({2})", truename, IP, discMsg);
                     return;
                 }
 
@@ -352,7 +361,8 @@ namespace MCGalaxy {
                 Message("Cannot {0} &Swhile chat moderation is on without &T/Voice&S", action); return false; 
             }
             if (Unverified) {
-                Message("&WYou must first verify with &T/Pass [Password]"); return false;
+                Authenticator.Current.RequiresVerification(this, action);
+                return false;
             }
             return true;
         }
@@ -363,11 +373,7 @@ namespace MCGalaxy {
             Unverified = Server.Config.verifyadmins && Rank >= Server.Config.VerifyAdminsRank;
             if (!Unverified) return;
             
-            if (!Commands.Moderation.CmdPass.HasPassword(name)) {
-                Message("&WPlease set your admin verification password with &T/SetPass [password]!");
-            } else {
-                Message("&WPlease complete admin verification with &T/Pass [password]!");
-            }
+            Authenticator.Current.NeedVerification(this);
         }
         
           
