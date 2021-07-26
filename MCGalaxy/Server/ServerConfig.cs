@@ -84,6 +84,8 @@ namespace MCGalaxy {
         public bool CheckForUpdates = true;
         [ConfigBool("enable-cpe", "Server", true)]
         public bool EnableCPE = true;
+        [ConfigBool("enable-custom-blocks", "Server", true)]
+        public bool EnableCustomBlocks = true;
         [ConfigBool("checkpoints-respawn-clientside", "Other", true)]
         public bool CheckpointsRespawnClientside = true;
         

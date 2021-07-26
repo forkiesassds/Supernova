@@ -72,9 +72,11 @@ namespace MCGalaxy {
             ext.ClientVersion = (byte)version;
             
             if (ext.Name == CpeExt.CustomBlocks) {
-                if (version == 1) Send(Packet.CustomBlockSupportLevel(1));
-                hasCustomBlocks = true;
-                if (MaxRawBlock < Block.CpeMaxBlock) MaxRawBlock = Block.CpeMaxBlock;
+                if(Server.Config.EnableCustomBlocks) {
+                    if (version == 1) Send(Packet.CustomBlockSupportLevel(1));
+                    hasCustomBlocks = true;
+                    if (MaxRawBlock < Block.CpeMaxBlock) MaxRawBlock = Block.CpeMaxBlock;
+                } 
             } else if (ext.Name == CpeExt.ChangeModel) {
                 hasChangeModel = true;
             } else if (ext.Name == CpeExt.EmoteFix) {
