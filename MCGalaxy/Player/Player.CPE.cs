@@ -86,8 +86,10 @@ namespace MCGalaxy {
             } else if (ext.Name == CpeExt.ExtPlayerList) {
                 hasExtList = true;
             } else if (ext.Name == CpeExt.BlockDefinitions) {
-                hasBlockDefs = true;
-                if (MaxRawBlock < 255) MaxRawBlock = 255;
+                if(Server.Config.EnableCustomBlocks) {
+                    hasBlockDefs = true;
+                    if (MaxRawBlock < 255) MaxRawBlock = 255;
+                }
             } else if (ext.Name == CpeExt.TextColors) {
                 hasTextColors = true;
                 for (int i = 0; i < Colors.List.Length; i++) {
