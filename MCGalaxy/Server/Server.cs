@@ -65,8 +65,8 @@ namespace MCGalaxy {
                 if (File.Exists(file)) {
                     Logger.Log(LogType.SystemActivity, file + " download succesful!");
                 }
-            } catch {
-                Logger.Log(LogType.Warning, "Downloading {0} failed, please try again later", file);
+            } catch (Exception ex) {
+                Logger.LogError("Downloading " + file +" failed, try again later", ex);
             }
         }
         
@@ -95,7 +95,7 @@ namespace MCGalaxy {
             MoveSqliteDll();
             MoveOutdatedFiles();
 
-            GenerateSalt();
+            salt = GenerateSalt();
             LoadAllSettings();
             InitDatabase();
             Economy.LoadDatabase();
@@ -238,8 +238,8 @@ namespace MCGalaxy {
                 foreach (INetSocket p in pending) { p.Send(kick, SendFlags.None); }
             } catch (Exception ex) { Logger.LogError(ex); }
 
-            Plugin.UnloadAll();
             OnShuttingDownEvent.Call(restarting, msg);
+            Plugin.UnloadAll();
 
             try {
                 string autoload = null;
@@ -277,7 +277,7 @@ namespace MCGalaxy {
         
         static bool HACK_TryExecvp() {
             return CLIMode && Environment.OSVersion.Platform == PlatformID.Unix 
-                && Type.GetType("Mono.Runtime") != null;
+                && RunningOnMono();
         }
         
         static void HACK_Execvp() {
@@ -306,6 +306,10 @@ namespace MCGalaxy {
                 execvp("mono", new string[] { "mono", RestartPath });
             } catch {
             }
+        }
+        
+        public static bool RunningOnMono() {
+            return Type.GetType("Mono.Runtime") != null;
         }
 
         public static void UpdateUrl(string url) {
@@ -364,7 +368,7 @@ namespace MCGalaxy {
         }
         
         /// <summary> Generates a random salt that is used for calculating mppasses. </summary>
-        public static void GenerateSalt() {
+        public static string GenerateSalt() {
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
             char[] str = new char[32];
             byte[] one = new byte[1];
@@ -375,7 +379,7 @@ namespace MCGalaxy {
                 
                 str[i] = (char)one[0]; i++;
             }
-            salt = new string(str);
+            return new string(str);
         }
         
         static System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();

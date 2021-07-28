@@ -21,9 +21,10 @@ using MCGalaxy.Config;
 using MCGalaxy.Events.ServerEvents;
 using MCGalaxy.Modules.Relay.Discord;
 
-namespace MCGalaxy.Modules.Relay.Discord {
-
-    public sealed class DiscordConfig {
+namespace MCGalaxy.Modules.Relay.Discord 
+{
+    public sealed class DiscordConfig 
+    {
         [ConfigBool("enabled", null, false)]
         public bool Enabled;
         [ConfigString("bot-token", null, "", true)]
@@ -47,6 +48,9 @@ namespace MCGalaxy.Modules.Relay.Discord {
         [ConfigEnum("presence-activity", null, PresenceActivity.Playing, typeof(PresenceActivity))]
         public PresenceActivity Activity = PresenceActivity.Playing;
         
+        [ConfigInt("embed-color", null, 9758051)]
+        public int EmbedColor = 9758051;
+        
         const string file = "properties/discordbot.properties";
         static ConfigElement[] cfg;
         
@@ -67,7 +71,8 @@ namespace MCGalaxy.Modules.Relay.Discord {
     public enum PresenceStatus { online, dnd, idle, invisible }
     public enum PresenceActivity { Playing = 0, Listening = 2, Watching = 3, Competing = 5 }
     
-    public sealed class DiscordPlugin : Plugin {
+    public sealed class DiscordPlugin : Plugin 
+    {
         public override string creator { get { return Server.SoftwareName + " team"; } }
         public override string MCGalaxy_Version { get { return Server.Version; } }
         public override string name { get { return "DiscordRelay"; } }
@@ -90,12 +95,14 @@ namespace MCGalaxy.Modules.Relay.Discord {
         void OnConfigUpdated() { Bot.ReloadConfig(); }
     }
     
-    public sealed class CmdDiscordBot : RelayBotCmd {
+    public sealed class CmdDiscordBot : RelayBotCmd 
+    {
         public override string name { get { return "DiscordBot"; } }
         protected override RelayBot Bot { get { return DiscordPlugin.Bot; } }
     }
     
-    public sealed class CmdDiscordControllers : BotControllersCmd {
+    public sealed class CmdDiscordControllers : BotControllersCmd 
+    {
         public override string name { get { return "DiscordControllers"; } }
         protected override RelayBot Bot { get { return DiscordPlugin.Bot; } }
     }

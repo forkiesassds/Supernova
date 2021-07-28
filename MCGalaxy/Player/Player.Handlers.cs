@@ -467,9 +467,8 @@ namespace MCGalaxy {
         }
         
         bool FilterChat(ref string text, byte continued) {
-            // handles the /womid client message, which displays the WoM vrersion
+            // Handle /womid [version] which informs the server of the WoM client version
             if (text.StartsWith("/womid")) {
-                string version = (text.Length <= 21 ? text.Substring(text.IndexOf(' ') + 1) : text.Substring(7, 15));
                 UsingWom = true;
                 return true;
             }
@@ -550,7 +549,7 @@ namespace MCGalaxy {
                 if (command == null) return;
                 
                 Thread thread = new Thread(() => UseCommand(command, args, data));
-                try { thread.Name = "MCG_CMD_" + cmd; } catch { }
+                try { thread.Name = "CMD_" + cmd; } catch { }
                 thread.IsBackground = true;
                 thread.Start();
             } catch (Exception e) {
@@ -577,7 +576,7 @@ namespace MCGalaxy {
                 }
 
                 Thread thread = new Thread(() => UseCommands(commands, messages, data));
-                thread.Name = "MCG_CMDS_";
+                thread.Name = "CMDS_";
                 thread.IsBackground = true;
                 thread.Start();
             } catch (Exception e) {

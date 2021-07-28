@@ -26,11 +26,13 @@ using MCGalaxy.Events.PlayerEvents;
 using MCGalaxy.Events.ServerEvents;
 using MCGalaxy.Util;
 
-namespace MCGalaxy.Modules.Relay.Discord {
-
-    public sealed class DiscordBot : RelayBot {
+namespace MCGalaxy.Modules.Relay.Discord 
+{
+    public sealed class DiscordBot : RelayBot 
+    {
         DiscordApiClient api;
         DiscordWebsocket socket;
+        DiscordSession session;
         string botUserID;
         
         Dictionary<string, bool> isDMChannel = new Dictionary<string, bool>();
@@ -54,7 +56,8 @@ namespace MCGalaxy.Modules.Relay.Discord {
         }
         
         protected override void DoConnect() {
-            socket = new DiscordWebsocket(); 
+            socket = new DiscordWebsocket();
+            socket.Session   = session;
             socket.Token     = Config.BotToken;
             socket.Presence  = Config.PresenceEnabled;
             socket.Status    = Config.Status;
@@ -223,6 +226,11 @@ namespace MCGalaxy.Modules.Relay.Discord {
             
             // remove variant selector character used with some emotes
             sb.Replace("\uFE0F", "");
+            
+            // unescape escaped bold/italic markdown characters
+            for (int i = 0; i < markdown_escaped.Length; i++) {
+                sb = sb.Replace(markdown_escaped[i], markdown_special[i]);
+            }
             return sb.ToString();
         }
         
@@ -232,12 +240,14 @@ namespace MCGalaxy.Modules.Relay.Discord {
         }
         
         void UpdateDiscordStatus() {
-            try { socket.SendUpdateStatus(); } catch { }
+            try { socket.UpdateStatus(); } catch { }
         }
         
         
         protected override void OnStart() {
-            base.OnStart();          
+            session = new DiscordSession();
+            base.OnStart();
+            
             OnPlayerConnectEvent.Register(HandlePlayerConnect, Priority.Low);
             OnPlayerDisconnectEvent.Register(HandlePlayerDisconnect, Priority.Low);
             OnPlayerActionEvent.Register(HandlePlayerAction, Priority.Low);
@@ -265,9 +275,14 @@ namespace MCGalaxy.Modules.Relay.Discord {
         }
         
         
+        /// <summary> Asynchronously sends a message to the discord API </summary>
+        public void Send(DiscordApiMessage msg) {
+            // can be null in gap between initial connection and ready event received
+            if (api != null) api.SendAsync(msg);
+        }
+        
         protected override void DoSendMessage(string channel, string message) {
-            if (api == null) return;
-            api.SendMessageAsync(channel, message);
+            Send(new ChannelSendMessage(channel, message));
         }
         
         protected override string ConvertMessage(string message) {
@@ -276,14 +291,18 @@ namespace MCGalaxy.Modules.Relay.Discord {
             return message;
         }
         
-        readonly string[] markdown_special = {  @"\",  @"*",  @"_",  @"~",  @"`",  @"|" };
-        readonly string[] markdown_escaped = { @"\\", @"\*", @"\_", @"\~", @"\`", @"\|" };
-        protected override string PrepareMessage(string message) {
+        static readonly string[] markdown_special = {  @"\",  @"*",  @"_",  @"~",  @"`",  @"|" };
+        static readonly string[] markdown_escaped = { @"\\", @"\*", @"\_", @"\~", @"\`", @"\|" };
+        static string StripMarkdown(string message) {
             // don't let user use bold/italic etc markdown
             for (int i = 0; i < markdown_special.Length; i++) {
                 message = message.Replace(markdown_special[i], markdown_escaped[i]);
             }
-            
+            return message;
+        }
+        
+        protected override string PrepareMessage(string message) {
+            message = StripMarkdown(message);
             // allow uses to do things like replacing '+' with ':green_square:'
             for (int i = 0; i < filter_triggers.Count; i++) {
                 message = message.Replace(filter_triggers[i], filter_replacements[i]);
@@ -296,11 +315,11 @@ namespace MCGalaxy.Modules.Relay.Discord {
         protected override bool CheckController(string userID, ref string error) { return true; }
         
         protected override string UnescapeFull(Player p) {
-            return "**" + base.UnescapeFull(p) + "**";
+            return "**" + StripMarkdown(base.UnescapeFull(p)) + "**";
         }
         
         protected override string UnescapeNick(Player p) {
-            return "**" + base.UnescapeNick(p) + "**";
+            return "**" + StripMarkdown(base.UnescapeNick(p)) + "**";
         }
         
         
@@ -324,8 +343,10 @@ namespace MCGalaxy.Modules.Relay.Discord {
             int total;
             List<OnlineListEntry> entries = PlayerInfo.GetOnlineList(p, p.Rank, out total);
             
+            embed.Color = Config.EmbedColor;            
             embed.Title = string.Format("{0} player{1} currently online",
                                         total, total.Plural());
+            
             foreach (OnlineListEntry e in entries) {
                 if (e.players.Count == 0) continue;
                 
@@ -334,7 +355,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
                     ConvertMessage(FormatPlayers(p, e))
                 );
             }
-            api.SendAsync(embed);
+            Send(embed);
         }
     }
 }

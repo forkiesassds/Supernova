@@ -26,7 +26,7 @@ namespace MCGalaxy.Cli {
 
         [STAThread]
         public static void Main(string[] args) {
-            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            SetCurrentDirectory();
 
             // If MCGalaxy_.dll is missing, a FileNotFoundException will get thrown for MCGalaxy dll
             try {
@@ -43,6 +43,20 @@ namespace MCGalaxy.Cli {
             StartCLI();
         }
         
+        static void SetCurrentDirectory() {
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            try {
+                Environment.CurrentDirectory = path;
+            } catch {
+                // assembly.Location usually gives full path of the .exe, but has issues with mkbundle
+                //   https://mono-devel-list.ximian.narkive.com/KfCAxY1F/mkbundle-assembly-getentryassembly
+                //   https://stackoverflow.com/questions/57648241/reliably-get-location-of-bundled-executable-on-linux
+                // Rather than trying to guess when this issue happens, just don't bother at all
+                //  (since most users will not be trying to run .exe from a different folder anyways)
+                Console.WriteLine("Failed to set working directory to '{0}', running in current directory..", path);
+            }
+        }
+        
         static void EnableCLIMode() {
             try {
                 Server.CLIMode = true;
@@ -51,6 +65,7 @@ namespace MCGalaxy.Cli {
             }
             Server.RestartPath = Assembly.GetEntryAssembly().Location;
         }
+        
         
         static void StartCLI() {
             FileLogger.Init();

@@ -55,7 +55,7 @@ namespace MCGalaxy.Scripting {
             return instances;
         }
         
-        static byte[] GetDebugData(string path) {
+        static byte[] GetDebugPDB(string path) {
             path = Path.ChangeExtension(path, ".pdb");
             if (!File.Exists(path)) return null;
             
@@ -70,7 +70,7 @@ namespace MCGalaxy.Scripting {
         /// <summary> Loads the given assembly from disc (and associated .pdb debug data) </summary>
         public static Assembly LoadAssembly(string path) {
             byte[] data  = File.ReadAllBytes(path);
-            byte[] debug = GetDebugData(path);
+            byte[] debug = GetDebugPDB(path);
             return Assembly.Load(data, debug);
         }
         
@@ -171,6 +171,7 @@ namespace MCGalaxy.Scripting {
         
         public static List<ICompiler> Compilers = new List<ICompiler>() { CS, VB };
         
+        
         public static ICompiler Lookup(string name, Player p) {
             if (name.Length == 0) return Compilers[0];
             
@@ -184,12 +185,10 @@ namespace MCGalaxy.Scripting {
             return null;
         }
 
-
         static string FormatSource(string source, params string[] args) {
-            // Make sure we use the OS's line endings
+            // Always use \r\n line endings so it looks correct in Notepad
             source = source.Replace(@"\t", "\t");
-            source = source.Replace("\r\n", "\n");
-            source = source.Replace("\n", Environment.NewLine);
+            source = source.Replace("\n", "\r\n");
             return string.Format(source, args);
         }
         
@@ -202,26 +201,34 @@ namespace MCGalaxy.Scripting {
             return FormatSource(PluginSkeleton, plugin, creator, Server.Version);
         }
         
+        
         const int maxLog = 2;
         /// <summary> Attempts to compile the given source code file to a .dll file. </summary>
         /// <remarks> If dstPath is null, compiles to an in-memory .dll instead. </remarks>
-        /// <remarks> Logs errors to IScripting.ErrorPath. </remarks>      
+        /// <remarks> Logs errors to IScripting.ErrorPath. </remarks>
         public CompilerResults Compile(string srcPath, string dstPath) {
-            List<string> source     = Utils.ReadAllLinesList(srcPath);
-            CompilerResults results = Compile(source, dstPath);
+            return Compile(new [] { srcPath }, dstPath);
+        }
+        
+        /// <summary> Attempts to compile the given source code files to a .dll file. </summary>
+        /// <remarks> If dstPath is null, compiles to an in-memory .dll instead. </remarks>
+        /// <remarks> Logs errors to IScripting.ErrorPath. </remarks>
+        public CompilerResults Compile(string[] srcPaths, string dstPath) {
+            CompilerResults results = DoCompile(srcPaths, dstPath);
             if (!results.Errors.HasErrors) return results;
             
-            StringBuilder sb = new StringBuilder();
+            SourceMap sources = new SourceMap(srcPaths);
+            StringBuilder sb  = new StringBuilder();
             sb.AppendLine("############################################################");
-            sb.AppendLine("Errors when compiling " + srcPath);
+            sb.AppendLine("Errors when compiling " + srcPaths.Join());
             sb.AppendLine("############################################################");
             sb.AppendLine();
             
             foreach (CompilerError err in results.Errors) {
-                string type = err.IsWarning ? "Warning" : "Error";                
+                string type = err.IsWarning ? "Warning" : "Error";
                 sb.AppendLine(type + " on line " + err.Line + ":");
                 
-                if (err.Line > 0) sb.AppendLine(source[err.Line - 1]);
+                if (err.Line > 0) sb.AppendLine(sources.Get(err.FileName, err.Line - 1));
                 if (err.Column > 0) sb.Append(' ', err.Column - 1);
                 sb.AppendLine("^-- " + type + " #" + err.ErrorNumber + " - " + err.ErrorText);
                 
@@ -234,6 +241,22 @@ namespace MCGalaxy.Scripting {
                 w.Write(sb.ToString());
             }
             return results;
+        }
+        
+        /// <summary> Compiles the given source code. </summary>
+        protected abstract CompilerResults DoCompile(string[] srcPaths, string dstPath);
+        
+        
+        public bool TryCompile(Player p, string type, string[] srcs, string dst) {
+            CompilerResults results = Compile(srcs, dst);
+            if (!results.Errors.HasErrors) {
+                p.Message("{0} compiled successfully.", type);
+                return true;
+            }
+            
+            SummariseErrors(results, p);
+            p.Message("&WCompilation error. See " + ErrorPath + " for more information.");
+            return false;
         }
         
         /// <summary> Messages a summary of warnings and errors to the given player. </summary>
@@ -250,9 +273,6 @@ namespace MCGalaxy.Scripting {
             if (results.Errors.Count <= maxLog) return;
             p.Message(" &W.. and {0} more", results.Errors.Count - maxLog);
         }
-        
-        /// <summary> Compiles the given source code. </summary>
-        protected abstract CompilerResults Compile(List<string> source, string dstPath);
     }
     
     /// <summary> Compiles source code files from a particular language into a .dll file, using a CodeDomProvider for the compiler. </summary>
@@ -264,6 +284,9 @@ namespace MCGalaxy.Scripting {
         protected abstract CodeDomProvider CreateProvider();
         /// <summary> Adds language-specific default arguments to list of arguments. </summary>
         protected abstract void PrepareArgs(CompilerParameters args);
+        /// <summary> Returns the prefix for an assembly reference line </summary>
+        /// <example> For C# this prefix is "//reference "" </example>
+        protected virtual string ReferenceLine { get { return "//reference "; } }
         
         // Lazy init compiler when it's actually needed
         void InitCompiler() {
@@ -272,39 +295,85 @@ namespace MCGalaxy.Scripting {
                 compiler = CreateProvider();
                 if (compiler != null) return;
                 
-                Logger.Log(LogType.Warning, 
-                           "WARNING: {0} compiler is missing, you will be unable to compile {1} files.", 
+                Logger.Log(LogType.Warning,
+                           "WARNING: {0} compiler is missing, you will be unable to compile {1} files.",
                            FullName, FileExtension);
                 // TODO: Should we log "You must have .net developer tools. (You need a visual studio)" ?
             }
-        }       
-        
-        static void AddReferences(List<string> lines, CompilerParameters args) {
-            // Allow referencing other assemblies using '//reference [assembly name]' at top of the file
-            for (int i = 0; i < lines.Count; i++) {
-                string line = lines[i];
-                if (!line.CaselessStarts("//reference ")) break;
-                
-                int index = line.IndexOf(' ') + 1;
-                // For consistency with C#, treat '//reference X.dll;' as '//reference X.dll'
-                string assem = line.Substring(index).Replace(";", "");
-                
-                args.ReferencedAssemblies.Add(assem);
-            }
-            args.ReferencedAssemblies.Add("MCGalaxy_.dll");
         }
         
-        protected override CompilerResults Compile(List<string> lines, string dstPath) {
+        void AddReferences(string path, CompilerParameters args) {
+            // Allow referencing other assemblies using '//reference [assembly name]' at top of the file
+            using (StreamReader r = new StreamReader(path)) {               
+                string refPrefix = ReferenceLine;
+                string line;
+                
+                while ((line = r.ReadLine()) != null) {
+                    if (!line.CaselessStarts(refPrefix)) break;
+                    
+                    int index = line.IndexOf(' ') + 1;
+                    // For consistency with C#, treat '//reference X.dll;' as '//reference X.dll'
+                    string assem = line.Substring(index).Replace(";", "");
+                    
+                    args.ReferencedAssemblies.Add(assem);
+                }
+            }
+        }
+        
+        protected override CompilerResults DoCompile(string[] srcPaths, string dstPath) {
             CompilerParameters args = new CompilerParameters();
-            args.GenerateExecutable = false;
+            args.GenerateExecutable      = false;
+            args.IncludeDebugInformation = true;
+            
             if (dstPath != null) args.OutputAssembly   = dstPath;
             if (dstPath == null) args.GenerateInMemory = true;
             
-            string source = lines.Join(Environment.NewLine);
-            AddReferences(lines, args);
+            for (int i = 0; i < srcPaths.Length; i++) {
+                // CodeDomProvider doesn't work properly with relative paths
+                string path = Path.GetFullPath(srcPaths[i]);
+                
+                AddReferences(path, args);
+                srcPaths[i] = path;
+            }
+            args.ReferencedAssemblies.Add("MCGalaxy_.dll");
+            
             PrepareArgs(args);
             InitCompiler();
-            return compiler.CompileAssemblyFromSource(args, source);
+            return compiler.CompileAssemblyFromFile(args, srcPaths);
+        }
+    }
+    
+    class SourceMap {
+        readonly string[] files;
+        readonly List<string>[] sources;
+        
+        public SourceMap(string[] paths) {
+            files   = paths;
+            sources = new List<string>[paths.Length];
+        }
+        
+        int FindFile(string file) {
+            for (int i = 0; i < files.Length; i++) {
+                if (file.CaselessEq(files[i])) return i;
+            }
+            return -1;
+        }
+        
+        /// <summary> Returns the given line in the given source code file </summary>
+        public string Get(string file, int line) {
+            int i = FindFile(file);
+            if (i == -1) return "";
+            
+            List<string> source = sources[i];
+            if (source == null) {
+                try {
+                    source = Utils.ReadAllLinesList(file);
+                } catch {
+                    source = new List<string>();
+                }
+                sources[i] = source;
+            }            
+            return line < source.Count ? source[line] : "";
         }
     }
 }

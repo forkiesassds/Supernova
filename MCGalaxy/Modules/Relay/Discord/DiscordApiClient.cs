@@ -30,6 +30,8 @@ namespace MCGalaxy.Modules.Relay.Discord {
     public abstract class DiscordApiMessage {
         /// <summary> The path/route that will handle this message </summary>
         public string Path;
+        /// <summary> The HTTP method of the path/route (e.g. "POST") </summary>
+        public string Method = "POST";
         
         /// <summary> Converts this message into its JSON representation </summary>
         public abstract JsonObject ToJson();
@@ -78,6 +80,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
     public class ChannelSendEmbed : ChannelSendMessage {
         public string Title;
         public Dictionary<string, string> Fields = new Dictionary<string, string>();
+        public int Color;
         
         public ChannelSendEmbed(string channelID) : base(channelID, null) { }
         
@@ -102,7 +105,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
             obj["embed"] = new JsonObject()
             {
                 { "title", Title },
-                { "color", 9758051 },
+                { "color", Color },
                 { "fields", GetFields() }
             };
             return obj;
@@ -142,7 +145,7 @@ namespace MCGalaxy.Modules.Relay.Discord {
             for (int retry = 0; retry < 10; retry++) {
                 try {
                     HttpWebRequest req = HttpUtil.CreateRequest(host + msg.Path);
-                    req.Method         = "POST";
+                    req.Method         = msg.Method;
                     req.ContentType    = "application/json";
                     req.Headers[HttpRequestHeader.Authorization] = "Bot " + Token;
                     
@@ -153,10 +156,13 @@ namespace MCGalaxy.Modules.Relay.Discord {
                     HttpUtil.GetResponseText(res);
                     break;
                 } catch (Exception ex) {
-            	    HttpUtil.DisposeErrorResponse(ex);
+                    string err = HttpUtil.GetErrorResponse(ex);
+                    HttpUtil.DisposeErrorResponse(ex);
                     if (Handle429(ex)) continue;
                     
-                    Logger.LogError(ex);
+                    Logger.LogError("Error sending request to Discord API", ex);                    
+                    if (!string.IsNullOrEmpty(err)) 
+                        Logger.Log(LogType.Warning, "Discord API returned: " + err);
                     return;
                 }
             }
@@ -194,11 +200,6 @@ namespace MCGalaxy.Modules.Relay.Discord {
 
             SleepForRetryPeriod(res);
             return true;
-        }
-        
-        
-        public void SendMessageAsync(string channelID, string message) {
-            SendAsync(new ChannelSendMessage(channelID, message));
         }
     }
 }

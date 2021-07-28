@@ -164,6 +164,7 @@
     <Compile Include="Commands\building\CmdMaze.cs" />
     <Compile Include="Commands\building\CmdMeasure.cs" />
     <Compile Include="Commands\building\CmdMessageBlock.cs" />
+    <Compile Include="Commands\building\CmdMirror.cs" />
     <Compile Include="Commands\building\CmdMode.cs" />
     <Compile Include="Commands\building\CmdOutline.cs" />
     <Compile Include="Commands\building\CmdPaint.cs" />
@@ -320,7 +321,6 @@
     <Compile Include="Commands\Moderation\CmdModerate.cs" />
     <Compile Include="Commands\Moderation\CmdMoveAll.cs" />
     <Compile Include="Commands\Moderation\CmdMute.cs" />
-    <Compile Include="Commands\Moderation\CmdNotes.cs" />
     <Compile Include="Commands\Moderation\CmdOhide.cs" />
     <Compile Include="Commands\Moderation\CmdP2P.cs" />
     <Compile Include="Commands\Moderation\CmdPass.cs" />
@@ -414,8 +414,8 @@
     <Compile Include="CorePlugin\IPThrottler.cs" />
     <Compile Include="CorePlugin\MiscHandlers.cs" />
     <Compile Include="CorePlugin\ModActionHandler.cs" />
-    <Compile Include="CorePlugin\NotesPlugin.cs" />
     <Compile Include="Database\Backends\SQLite.cs" />
+    <Compile Include="Database\Backends\SQLiteBackend.cs" />
     <Compile Include="Database\BlockDB\BlockDB.cs" />
     <Compile Include="Database\BlockDB\BlockDBCache.cs" />
     <Compile Include="Database\BlockDB\BlockDBFile.cs" />
@@ -611,6 +611,8 @@
     <Compile Include="Blocks\Physics\TntPhysics.cs" />
     <Compile Include="Blocks\Physics\ZombiePhysics.cs" />
     <Compile Include="Levels\Zone.cs" />
+    <Compile Include="Modules\Moderation\Notes\CmdNotes.cs" />
+    <Compile Include="Modules\Moderation\Notes\NotesPlugin.cs" />
     <Compile Include="Modules\Relay\BotControllersCmd.cs" />
     <Compile Include="Modules\Relay\Discord\DiscordApiClient.cs" />
     <Compile Include="Modules\Relay\Discord\DiscordBot.cs" />
@@ -647,6 +649,7 @@
     <Compile Include="Player\PlayerActions.cs" />
     <Compile Include="Player\PlayerIgnores.cs" />
     <Compile Include="Player\PlayerInfo.cs" />
+    <Compile Include="Player\PlayerOperations.cs" />
     <Compile Include="Player\PlayerPhysics.cs" />
     <Compile Include="Player\SpamChecker.cs" />
     <Compile Include="Player\Warp.cs" />
@@ -756,6 +759,8 @@
     <Folder Include="Generator\LibNoise" />
     <Folder Include="Generator\Classic" />
     <Folder Include="Generator\Realistic" />
+    <Folder Include="Modules\Moderation" />
+    <Folder Include="Modules\Moderation\Notes" />
     <Folder Include="Modules\Relay\Discord" />
     <Folder Include="Modules\Relay" />
     <Folder Include="Network\Heartbeat" />
