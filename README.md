@@ -1,4 +1,4 @@
-Supernova is a fully featured and customisable **ClassiCube Server Software** based on MCForge/MCLawl.
+Supernova is a fully featured and customisable **Minecraft Classic and ClassiCube Server Software** based on MCGalaxy.
 
 **Setup**
 -----------------
