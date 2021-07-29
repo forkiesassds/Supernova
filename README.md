@@ -19,7 +19,7 @@ Run **Supernova.exe** for a graphical interface, or run **SupernovaCLI.exe** for
 Joining your server
 -----------------
 Run Supernova.exe or SupernovaCLI.exe firstly. You'll see something like:
-![opt3](https://user-images.githubusercontent.com/6509348/60258728-0e05bd00-9919-11e9-9ae8-f1262719cd50.png)
+![opt3](https://github.com/MisterSheeple/Supernova/blob/1ee1be2fc677b14c3b94d331530da01b3ec4310b/Images/Supernova1.PNG)
 
 If you are signed in to classicube.net, you can copy this URL straight into your web browser and start playing.
 
@@ -45,7 +45,7 @@ After joining, you will want to rank yourself owner so you can use all commands.
 
 Type ```/rank [your account] superop``` into the bottom text box, then press Enter.
 
-![opt4](https://user-images.githubusercontent.com/6509348/60258729-0e9e5380-9919-11e9-921d-ea7e0c4365af.png)
+![opt4](https://github.com/MisterSheeple/Supernova/blob/b6a28bebd25d7fc13ac2913aa020bd39f15a584e/Images/Supernova2_new.PNG)
 
 
 Letting others join your server
