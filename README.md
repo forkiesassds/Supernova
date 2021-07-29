@@ -1,4 +1,10 @@
-Supernova is a fully featured and customisable **ClassiCube Server Software** based on MCForge/MCLawl.
+Supernova is a fully featured and customisable **Minecraft Classic and ClassiCube server software** based on MCGalaxy that adds support for multiple new features.
+
+**Features**
+-----------------
+Supernova adds the following major features:
+* Support for older versions of the Minecraft Classic Protocol.
+* Dual server list functionality with the ClassiCube and BetaCraft server lists.
 
 **Setup**
 -----------------
@@ -11,12 +17,24 @@ Run **Supernova.exe** for a graphical interface, or run **SupernovaCLI.exe** for
 Joining your server
 -----------------
 Run Supernova.exe or SupernovaCLI.exe firstly. You'll see something like:
-![opt3](https://user-images.githubusercontent.com/6509348/60258728-0e05bd00-9919-11e9-9ae8-f1262719cd50.png)
+![opt3](https://github.com/MisterSheeple/Supernova/blob/1ee1be2fc677b14c3b94d331530da01b3ec4310b/Images/Supernova1.PNG)
 
 If you are signed in to classicube.net, you can copy this URL straight into your web browser and start playing.
 
-#### Joining from the desktop client
+#### Joining from the BetaCraft Launcher
+Click on **Select version** at the main menu, and select 0.30-c (or a different version if you've changed the PVN).
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft1.PNG)
+
+Enter a username into the *Username* text box, or click **Log in** to sign in with a Mojang or Microsoft account.
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft2.PNG)
+
+Once you click **Play**, a text box will pop up requesting a server IP. Enter ```127.0.0.1:25565``` into this text box and click **OK**.
+
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft3.PNG)
+
+#### Joining from the ClassiCube desktop client
 Click **Direct connect** at the main menu.
+
 ![opt1](https://user-images.githubusercontent.com/6509348/60258725-0e05bd00-9919-11e9-8f8c-fbbdc52f04f9.png)
 
 Type your username into *Username*, ```127.0.0.1:25565``` into *IP:Port*, and leave *Mppass* blank. Then click **Connect**.
@@ -27,7 +45,7 @@ After joining, you will want to rank yourself owner so you can use all commands.
 
 Type ```/rank [your account] superop``` into the bottom text box, then press Enter.
 
-![opt4](https://user-images.githubusercontent.com/6509348/60258729-0e9e5380-9919-11e9-921d-ea7e0c4365af.png)
+![opt4](https://github.com/MisterSheeple/Supernova/blob/b6a28bebd25d7fc13ac2913aa020bd39f15a584e/Images/Supernova2_new.PNG)
 
 
 Letting others join your server
@@ -36,25 +54,29 @@ Letting others join your server
 You need to find out your LAN/local IP address.
 *  Windows: Type ```ipconfig``` into **Command Prompt**. Look for ```IPv4 address``` in the output.
 
-To join from a web browser, add ```?ip=[lan ip]``` to the server's URL.\
+To join from a web browser on ClassiCube, add ```?ip=[lan ip]``` to the server's URL.\
 (e.g. http://www.classicube.net/server/play/d1362e7fee1a54365514712d007c8799?ip=192.168.1.30)
 
-To join from the desktop client, **Direct connect** to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
+To join from the ClassiCube or BetaCraft desktop clients, connect to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
 
 
 #### Across the internet
 You need to port forward your router. Players can then join by entering the server URL into their web browser.
 
-For the desktop client:
+For the ClassiCube desktop client:
 * Click **Sign in**. 
 * Type/paste the hash (e.g. ```d1362e7fee1a54365514712d007c8799```) into the *classicube.net/server/play* text box. 
 * Click **Connect**.
 
+For the BetaCraft desktop client:
+* Find your public IP address. This can typically be seen in your router's settings (your public IP should not begin with ```192.168```)
+* Type/paste the public IP address into the *Server IP* text box and click **OK**.
 
-#### Show on classicube.net server list
+
+#### Show on server lists
 Click **Settings** in the Supernova window, then tick the **Public** checkbox. Then click **Save**.
 
-This makes your server appear in the server list on classicube.net and in the desktop client.
+This makes your server appear in ClassiCube and BetaCraft's respective server lists.
 
 Compiling
 -----------------
