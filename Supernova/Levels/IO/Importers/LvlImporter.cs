@@ -28,7 +28,7 @@ namespace Supernova.Levels.IO {
     public unsafe sealed class LvlImporter : IMapImporter {
 
         public override string Extension { get { return ".lvl"; } }
-        public override string Description { get { return "MCDzienny/MCForge/Supernova map"; } }
+        public override string Description { get { return "MCDzienny/MCForge/MCGalaxy/Supernova map"; } }
         
         public override Vec3U16 ReadDimensions(Stream src) {
             using (Stream gs = new GZipStream(src, CompressionMode.Decompress, true)) {
