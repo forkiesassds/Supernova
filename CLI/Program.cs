@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/MCGalaxy)
+    Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -19,27 +19,27 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using MCGalaxy.UI;
+using Supernova.UI;
 
-namespace MCGalaxy.Cli {
+namespace Supernova.Cli {
     public static class Program {
 
         [STAThread]
         public static void Main(string[] args) {
             SetCurrentDirectory();
 
-            // If MCGalaxy_.dll is missing, a FileNotFoundException will get thrown for MCGalaxy dll
+            // If Supernova_.dll is missing, a FileNotFoundException will get thrown for Supernova dll
             try {
                 EnableCLIMode();
             } catch (FileNotFoundException) {
-                Console.WriteLine("Cannot start server as MCGalaxy_.dll is missing from " + Environment.CurrentDirectory);
+                Console.WriteLine("Cannot start server as Supernova_.dll is missing from " + Environment.CurrentDirectory);
                 Console.WriteLine("Download from " + Updater.UploadsURL);
                 Console.WriteLine("Press any key to exit...");
                 Console.ReadKey(true);
                 return;
             }
             
-            // separate method, in case MCGalaxy_.dll is missing
+            // separate method, in case Supernova_.dll is missing
             StartCLI();
         }
         
@@ -61,7 +61,7 @@ namespace MCGalaxy.Cli {
             try {
                 Server.CLIMode = true;
             } catch {
-                // in case user is running CLI with older MCGalaxy dll which lacked CLIMode field
+                // in case user is running CLI with older Supernova dll which lacked CLIMode field
             }
             Server.RestartPath = Assembly.GetEntryAssembly().Location;
         }
@@ -160,7 +160,7 @@ namespace MCGalaxy.Cli {
         
 
         static void LogNewerVersionDetected(object sender, EventArgs e) {
-            Write("&cMCGalaxy update available! Update by replacing with the files from " + Updater.UploadsURL);
+            Write("&cSupernova update available! Update by replacing with the files from " + Updater.UploadsURL);
         }
         
         static void ConsoleLoop() {

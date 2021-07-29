@@ -1,5 +1,5 @@
 /*
-    Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/MCGalaxy)
+    Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -18,7 +18,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace MCGalaxy.Gui
+namespace Supernova.Gui
 {
     public partial class Window
     {
@@ -97,7 +97,7 @@ namespace MCGalaxy.Gui
             this.main_colLvlPlayers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.main_colLvlPhysics = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.main_Maps = new System.Windows.Forms.DataGridView();
-            this.main_txtLog = new MCGalaxy.Gui.Components.ColoredTextBox();
+            this.main_txtLog = new Supernova.Gui.Components.ColoredTextBox();
             this.tsLog_Menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsLog_night = new System.Windows.Forms.ToolStripMenuItem();
             this.tsLog_Colored = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +117,7 @@ namespace MCGalaxy.Gui
             this.tabs = new System.Windows.Forms.TabControl();
             this.tp_Maps = new System.Windows.Forms.TabPage();
             this.map_gbProps = new System.Windows.Forms.GroupBox();
-            this.map_pgProps = new MCGalaxy.Gui.HackyPropertyGrid();
+            this.map_pgProps = new Supernova.Gui.HackyPropertyGrid();
             this.map_gbLoaded = new System.Windows.Forms.GroupBox();
             this.map_lbLoaded = new System.Windows.Forms.ListBox();
             this.map_gbUnloaded = new System.Windows.Forms.GroupBox();
@@ -139,7 +139,7 @@ namespace MCGalaxy.Gui
             this.map_txtName = new System.Windows.Forms.TextBox();
             this.tp_Players = new System.Windows.Forms.TabPage();
             this.pl_gbProps = new System.Windows.Forms.GroupBox();
-            this.pl_pgProps = new MCGalaxy.Gui.HackyPropertyGrid();
+            this.pl_pgProps = new Supernova.Gui.HackyPropertyGrid();
             this.pl_gbOther = new System.Windows.Forms.GroupBox();
             this.pl_txtImpersonate = new System.Windows.Forms.TextBox();
             this.pl_btnSendCommand = new System.Windows.Forms.Button();

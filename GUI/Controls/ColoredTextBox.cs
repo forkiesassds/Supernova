@@ -19,9 +19,9 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using MCGalaxy.UI;
+using Supernova.UI;
 
-namespace MCGalaxy.Gui.Components {
+namespace Supernova.Gui.Components {
 
     /// <summary> Extended rich text box that auto-colors minecraft classic text. </summary>
     public class ColoredTextBox : RichTextBox {

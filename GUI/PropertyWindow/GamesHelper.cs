@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -18,9 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using MCGalaxy.Games;
+using Supernova.Games;
 
-namespace MCGalaxy.Gui {
+namespace Supernova.Gui {
     public sealed class GamesHelper {
         CheckBox cbStart, cbMap, cbMain;
         Button btnStart, btnStop, btnEnd, btnAdd, btnDel;

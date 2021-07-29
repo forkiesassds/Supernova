@@ -1,5 +1,5 @@
 /*
-    Copyright 2015 MCGalaxy
+    Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -18,9 +18,9 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
-using MCGalaxy.Util;
+using Supernova.Util;
 
-namespace MCGalaxy.Gui.Popups {
+namespace Supernova.Gui.Popups {
     public partial class EditText : Form {
         TextFile curFile;
         

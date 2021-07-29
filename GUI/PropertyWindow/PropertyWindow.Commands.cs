@@ -1,5 +1,5 @@
 ﻿/*
-Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/MCGalaxy)
+Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
 not use this file except in compliance with the Licenses. You may
@@ -15,10 +15,10 @@ permissions and limitations under the Licenses.
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using MCGalaxy.Commands;
-using MCGalaxy.Gui.Popups;
+using Supernova.Commands;
+using Supernova.Gui.Popups;
 
-namespace MCGalaxy.Gui {
+namespace Supernova.Gui {
     public partial class PropertyWindow : Form {
         
         ItemPermsHelper commandItems = new ItemPermsHelper();

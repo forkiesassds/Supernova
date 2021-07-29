@@ -2,9 +2,9 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System;
-using MCGalaxy;
+using Supernova;
 
-namespace MCGalaxy.Gui.Popups {
+namespace Supernova.Gui.Popups {
     internal sealed partial class ColorSelector : Form {
         public char ColorCode;
 

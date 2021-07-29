@@ -94,7 +94,7 @@ Fixed: Bump record limit from 21 to 101 for database queries that are matching m
 Fixed: /color without a colour specified should remove the colour completely
 Fix imageprint very rarely resizing to 0x0 and erroring (Thanks Goodly)
 Fixed: constantly erroring after restarting with Mono on linux with CLI
-Removed: MCGalaxy mods altogether (only gave you an in-game title anyways)
+Removed: Supernova mods altogether (only gave you an in-game title anyways)
 Removed: Automatically moving .prev files from levels into levels/prev (obsolete for 4.75 years now)
 
 v 1.9.2.9
@@ -184,7 +184,7 @@ Removed: '![command]' acting as '/[command]'
 Improved: //[command] in MBs acts like regular chat and just messages '/[command]' back to the user
 Improved: Order of properties in server.properties
 Improved: SQL transaction error message logging
-Improved: 'Failed to start due to missing MCGalaxy_.dll' message now includes folder
+Improved: 'Failed to start due to missing Supernova_.dll' message now includes folder
 Fixed: Some IRC mode changes wrongly showing as an IRC error in logs
 
 v 1.9.2.5
@@ -216,7 +216,7 @@ Added: /ln alias for /line (fCraft compatibility)
 Added: Packets for custom models
 Removed: /bs shortcut for /blockspeed
 Improved: Parse /shutdown delay as timespan instead of integer seconds only
-Removed: /devs, link to MCGalaxy source in /sinfo instead
+Removed: /devs, link to Supernova source in /sinfo instead
 Improved: Make /eat an economy item, so price can be configured
 Improved: Make p.Extensions public
 Fixed: Doing /model while a zombie in ZS still changing it
@@ -459,7 +459,7 @@ Fixed: Old level blockprops files not being copied/deleted/renamed
 Fixed: Accuracy issues with MaxUndo for ranks and /calc
 Fixed: Out of memory error when resizing, caused changes in map to not be saved
 Fixed: Physics restart checkbox having wrong tooltip
-Improved: Can get MCGalaxy to compile for .NET 2.0
+Improved: Can get Supernova to compile for .NET 2.0
 
 v 1.9.0.7
 Added: /hold to make you hold a particular block
@@ -1003,7 +1003,7 @@ Fixed: /mark
 Fixed: changing fallback not auto-reloading clients that don't support custom blocks
 
 v 1.8.9.0
-Added: MCGalaxy can natively run in 64 bit
+Added: Supernova can natively run in 64 bit
 Added: Can set map sides (bedrock) offset
 Added: Positions are now supported past -1024 or 1024 (currently 32768)
 Added: Ability to rotate players and bots on X and Z axis
@@ -1246,7 +1246,7 @@ v 1.8.8.3
 Fixed: Doors not working
 Fixed: Changing maps resetting AFK
 Fixed: Some minor issues with zombie survival
-Fixed: Window title always showing 'starting mcgalaxy' on first run
+Fixed: Window title always showing 'starting Supernova' on first run
 
 v 1.8.8.2
 Added: Can provide reasons for /shutdown, mention /shutdown abort in its help
@@ -1322,7 +1322,7 @@ Added: .cw map importer, imports env and custom blocks too (Format used by the c
 Added: skip/none block type for drawing commands
 Added: /transform and /transform scale, which allows you to scale the output of draw operations
 Added: Start tracking total blocks draw, placed, and deleted in /whois and /top
-Fixed: Being unable to run MCGalaxy behind an IPv6 address
+Fixed: Being unable to run Supernova behind an IPv6 address
 Fixed: /server backup lite still including undo files on windows
 Fixed: Bots using 90% CPU on mono
 Fixed: Spawn world should use that level's motd if it has a custom one
@@ -1413,7 +1413,7 @@ Improved: /fixgrass now uses bulk packet sending
 Improved: /reach now saves across sessions
 
 v 1.8.7.5
-Fix issue with database handles being left open on sqlite backend. This fixes the main memory leak in MCGalaxy.
+Fix issue with database handles being left open on sqlite backend. This fixes the main memory leak in Supernova.
 Fix issue with some sqlite connections rarely not being closed, which caused all other database calls to fail (preventing people from joining).
 It is highly recommended you update for the above two fixes.
 Added: /os map perbuild
@@ -1714,7 +1714,7 @@ v1.7.3.0
 - Fixed /scinema error.
 - Created /xnick, /xtitle, /xtcolor, /xcolor.
 - Made warnings visible in IRC/GUI.
-- Temp fix for MCGalaxy-protection-levl.
+- Temp fix for Supernova-protection-levl.
 - Use /tcolor (or normal color if no title color) for both brakcers in player title.
 - Adminchat should be turned on when using /xhide.
 - Hidden players should not be announced as AFK.

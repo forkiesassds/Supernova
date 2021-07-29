@@ -1,4 +1,4 @@
-namespace MCGalaxy.Gui.Popups {
+namespace Supernova.Gui.Popups {
     partial class PortTools {
         /// <summary>
         /// Required designer variable.

@@ -19,10 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using MCGalaxy.Eco;
-using MCGalaxy.Generator;
+using Supernova.Eco;
+using Supernova.Generator;
 
-namespace MCGalaxy.Gui {
+namespace Supernova.Gui {
 
     public partial class PropertyWindow : Form {
         

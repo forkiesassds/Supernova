@@ -19,10 +19,10 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using MCGalaxy.Network;
+using Supernova.Network;
 //This upnp class comes from http://www.codeproject.com/Articles/27992/NAT-Traversal-with-UPnP-in-C, Modified for use with MCForge
 
-namespace MCGalaxy {
+namespace Supernova {
     public static class UPnP {
 
         public static TimeSpan Timeout = TimeSpan.FromSeconds(3);

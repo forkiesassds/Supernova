@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -18,9 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using MCGalaxy.Games;
+using Supernova.Games;
 
-namespace MCGalaxy.Gui {
+namespace Supernova.Gui {
     public sealed class ZombieProperties {  
         
         [Description("Whether players are allowed to pillar in zombie survival. " +

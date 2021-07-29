@@ -1,4 +1,4 @@
-﻿namespace MCGalaxy.Gui.Popups {
+﻿namespace Supernova.Gui.Popups {
     partial class CustomCommands {
         /// <summary>
         /// Designer variable used to keep track of non-visual components.

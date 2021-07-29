@@ -3,7 +3,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MCGalaxy.Gui.Popups {
+namespace Supernova.Gui.Popups {
     internal sealed partial class TokenSelector : Form {
         public string Token;
 

@@ -1,16 +1,16 @@
-MCGalaxy is a fully featured and customisable **ClassiCube Server Software** based on MCForge/MCLawl.
+Supernova is a fully featured and customisable **ClassiCube Server Software** based on MCForge/MCLawl.
 
 **Setup**
 -----------------
-Download the latest MCGalaxy release [from here](https://github.com/UnknownShadow200/MCGalaxy/releases)
+Download the latest Supernova release [from here](https://github.com/forkiesassds/Supernova/releases)
 * Windows: You need to install .NET framework 4.0. Windows 8/10 already have this included.
 * Linux/macOS: You need to install the [Mono framework](https://www.mono-project.com).
 
-Run **MCGalaxy.exe** for a graphical interface, or run **MCGalaxyCLI.exe** for command line only.
+Run **Supernova.exe** for a graphical interface, or run **SupernovaCLI.exe** for command line only.
 
 Joining your server
 -----------------
-Run MCGalaxy.exe or MCGalaxyCLI.exe firstly. You'll see something like:
+Run Supernova.exe or SupernovaCLI.exe firstly. You'll see something like:
 ![opt3](https://user-images.githubusercontent.com/6509348/60258728-0e05bd00-9919-11e9-9ae8-f1262719cd50.png)
 
 If you are signed in to classicube.net, you can copy this URL straight into your web browser and start playing.
@@ -52,21 +52,21 @@ For the desktop client:
 
 
 #### Show on classicube.net server list
-Click **Settings** in the MCGalaxy window, then tick the **Public** checkbox. Then click **Save**.
+Click **Settings** in the Supernova window, then tick the **Public** checkbox. Then click **Save**.
 
 This makes your server appear in the server list on classicube.net and in the desktop client.
 
 Compiling
 -----------------
 **With an IDE:**
-* Visual Studio : Open `MCGalaxy.sln`, click `Build` in the menubar, then click `Build Solution`. (Or press F6)
-* SharpDevelop: Open `MCGalaxy.sln`, click `Build` in the menubar, then click `Build Solution`. (Or press F8)
+* Visual Studio : Open `Supernova.sln`, click `Build` in the menubar, then click `Build Solution`. (Or press F6)
+* SharpDevelop: Open `Supernova.sln`, click `Build` in the menubar, then click `Build Solution`. (Or press F8)
 
 **Command line:**
-* For Windows: Run `MSBuild command prompt for VS`, then type `msbuild MCGalaxy.sln` into command prompt
-* Modern mono: Type `msbuild MCGalaxy.sln` into Terminal
-* Older mono: Type `xbuild MCGalaxy.sln` into Terminal
+* For Windows: Run `MSBuild command prompt for VS`, then type `msbuild Supernova.sln` into command prompt
+* Modern mono: Type `msbuild Supernova.sln` into Terminal
+* Older mono: Type `xbuild Supernova.sln` into Terminal
 
 Copyright/License
 -----------------
-See LICENSE for MCGalaxy license, and license.txt for code used from other software.
+See LICENSE for Supernova license, and license.txt for code used from other software.

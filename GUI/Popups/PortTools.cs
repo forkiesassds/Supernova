@@ -21,9 +21,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Net.Sockets;
 using System.Windows.Forms;
-using MCGalaxy.Core;
+using Supernova.Core;
 
-namespace MCGalaxy.Gui.Popups {
+namespace Supernova.Gui.Popups {
     public partial class PortTools : Form {
 
         readonly BackgroundWorker worker;
