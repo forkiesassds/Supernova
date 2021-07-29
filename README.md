@@ -29,6 +29,7 @@ Enter a username into the *Username* text box, or click **Log in** to sign in wi
 ![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft2.PNG)
 
 Once you click **Play**, a text box will pop up requesting a server IP. Enter ```127.0.0.1:25565``` into this text box and click **OK**.
+
 ![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft3.PNG)
 
 #### Joining from the ClassiCube desktop client
