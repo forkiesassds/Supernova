@@ -3,3 +3,4 @@ Based on upstream commit 1b336e7d023f426ff1ad4c5dcb07f87e6fe33f42
 Implement support for older Minecraft Classic protocols.
 Very basic and probably insecure implementation of the BetaCraft heartbeat.
 Support for 64-bit builds has been added.
+Added option to disable CPE blocks.
