@@ -33,6 +33,7 @@ Once you click **Play**, a text box will pop up requesting a server IP. Enter ``
 
 #### Joining from the ClassiCube desktop client
 Click **Direct connect** at the main menu.
+
 ![opt1](https://user-images.githubusercontent.com/6509348/60258725-0e05bd00-9919-11e9-8f8c-fbbdc52f04f9.png)
 
 Type your username into *Username*, ```127.0.0.1:25565``` into *IP:Port*, and leave *Mppass* blank. Then click **Connect**.
