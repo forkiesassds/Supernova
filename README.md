@@ -4,7 +4,7 @@ Supernova is a fully featured and customisable **Minecraft Classic and ClassiCub
 -----------------
 Supernova adds the following major features:
 * Support for older versions of the Minecraft Classic Protocol.
-* Dual server list functionality with the ClassiCube and Betacraft server lists.
+* Dual server list functionality with the ClassiCube and BetaCraft server lists.
 
 **Setup**
 -----------------
@@ -21,7 +21,7 @@ Run Supernova.exe or SupernovaCLI.exe firstly. You'll see something like:
 
 If you are signed in to classicube.net, you can copy this URL straight into your web browser and start playing.
 
-#### Joining from the Betacraft Launcher
+#### Joining from the BetaCraft Launcher
 Click on **Select version** at the main menu, and select 0.30-c (or a different version if you've changed the PVN).
 ![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft1.PNG)
 
@@ -57,7 +57,7 @@ You need to find out your LAN/local IP address.
 To join from a web browser on ClassiCube, add ```?ip=[lan ip]``` to the server's URL.\
 (e.g. http://www.classicube.net/server/play/d1362e7fee1a54365514712d007c8799?ip=192.168.1.30)
 
-To join from the ClassiCube or Betacraft desktop clients, connect to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
+To join from the ClassiCube or BetaCraft desktop clients, connect to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
 
 
 #### Across the internet
@@ -68,7 +68,7 @@ For the ClassiCube desktop client:
 * Type/paste the hash (e.g. ```d1362e7fee1a54365514712d007c8799```) into the *classicube.net/server/play* text box. 
 * Click **Connect**.
 
-For the Betacraft desktop client:
+For the BetaCraft desktop client:
 * Find your public IP address. This can typically be seen in your router's settings (your public IP should not begin with ```192.168```)
 * Type/paste the public IP address into the *Server IP* text box and click **OK**.
 
@@ -76,7 +76,7 @@ For the Betacraft desktop client:
 #### Show on server lists
 Click **Settings** in the Supernova window, then tick the **Public** checkbox. Then click **Save**.
 
-This makes your server appear in the server list on ClassiCube and Betacraft's respective server lists.
+This makes your server appear in ClassiCube and BetaCraft's respective server lists.
 
 Compiling
 -----------------
