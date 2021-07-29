@@ -2,11 +2,9 @@ Supernova is a fully featured and customisable **Minecraft Classic and ClassiCub
 
 **Features**
 -----------------
-Supernova adds the following features:
+Supernova adds the following major features:
 * Support for older versions of the Minecraft Classic Protocol.
 * Dual server list functionality with the ClassiCube and Betacraft server lists.
-* Support for 64-bit builds.
-* An option to disable CPE-exclusive blocks.
 
 **Setup**
 -----------------
