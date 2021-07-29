@@ -1,4 +1,4 @@
-Supernova is a fork of MCGalaxy that aims to add support for older versions of Minecraft Classic.
+Supernova is a fork of MCGalaxy that aims to add support for older versions of **Minecraft Classic**.
 
 **Features**
 -----------------
@@ -23,7 +23,17 @@ Run Supernova.exe or SupernovaCLI.exe firstly. You'll see something like:
 
 If you are signed in to classicube.net, you can copy this URL straight into your web browser and start playing.
 
-#### Joining from the desktop client
+#### Joining from the Betacraft Launcher
+Click on **Select version** at the main menu, and select 0.30-c (or a different version if you've changed the PVN).
+# WIP (picture will go here)
+
+Enter a username into the *Username* text box, or click **Log in** to sign in with a Mojang or Microsoft account.
+# WIP (picture will go here)
+
+Once you click **Play**, a text box will pop up requesting a server IP. Enter ```127.0.0.1:25565``` into this text box and click **OK**.
+# WIP (picture will go here)
+
+#### Joining from the ClassiCube desktop client
 Click **Direct connect** at the main menu.
 ![opt1](https://user-images.githubusercontent.com/6509348/60258725-0e05bd00-9919-11e9-8f8c-fbbdc52f04f9.png)
 
@@ -47,16 +57,20 @@ You need to find out your LAN/local IP address.
 To join from a web browser on ClassiCube, add ```?ip=[lan ip]``` to the server's URL.\
 (e.g. http://www.classicube.net/server/play/d1362e7fee1a54365514712d007c8799?ip=192.168.1.30)
 
-To join from the desktop client, **Direct connect** to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
+To join from the ClassiCube or Betacraft desktop clients, connect to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
 
 
 #### Across the internet
 You need to port forward your router. Players can then join by entering the server URL into their web browser.
 
-For the desktop client:
+For the ClassiCube desktop client:
 * Click **Sign in**. 
 * Type/paste the hash (e.g. ```d1362e7fee1a54365514712d007c8799```) into the *classicube.net/server/play* text box. 
 * Click **Connect**.
+
+For the Betacraft desktop client:
+* Find your public IP address. This can typically be seen in your router's settings (your public IP should not begin with ```192.168```)
+* Type/paste the public IP address into the *Server IP* text box and click **OK**.
 
 
 #### Show on server lists
