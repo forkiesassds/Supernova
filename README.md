@@ -1,4 +1,12 @@
-Supernova is a **Minecraft Classic and ClassiCube Server Software** based on MCGalaxy that aims to add support for older versions of the Minecraft Classic Protocol, among other features.
+Supernova is a fork of MCGalaxy that aims to add support for older versions of Minecraft Classic.
+
+**Features**
+-----------------
+Supernova adds the following features:
+* Support for older versions of the Minecraft Classic Protocol.
+* Dual server list functionality with the ClassiCube and Betacraft server lists.
+* Support for 64-bit builds.
+* An option to disable CPE-exclusive blocks.
 
 **Setup**
 -----------------
