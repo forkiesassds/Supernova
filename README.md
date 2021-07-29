@@ -1,4 +1,4 @@
-Supernova is a fully featured and customisable **Minecraft Classic and ClassiCube Server Software** based on MCGalaxy.
+Supernova is a **Minecraft Classic and ClassiCube Server Software** based on MCGalaxy that aims to add support for older versions of the Minecraft Classic Protocol, among other features.
 
 **Setup**
 -----------------
@@ -36,7 +36,7 @@ Letting others join your server
 You need to find out your LAN/local IP address.
 *  Windows: Type ```ipconfig``` into **Command Prompt**. Look for ```IPv4 address``` in the output.
 
-To join from a web browser, add ```?ip=[lan ip]``` to the server's URL.\
+To join from a web browser on ClassiCube, add ```?ip=[lan ip]``` to the server's URL.\
 (e.g. http://www.classicube.net/server/play/d1362e7fee1a54365514712d007c8799?ip=192.168.1.30)
 
 To join from the desktop client, **Direct connect** to ```[lan ip]:25565``` instead. (e.g. ```192.168.1.30:25565```)
@@ -51,10 +51,10 @@ For the desktop client:
 * Click **Connect**.
 
 
-#### Show on classicube.net server list
+#### Show on server lists
 Click **Settings** in the Supernova window, then tick the **Public** checkbox. Then click **Save**.
 
-This makes your server appear in the server list on classicube.net and in the desktop client.
+This makes your server appear in the server list on ClassiCube and Betacraft's respective server lists.
 
 Compiling
 -----------------
