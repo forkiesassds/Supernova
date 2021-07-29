@@ -23,13 +23,13 @@ If you are signed in to classicube.net, you can copy this URL straight into your
 
 #### Joining from the Betacraft Launcher
 Click on **Select version** at the main menu, and select 0.30-c (or a different version if you've changed the PVN).
-#### WIP (picture will go here)
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft1.PNG)
 
 Enter a username into the *Username* text box, or click **Log in** to sign in with a Mojang or Microsoft account.
-#### WIP (picture will go here)
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft2.PNG)
 
 Once you click **Play**, a text box will pop up requesting a server IP. Enter ```127.0.0.1:25565``` into this text box and click **OK**.
-#### WIP (picture will go here)
+![opt3](https://github.com/MisterSheeple/Supernova/blob/119ff44cbf40d5ccb8df0422efbc992fd5beb3ea/Images/Betacraft3.PNG)
 
 #### Joining from the ClassiCube desktop client
 Click **Direct connect** at the main menu.
