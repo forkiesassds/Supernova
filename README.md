@@ -1,4 +1,4 @@
-Supernova is a fork of MCGalaxy that aims to add support for older versions of **Minecraft Classic**.
+Supernova is a fully featured and customisable **Minecraft Classic and ClassiCube server software** based on MCGalaxy that adds support for multiple new features.
 
 **Features**
 -----------------
