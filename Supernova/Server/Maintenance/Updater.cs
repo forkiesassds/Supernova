@@ -19,6 +19,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Reflection;
 using Supernova.Network;
 using Supernova.Tasks;
@@ -54,8 +55,7 @@ namespace Supernova {
 
             try {
                 string latest = client.DownloadString(CurrentVersionURL);
-                
-                if (new Version(Server.Version) >= new Version(latest)) {
+                if (new Version(Regex.Replace(Server.Version, "-[a-zA-Z]+[a-zA-Z]", "")) >= new Version(latest)) {
                     Logger.Log(LogType.SystemActivity, "No update found!");
                 } else if (NewerVersionDetected != null) {
                     NewerVersionDetected(null, EventArgs.Empty);
