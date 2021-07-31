@@ -178,7 +178,7 @@ namespace Supernova {
             
             // For backwards compatibility, treat name+XYZ map names as belonging to name+
             // If no + though, don't use because otherwise people can register accounts and claim maps
-            return Server.Config.ClassicubeAccountPlus && map.CaselessStarts(name);
+            return true && map.CaselessStarts(name);
         }
     }
 }

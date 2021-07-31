@@ -125,7 +125,7 @@ namespace Supernova.Commands.Info {
         }
         
         static string DefaultRealmOwner(string map) {
-            bool plus = Server.Config.ClassicubeAccountPlus;
+            bool plus = true;
             // Early out when accounts have + and map doesn't.
             //if (plus && map.IndexOf('+') == -1) return null;
             
