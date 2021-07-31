@@ -42,7 +42,7 @@ namespace Supernova {
             string mppass = NetUtils.ReadString(buffer, offset + 66);
             OnPlayerStartConnectingEvent.Call(this, mppass);
             if (!this.betacraftUser) name += "+";
-            SkinName = name; DisplayName = name; truename = name;
+            SkinName = (this.betacraftUser ? "https://minotar.net/skin/" + name + ".png" : name); DisplayName = name; truename = name;
             if (cancelconnecting) { cancelconnecting = false; return; }
             if (Server.Config.PVN < 7) Server.Config.EnableCPE = false;
             hasCpe = buffer[offset + 130] == 0x42 && Server.Config.EnableCPE;
