@@ -41,7 +41,6 @@ namespace Supernova {
             
             string mppass = NetUtils.ReadString(buffer, offset + 66);
             OnPlayerStartConnectingEvent.Call(this, mppass);
-            System.Console.WriteLine(this.betacraftUser);
             if (Server.Config.ClassicubeAccountPlus && !this.betacraftUser) name += "+";
             SkinName = name; DisplayName = name; truename = name;
             if (cancelconnecting) { cancelconnecting = false; return; }
