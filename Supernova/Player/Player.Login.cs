@@ -74,7 +74,7 @@ namespace Supernova {
                 // Check if any players online have same name
                 Player[] players = PlayerInfo.Online.Items;
                 foreach (Player pl in players) {
-                    if (pl.truename == truename) { System.Console.WriteLine(pl.truename); System.Console.WriteLine(truename); clone = pl; break; }
+                    if (pl.truename == truename) { clone = pl; break; }
                 }
                 
                 // Remove clone from list (hold lock for as short time as possible)
