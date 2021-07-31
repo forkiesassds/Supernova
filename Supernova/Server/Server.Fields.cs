@@ -39,7 +39,7 @@ namespace Supernova {
         public static PlayerMetaList Notes = new PlayerMetaList("text/notes.txt");
         
         /// <summary> *** DO NOT USE THIS! *** Use VersionString, as this field is a constant and is inlined if used. </summary>
-        public const string InternalVersion = "1.0.1"
+        public const string InternalVersion = "1.0.2"
         #if DEBUG 
             + "-dev";
         #elif PRERELEASE 
@@ -91,6 +91,7 @@ namespace Supernova {
         public static Server s = new Server();
 
         public static string salt = "";
+        public static string betacraftSalt = "";
         public static bool chatmod, flipHead;
         public static bool shuttingDown;
     }

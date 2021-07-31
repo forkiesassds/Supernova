@@ -380,7 +380,7 @@ namespace Supernova {
             Player target = PlayerInfo.FindExact(name);
             // TODO: select color from database?
             if (target != null && CanSee(target)) return FormatNick(target);
-            return Group.GroupIn(name).Color + name.RemoveLastPlus();
+            return Group.GroupIn(name).Color + name;
         }
 
         /// <summary> Formats a player's name for displaying in chat. </summary>        

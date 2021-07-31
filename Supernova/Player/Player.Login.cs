@@ -38,10 +38,12 @@ namespace Supernova {
             
             name = NetUtils.ReadString(buffer, offset + 2);
             SkinName = name; DisplayName = name; truename = name;
-            if (Server.Config.ClassicubeAccountPlus) name += "+";
             
             string mppass = NetUtils.ReadString(buffer, offset + 66);
             OnPlayerStartConnectingEvent.Call(this, mppass);
+            System.Console.WriteLine(this.betacraftUser);
+            if (Server.Config.ClassicubeAccountPlus && !this.betacraftUser) name += "+";
+            SkinName = name; DisplayName = name; truename = name;
             if (cancelconnecting) { cancelconnecting = false; return; }
             if (Server.Config.PVN < 7) Server.Config.EnableCPE = false;
             hasCpe = buffer[offset + 130] == 0x42 && Server.Config.EnableCPE;
@@ -72,7 +74,7 @@ namespace Supernova {
                 // Check if any players online have same name
                 Player[] players = PlayerInfo.Online.Items;
                 foreach (Player pl in players) {
-                    if (pl.truename == truename) { clone = pl; break; }
+                    if (pl.truename == truename) { System.Console.WriteLine(pl.truename); System.Console.WriteLine(truename); clone = pl; break; }
                 }
                 
                 // Remove clone from list (hold lock for as short time as possible)
@@ -81,7 +83,7 @@ namespace Supernova {
                 PlayerInfo.Online.Add(this);
             }
             
-            if (clone != null && Server.Config.VerifyNames) {
+            if (clone != null  && Server.Config.VerifyNames) {
                 string reason = ip == clone.ip ? "(Reconnecting)" : "(Reconnecting from a different IP)";
                 clone.Leave(reason);
             } else if (clone != null) {

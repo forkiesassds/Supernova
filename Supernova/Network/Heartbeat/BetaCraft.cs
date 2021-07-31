@@ -69,7 +69,7 @@ namespace Supernova.Network {
                 "&name="     + Uri.EscapeDataString(name) +
                 "&public="   + Server.Config.Public +
                 "&version="  + Server.Config.PVN +
-                "&salt="     + Server.salt +
+                "&salt="     + Server.betacraftSalt +
                 "&users="    + PlayerInfo.NonHiddenUniqueIPCount();
         }
         

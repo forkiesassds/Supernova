@@ -222,6 +222,7 @@ namespace Supernova {
         /// <summary> Whether player has completed login process and been sent initial map. </summary>
         public bool loggedIn;
         public bool verifiedName;
+        public bool betacraftUser;
         bool gotSQLData;
         
         

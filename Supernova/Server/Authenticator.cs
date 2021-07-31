@@ -33,12 +33,14 @@ namespace Supernova {
         /// <summary> Checks if the given player is allowed to login with the given mppass </summary>
         public virtual bool VerifyLogin(Player p, string mppass) {
             if (!Server.Config.VerifyNames) return true;
-            string calculated = Server.CalcMppass(p.truename);
-            
-            if (!mppass.CaselessEq(calculated)) {
-                if (!IPUtil.IsPrivate(p.IP)) return false;
-            } else {
+            string calculated = Server.CalcMppass(p.truename, Server.salt);
+            string betacraftCalculated = Server.CalcMppass(p.truename, Server.betacraftSalt);
+
+            if (mppass.CaselessEq(calculated) || mppass.CaselessEq(betacraftCalculated)) {
                 p.verifiedName = true;
+                if (mppass.CaselessEq(betacraftCalculated)) p.betacraftUser = true;
+            } else {
+                if (!IPUtil.IsPrivate(p.IP)) return false;
             }
             return true;
         }
@@ -171,8 +173,7 @@ namespace Supernova {
 
         
         static string NewHashPath(string name) {
-            // don't want '+' at end of names
-            return PASS_FOLDER + name.RemoveLastPlus().ToLower() + ".pwd";
+            return PASS_FOLDER + name.ToLower() + ".pwd";
         }
         
         static string FindOldHashPath(string name) {
