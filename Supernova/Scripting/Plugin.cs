@@ -16,6 +16,7 @@
     permissions and limitations under the Licenses.
 */
 using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using Supernova.Core;
 using Supernova.Modules.Moderation.Notes;
@@ -62,7 +63,7 @@ namespace Supernova
         public static bool Load(Plugin p, bool auto) {
             try {
                 string ver = p.Supernova_Version;
-                if (!String.IsNullOrEmpty(ver) && new Version(ver) > new Version(Server.Version)) {
+                if (!String.IsNullOrEmpty(ver) && new Version(Regex.Replace(ver, "-[a-zA-Z]+[a-zA-Z]", "")) > new Version(Regex.Replace(Server.Version, "-[a-zA-Z]+[a-zA-Z]", ""))) {
                     Logger.Log(LogType.Warning, "Plugin ({0}) requires a more recent version of {1}!", p.name, Server.SoftwareName);
                     return false;
                 }
