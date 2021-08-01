@@ -229,7 +229,7 @@ namespace Supernova {
                         Message("There is currently &a" + PlayerInfo.Online.list.Count + " player online.");
                     else
                         Message("There are currently &a" + PlayerInfo.Online.list.Count + " players online.");
-                    if ( CanUse("awards") ) Message("You have " + Awards.GetCurrentPlayerAwards(name).Count + " awards.");
+                    if ( CanUse("awards") ) Message("You have " + Modules.Awards.PlayerAwards.Get(FullName).Count + " awards.");
                 };
             }
             gotSQLData = true;

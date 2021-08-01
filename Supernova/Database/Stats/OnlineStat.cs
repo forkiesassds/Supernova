@@ -103,8 +103,6 @@ namespace Supernova.DB {
         }
         
         public static void SpecialGroupLine(Player p, string name) {
-            if (Server.Devs.CaselessContains(name.RemoveLastPlus()))
-                p.Message("  Player is an &9{0} Developer", Server.SoftwareName);
             if (Server.Config.OwnerName.CaselessEq(name))
                 p.Message("  Player is the &cServer owner");
         }
