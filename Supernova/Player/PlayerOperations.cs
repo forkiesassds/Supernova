@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -71,13 +71,13 @@ namespace Supernova {
             
             if (nick.Length == 0) {
                 PlayerOperations.MessageAction(p, target, who, "λACTOR &Sremoved λTARGET nick");
-                nick = target;
+                nick = target.RemoveLastPlus();
             } else {
                 if (!p.CheckCanSpeak("change nicks")) return false;
                 
                 // TODO: select color from database?
                 string color = who != null ? who.color : Group.GroupIn(target).Color;
-                PlayerOperations.MessageAction(p, target, who, "λACTOR &Schanged λTARGET nick to " + color + nick);
+                MessageAction(p, target, who, "λACTOR &Schanged λTARGET nick to " + color + nick);
             }
             
             if (who != null) who.DisplayName = nick;

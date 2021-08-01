@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -51,6 +51,8 @@ namespace Supernova.Modules.Relay.Discord
         
         /// <summary> Callback invoked when a ready event has been received </summary>
         public Action<JsonObject> OnReady;
+        /// <summary> Callback invoked when a resumed event has been received </summary>
+        public Action<JsonObject> OnResumed;
         /// <summary> Callback invoked when a message created event has been received </summary>
         public Action<JsonObject> OnMessageCreate;
         /// <summary> Callback invoked when a channel created event has been received </summary>
@@ -180,6 +182,9 @@ namespace Supernova.Modules.Relay.Discord
                 data = (JsonObject)obj["d"];
                 HandleReady(data);
                 OnReady(data);
+            } else if (eventName == "RESUMED") {
+                data = (JsonObject)obj["d"];
+                OnResumed(data);
             } else if (eventName == "MESSAGE_CREATE") {
                 data = (JsonObject)obj["d"];
                 OnMessageCreate(data);

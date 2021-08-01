@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -15,6 +15,7 @@
     or implied. See the Licenses for the specific language governing
     permissions and limitations under the Licenses.
  */
+ 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -65,6 +66,7 @@ namespace Supernova.Modules.Relay.Discord
             socket.GetStatus = GetStatusMessage;
             
             socket.OnReady         = HandleReadyEvent;
+            socket.OnResumed       = HandleResumedEvent;
             socket.OnMessageCreate = HandleMessageEvent;
             socket.OnChannelCreate = HandleChannelEvent;
             socket.Connect();
@@ -168,7 +170,10 @@ namespace Supernova.Modules.Relay.Discord
         void HandleReadyEvent(JsonObject data) {
             JsonObject user = (JsonObject)data["user"];
             botUserID       = (string)user["id"];
-            
+            HandleResumedEvent(data);
+        }
+        
+        void HandleResumedEvent(JsonObject data) {
             // May not be null when reconnecting
             if (api == null) {
                 api = new DiscordApiClient();
