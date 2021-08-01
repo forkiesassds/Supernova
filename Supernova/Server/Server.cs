@@ -32,6 +32,7 @@ using Supernova.Network;
 using Supernova.Scripting;
 using Supernova.Tasks;
 using Supernova.Util;
+using Supernova.Modules.Awards;
 
 namespace Supernova {
     public sealed partial class Server {
@@ -183,7 +184,8 @@ namespace Supernova {
             CommandPerms.Load();
             Command.InitAll();
             Block.SetBlocks();
-            Awards.Load();
+            AwardsList.Load();
+            PlayerAwards.Load();
             Economy.Load();
             WarpList.Global.Filename = "extra/warps.save";
             WarpList.Global.Load();

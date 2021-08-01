@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -229,9 +229,6 @@
     <Compile Include="Commands\CPE\CmdSkin.cs" />
     <Compile Include="Commands\CPE\CmdTexture.cs" />
     <Compile Include="Commands\CPE\CustomBlockCommand.cs" />
-    <Compile Include="Commands\Economy\CmdAward.cs" />
-    <Compile Include="Commands\Economy\CmdAwardMod.cs" />
-    <Compile Include="Commands\Economy\CmdAwards.cs" />
     <Compile Include="Commands\Economy\CmdBuy.cs" />
     <Compile Include="Commands\Economy\CmdEconomy.cs" />
     <Compile Include="Commands\Economy\CmdGive.cs" />
@@ -484,7 +481,6 @@
     <Compile Include="Drawing\Transform\RotateTransform.cs" />
     <Compile Include="Drawing\Transform\SimpleTransforms.cs" />
     <Compile Include="Drawing\Transform\Transform.cs" />
-    <Compile Include="Economy\Awards.cs" />
     <Compile Include="Economy\Economy.DB.cs" />
     <Compile Include="Economy\OtherItems.cs" />
     <Compile Include="Economy\ZombieItems.cs" />
@@ -611,6 +607,11 @@
     <Compile Include="Blocks\Physics\TntPhysics.cs" />
     <Compile Include="Blocks\Physics\ZombiePhysics.cs" />
     <Compile Include="Levels\Zone.cs" />
+    <Compile Include="Modules\Awards\PlayerAwards.cs" />
+    <Compile Include="Modules\Awards\CmdAward.cs" />
+    <Compile Include="Modules\Awards\CmdAwardMod.cs" />
+    <Compile Include="Modules\Awards\CmdAwards.cs" />
+    <Compile Include="Modules\Awards\AwardsList.cs" />
     <Compile Include="Modules\Moderation\Notes\CmdNotes.cs" />
     <Compile Include="Modules\Moderation\Notes\NotesPlugin.cs" />
     <Compile Include="Modules\Relay\BotControllersCmd.cs" />
@@ -624,7 +625,6 @@
     <Compile Include="Modules\Relay\RelayBotCmd.cs" />
     <Compile Include="Modules\Relay\RelayBotSender.cs" />
     <Compile Include="Network\BaseWebSocket.cs" />
-    <Compile Include="Network\Heartbeat\BetaCraft.cs" />
     <Compile Include="Network\Heartbeat\ClassiCube.cs" />
     <Compile Include="Network\Heartbeat\Heartbeat.cs" />
     <Compile Include="Modules\Relay\IRC\IRCBot.cs" />
@@ -759,6 +759,7 @@
     <Folder Include="Generator\LibNoise" />
     <Folder Include="Generator\Classic" />
     <Folder Include="Generator\Realistic" />
+    <Folder Include="Modules\Awards" />
     <Folder Include="Modules\Moderation" />
     <Folder Include="Modules\Moderation\Notes" />
     <Folder Include="Modules\Relay\Discord" />
@@ -779,8 +780,8 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-  </Target>-->
-  
+  </Target>
+  -->
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>

@@ -17,16 +17,18 @@
 */
 using Supernova.Eco;
 
-namespace Supernova.Commands.Eco {   
-    public sealed class CmdAwardMod : Command2 {        
+namespace Supernova.Modules.Awards
+{
+    public sealed class CmdAwardMod : Command2 
+    {
         public override string name { get { return "AwardMod"; } }
         public override string type { get { return CommandTypes.Economy; } }
         public override LevelPermission defaultRank { get { return LevelPermission.Admin; } }
         static char[] awardArgs = new char[] { ':' };
 
         public override void Use(Player p, string message, CommandData data) {
-            if (message.Length == 0 || message.IndexOf(' ') == -1) { Help(p); return; }
             string[] args = message.SplitSpaces(2);
+            if (args.Length < 2) { Help(p); return; }
 
             if (IsCreateCommand(args[0])) {
                 args = args[1].Split(awardArgs, 2);
@@ -34,19 +36,22 @@ namespace Supernova.Commands.Eco {
                     p.Message("&WUse a : to separate the award name from its description."); 
                     Help(p); return;
                 }
+                
+                string award = args[0].Trim();
+                string desc  = args[1].Trim();
 
-                if (!Awards.Add(args[0], args[1])) {
+                if (!AwardsList.Add(award, desc)) {
                     p.Message("This award already exists."); return;
                 } else {
-                    Chat.MessageGlobal("Award added: &6{0} : {1}", args[0], args[1]);
-                    Awards.SaveAwards();
+                    Chat.MessageGlobal("Award added: &6{0} : {1}", award, desc);
+                    AwardsList.Save();
                 }
             } else if (IsDeleteCommand(args[0])) {
-                if (!Awards.Remove(args[1])) {
+                if (!AwardsList.Remove(args[1])) {
                     p.Message("This award does not exist."); return;
                 } else {
                     Chat.MessageGlobal("Award removed: &6{0}", args[1]);
-                    Awards.SaveAwards();
+                    AwardsList.Save();
                 }
             } else {
                 Help(p);

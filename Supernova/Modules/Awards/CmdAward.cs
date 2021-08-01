@@ -17,8 +17,10 @@
 */
 using Supernova.Eco;
 
-namespace Supernova.Commands.Eco {
-    public sealed class CmdAward : Command2 {      
+namespace Supernova.Modules.Awards
+{
+    public sealed class CmdAward : Command2 
+    {
         public override string name { get { return "Award"; } }
         public override string type { get { return CommandTypes.Economy; } }
         public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
@@ -40,18 +42,18 @@ namespace Supernova.Commands.Eco {
 
             string displayName = p.FormatNick(plName);
             if (!take) {
-                if (Awards.GiveAward(plName, award)) {
+                if (PlayerAwards.Give(plName, award)) {
                     Chat.MessageGlobal("{0} &Swas awarded: &b{1}", displayName, award);
-                    Awards.SavePlayers();
+                    PlayerAwards.Save();
                 } else if (plName.CaselessEq(p.name)) {
                     p.Message("You already have that award.");
                 } else {
                     p.Message("{0} &Salready has that award.", displayName);
                 }
             } else {
-                if (Awards.TakeAward(plName, award)) {
+                if (PlayerAwards.Take(plName, award)) {
                     Chat.MessageGlobal("{0} &Shad their &b{1} &Saward removed", displayName, award);
-                    Awards.SavePlayers();
+                    PlayerAwards.Save();
                 } else if (plName.CaselessEq(p.name)) {
                     p.Message("You did not have that award to begin with.");
                 } else {

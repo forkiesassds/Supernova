@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -21,7 +21,6 @@ using Supernova.Drawing.Brushes;
 using Supernova.Drawing.Ops;
 using Supernova.Maths;
 using BlockID = System.UInt16;
-using BlockRaw = System.Byte;
 
 namespace Supernova.Generator.Foliage {
     public sealed class AshTree : Tree {
@@ -75,7 +74,7 @@ namespace Supernova.Generator.Foliage {
             DrawOp op = new EllipsoidDrawOp();
             Brush brush = new SolidBrush(Block.Leaves);
             op.SetMarks(marks);
-            op.Perform(marks, brush, b => output(b.X, b.Y, b.Z, (BlockRaw)b.Block));
+            op.Perform(marks, brush, b => output(b.X, b.Y, b.Z, b.Block));
         }
         
         void Line(Vec3S32 p1, Vec3S32 p2, TreeOutput output) {

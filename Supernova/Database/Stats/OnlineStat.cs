@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using Supernova.Commands;
 using Supernova.Eco;
+using Supernova.Modules.Awards;
 
 namespace Supernova.DB {
 
@@ -56,11 +57,11 @@ namespace Supernova.DB {
         
         public static void MiscLine(Player p, string name, int deaths, int money) {
             if (Economy.Enabled) {
-                p.Message("  &a{0} &cdeaths&S, &a{2} &S{3}, {1} &Sawards",
-                               deaths, Awards.AwardAmount(name), money, Server.Config.Currency);
+                p.Message("  &a{0} &cdeaths&S, &a{2} &S{3}, &f{1} &Sawards",
+                               deaths, PlayerAwards.Summarise(name), money, Server.Config.Currency);
             } else {
-                p.Message("  &a{0} &cdeaths&S, {1} &Sawards",
-                               deaths, Awards.AwardAmount(name));
+                p.Message("  &a{0} &cdeaths&S, &f{1} &Sawards",
+                               deaths, PlayerAwards.Summarise(name));
             }
         }
         
@@ -102,6 +103,8 @@ namespace Supernova.DB {
         }
         
         public static void SpecialGroupLine(Player p, string name) {
+            if (Server.Devs.CaselessContains(name.RemoveLastPlus()))
+                p.Message("  Player is an &9{0} Developer", Server.SoftwareName);
             if (Server.Config.OwnerName.CaselessEq(name))
                 p.Message("  Player is the &cServer owner");
         }

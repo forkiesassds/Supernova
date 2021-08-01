@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -22,6 +22,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using Supernova.Eco;
+using Supernova.Modules.Awards;
 
 namespace Supernova {
     
@@ -32,8 +33,8 @@ namespace Supernova {
         /// <summary> Finds partial matches of 'name' against the list of all awards. </summary>
         public static string FindAwards(Player p, string name) {
             int matches;
-            Awards.Award award = Find(p, name, out matches, Awards.AwardsList,
-                                      null, a => a.Name, "awards");
+            Award award = Find(p, name, out matches, AwardsList.Awards,
+                               null, a => a.Name, "awards");
             return award == null ? null : award.Name;
         }
         
