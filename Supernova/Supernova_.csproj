@@ -246,6 +246,7 @@
     <Compile Include="Commands\Fun\CmdMissile.cs" />
     <Compile Include="Commands\Fun\CmdReferee.cs" />
     <Compile Include="Commands\Fun\CmdSlap.cs" />
+    <Compile Include="Commands\Fun\CmdSpleef.cs" />
     <Compile Include="Commands\Fun\CmdTeam.cs" />
     <Compile Include="Commands\Fun\CmdTntWars.cs" />
     <Compile Include="Commands\Fun\CmdZombieSpawn.cs" />
@@ -525,6 +526,10 @@
     <Compile Include="Games\RoundsGame\RoundsGameConfig.cs" />
     <Compile Include="Games\RoundsGame\RoundsGame.cs" />
     <Compile Include="Games\RoundsGame\RoundsGame.Plugin.cs" />
+    <Compile Include="Games\Spleef\SpleefGame.cs" />
+    <Compile Include="Games\Spleef\SpleefGame.Plugin.cs" />
+    <Compile Include="Games\Spleef\SpleefGame.Round.cs" />
+    <Compile Include="Games\Spleef\SpleefMap.cs" />
     <Compile Include="Games\Team.cs" />
     <Compile Include="Games\TntWars\TWGame.Plugin.cs" />
     <Compile Include="Games\TntWars\TWGame.Round.cs" />

@@ -161,6 +161,33 @@ namespace Supernova.Games {
                 Map.Message("&WNeed 2 or more non-ref players to start a round.");
             }
         }
+
+        protected void DoSpleef(string format, int delay, int minThreshold) {
+            const CpeMessageType type = CpeMessageType.Announcement;
+            for (int i = delay; i > 0 && Running; i--) {
+                if (i == 1) {
+                    MessageMap(type, String.Format(format, i)
+                               .Replace("seconds", "second"));
+                } else if (i < minThreshold || (i % 10) == 0) {
+                    MessageMap(type, String.Format(format, i));
+                }
+                Thread.Sleep(1000);
+            }
+            MessageMap(type, "");
+        }
+        protected List<Player> DoRoundSpleef(int delay) {
+            while (true) {
+                RoundStart = DateTime.UtcNow.AddSeconds(delay);
+                if (!Running) return null;
+
+                DoSpleef("&4Starting in &f{0} &4seconds", delay, 10);
+                if (!Running) return null;
+                
+                List<Player> players = GetPlayers();
+                if (players.Count >= 2) return players;
+                Map.Message("&WNeed 2 or more non-ref players to start a round.");
+            }
+        }
         
         protected virtual void VoteAndMoveToNextMap() {
             Picker.AddRecentMap(Map.MapName);
