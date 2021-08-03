@@ -76,7 +76,7 @@ namespace Supernova.Games {
                 
         void ResetBoard() {
             int maxX = Map.Width - 1, maxZ = Map.Length - 1;
-            Cuboid(4, 4, 4, maxX, 4, maxZ, Block.White);
+            Cuboid(0, 4, 0, maxX, 4, maxZ, Block.White);
             
             bulk.Flush();
         }        
