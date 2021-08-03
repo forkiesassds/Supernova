@@ -32,14 +32,12 @@ namespace Supernova.Games {
         
         protected override void DoRound() {
             bulk.level = Map;
-            SetBoardOpening(Block.Glass);
             ResetBoard();
             if (!Running) return;
             DoRoundSpleef(10);
             ResetBoard();
             if (!Running) return;
             
-            SetBoardOpening(Block.Air);
             bulk.Flush();
             if (!Running) return;
             
@@ -47,7 +45,6 @@ namespace Supernova.Games {
             if (!Running) return;
             
             BeginRound();
-            SetBoardOpening(Block.Glass);
             if (!Running) return;
             
             RoundInProgress = true;
@@ -65,6 +62,8 @@ namespace Supernova.Games {
             
             if (!Running) return;
             Map.Message("GO!!!!!!!");
+            Map.Config.Deletable = true;
+            Map.UpdateBlockPermissions();
             
             Player[] players = Players.Items;
             Remaining.Clear();
@@ -76,18 +75,11 @@ namespace Supernova.Games {
         }
                 
         void ResetBoard() {
-            SetBoardOpening(Block.White);
             int maxX = Map.Width - 1, maxZ = Map.Length - 1;
-            Cuboid(4, 4, 4, maxX - 4, 4, maxZ - 4, Block.White);
+            Cuboid(4, 4, 4, maxX, 4, maxZ, Block.White);
             
             bulk.Flush();
         }        
-        
-        void SetBoardOpening(BlockID block) {
-            int midX = Map.Width / 2, midY = Map.Height / 2, midZ = Map.Length / 2;
-            Cuboid(midX - 1, midY, midZ - 1, midX, midY, midZ, block);
-            bulk.Flush();
-        }
         
         void Cuboid(int x1, int y1, int z1, int x2, int y2, int z2, BlockID block) {
             for (int y = y1; y <= y2; y++)
@@ -145,6 +137,8 @@ namespace Supernova.Games {
         public override void EndRound() { EndRound(null); }
         public void EndRound(Player winner) {
             RoundInProgress = false;
+            Map.Config.Deletable = false;
+            Map.UpdateBlockPermissions();
             Remaining.Clear();
             UpdateAllStatus();
             
