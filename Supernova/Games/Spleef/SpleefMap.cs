@@ -43,17 +43,17 @@ namespace Supernova.Games {
         }
         
         static void MakeBoundaries(Level lvl) {
-            int maxX = lvl.Width, maxY = lvl.Height, maxZ = lvl.Length;
+            int maxX = lvl.Width - 1, maxZ = lvl.Length - 1;
             Cuboid(0, 1, 0, maxX, 1, maxZ, Block.Magma, lvl);
         }
         
         static void MakeViewAreaRoof(Level lvl) {
-            int maxX = lvl.Width, midY = lvl.Height / 2, maxZ = lvl.Length;
+            int maxX = lvl.Width - 1, midY = lvl.Height / 2, maxZ = lvl.Length - 1;
             Cuboid(0, midY, 0, maxX, midY, maxZ, Block.Op_Glass, lvl);
         }
         
         static void MakePlayAreaWalls(Level lvl) {
-            int maxX = lvl.Width, maxZ = lvl.Length, maxY = lvl.Height - 1;
+            int maxX = lvl.Width - 1, maxZ = lvl.Length - 1, maxY = lvl.Height - 1;
             Cuboid(0, 4, 0, 0, maxY / 2 + 1, maxZ, Block.Op_Stone, lvl);
             Cuboid(maxX, 4, 0, maxX, maxY / 2 + 1, maxZ, Block.Op_Stone, lvl);
             Cuboid(0, 4, 0, maxX, maxY / 2 + 1, 0, Block.Op_Stone, lvl);
@@ -61,7 +61,7 @@ namespace Supernova.Games {
         }
         
         static void MakePlayArea(Level lvl) {
-            int maxX = lvl.Width, maxZ = lvl.Length;
+            int maxX = lvl.Width - 1, maxZ = lvl.Length - 1;
             Cuboid(0, 4, 0, maxX, 4, maxZ, Block.White, lvl);
         }
         
