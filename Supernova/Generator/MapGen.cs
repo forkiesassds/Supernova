@@ -25,7 +25,7 @@ using ClassicalSharp.Generator;
 
 namespace Supernova.Generator {    
     public delegate bool MapGenFunc(Player p, Level lvl, string seed);
-    public enum GenType { Simple, fCraft, Advanced };
+    public enum GenType { Simple, fCraft, Classic, Advanced };
     
     /// <summary> Map generators initialise the blocks in a level. </summary>
     /// <remarks> e.g. flatgrass generator, mountains theme generator, etc </remarks>
@@ -71,9 +71,10 @@ namespace Supernova.Generator {
             return Generators.Join(g => g.Type == type ? g.Theme : null); 
         }
         public static void PrintThemes(Player p) {
-            p.Message("&HSimple themes: &f"   + FilterThemes(GenType.Simple));
-            p.Message("&HfCraft themes: &f"   + FilterThemes(GenType.fCraft));
-            p.Message("&HAdvanced themes: &f" + FilterThemes(GenType.Advanced));
+            p.Message("&HSimple themes: &f"    + FilterThemes(GenType.Simple));
+            p.Message("&HfCraft themes: &f"    + FilterThemes(GenType.fCraft));
+            p.Message("&HClassic themes: &f"   + FilterThemes(GenType.Classic));
+            p.Message("&HAdvanced themes: &f"  + FilterThemes(GenType.Advanced));
         }
         
         /// <summary> Adds a new map generator to the list of generators. </summary>
