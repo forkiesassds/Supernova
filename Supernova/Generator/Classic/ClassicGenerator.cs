@@ -77,7 +77,6 @@ namespace ClassicalSharp.Generator {
         }
 
         void CreateHeightmap(string type) {
-            int[] array;
             if (type == "flat") {
                 short[] hMap = new short[Width * Length];
                 int index = 0;
