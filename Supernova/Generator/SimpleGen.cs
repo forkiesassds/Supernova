@@ -63,6 +63,7 @@ namespace Supernova.Generator {
             fixed (byte* ptr = lvl.blocks) {
                 if (grassHeight > 0)
                     MapSet(lvl.Width, lvl.Length, ptr, 0, grassHeight - 1, Block.Dirt);
+                    MapSet(lvl.Width, lvl.Length, ptr, 0, grassHeight - 6, Block.Stone);
                 if (grassHeight < lvl.Height)
                     MapSet(lvl.Width, lvl.Length, ptr, grassHeight, grassHeight, Block.Grass);
             }
