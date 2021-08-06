@@ -32,10 +32,12 @@ namespace Supernova.Games {
         
         protected override void DoRound() {
             bulk.level = Map;
+            SetBoardOpening(Block.Glass);
             ResetBoard();
             if (!Running) return;
             DoRoundSpleef(10);
             ResetBoard();
+            SetBoardOpening(Block.Air);
             if (!Running) return;
             
             bulk.Flush();
@@ -45,6 +47,7 @@ namespace Supernova.Games {
             if (!Running) return;
             
             BeginRound();
+            SetBoardOpening(Block.Glass);
             if (!Running) return;
             
             RoundInProgress = true;
@@ -55,6 +58,12 @@ namespace Supernova.Games {
         protected override void ContinueOnSameMap() {
             // spleef only modifies board in the map, so it's fine to continue on the same map
             // without needing to reload the entire map
+        }
+
+        void SetBoardOpening(BlockID block) {
+            int midX = Map.Width / 2, midY = Map.Height / 2, midZ = Map.Length / 2;
+            Cuboid(midX - 1, midY, midZ - 1, midX, midY, midZ, block);
+            bulk.Flush();
         }
         
         void BeginRound() {
@@ -75,6 +84,7 @@ namespace Supernova.Games {
         }
                 
         void ResetBoard() {
+            SetBoardOpening(Block.Glass);
             int maxX = Map.Width - 1, maxZ = Map.Length - 1;
             Cuboid(0, 4, 0, maxX, 4, maxZ, Block.White);
             
