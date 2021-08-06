@@ -70,6 +70,11 @@ namespace Supernova {
                 RevertBlock(x, y, z); return;
             }
 
+            if ( SpleefGame.Instance.Running && !SpleefGame.Instance.Remaining.Contains(this) ) {
+                Message("You are out of the round, and cannot break blocks.");
+                RevertBlock(x, y, z); return;
+            }
+
             if (ClickToMark && DoBlockchangeCallback(x, y, z, block)) return;
             
             bool cancel = false;
