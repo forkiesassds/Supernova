@@ -27,6 +27,10 @@ namespace Supernova.Commands.Building {
         public override bool SuperUseable { get { return false; } }
         
         public override void Use(Player p, string message, CommandData data) {
+            if (p.level.Config.Buildable == false) {
+                p.Message("Building has been disabled in this level.");
+                return;
+            }
             BlockID block = p.GetHeldBlock();
             Vec3S32 P = p.Pos.BlockCoords;
             P.Y = (p.Pos.Y - 32) / 32;
