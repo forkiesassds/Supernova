@@ -41,7 +41,7 @@ namespace Supernova.Commands.Fun {
             if (!game.Running) {
                 p.Message("Cannot join as spleef is not running.");
             } else {
-                if (game.RoundInProgress) {
+                if (game.RoundInProgress && !game.Players.Contains(p)) {
                     p.Message("You have joined, but you will only be able to play until next round.");
                 }
                 game.PlayerJoinedGame(p);
