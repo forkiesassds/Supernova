@@ -26,9 +26,17 @@ namespace Supernova.Commands.Misc {
         
         public override void Use(Player p, string message, CommandData data) {
             string[] args = message.SplitSpaces(3);
-            Player target = PlayerInfo.FindMatches(p, args[0]);
-            if (target == null) return;
-            
+            if (args[0] == "*") {
+                foreach(Player player in PlayerInfo.Online.Items) {
+                    UseCMDOn(p, player, args, data);
+                }
+            } else {
+                Player target = PlayerInfo.FindMatches(p, args[0]);
+                if (target == null) return;
+                UseCMDOn(p, target, args, data);
+            }
+        }
+        void UseCMDOn(Player p, Player target, string[] args, CommandData data) {
             if (!CheckRank(p, data, target, "send commands for", true)) return;
             if (args.Length == 1) { p.Message("No command name given."); return; }
             
