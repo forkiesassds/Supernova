@@ -34,6 +34,7 @@ namespace Supernova.Games {
             lvl.Config.UseBlockDB = false;
             lvl.Config.Deletable  = false;
             lvl.Config.Buildable  = false;
+            lvl.Config.Drawing    = false;
             lvl.Config.MOTD = "Welcome to the Spleef map! -hax";
             
             lvl.spawnx = (ushort)(lvl.Width / 2);
