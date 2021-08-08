@@ -55,10 +55,10 @@ namespace Supernova.Games {
         
         static void MakePlayAreaWalls(Level lvl) {
             int maxX = lvl.Width - 1, maxZ = lvl.Length - 1, maxY = lvl.Height - 1;
-            Cuboid(0, 4, 0, 0, maxY / 2 + 1, maxZ, Block.Op_Stone, lvl);
-            Cuboid(maxX, 4, 0, maxX, maxY / 2 + 1, maxZ, Block.Op_Stone, lvl);
-            Cuboid(0, 4, 0, maxX, maxY / 2 + 1, 0, Block.Op_Stone, lvl);
-            Cuboid(0, 4, maxZ, maxX, maxY / 2  + 1, maxZ, Block.Op_Stone, lvl);
+            Cuboid(0, 4, 0, 0, maxY / 2 + 1, maxZ, Block.Bedrock, lvl);
+            Cuboid(maxX, 4, 0, maxX, maxY / 2 + 1, maxZ, Block.Bedrock, lvl);
+            Cuboid(0, 4, 0, maxX, maxY / 2 + 1, 0, Block.Bedrock, lvl);
+            Cuboid(0, 4, maxZ, maxX, maxY / 2  + 1, maxZ, Block.Bedrock, lvl);
         }
         
         static void MakePlayArea(Level lvl) {
