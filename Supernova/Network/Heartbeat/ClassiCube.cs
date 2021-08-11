@@ -24,20 +24,26 @@ using Supernova.Config;
 using Supernova.Events.ServerEvents;
 
 namespace Supernova.Network {
-    
+
     /// <summary> Heartbeat to ClassiCube.net's web server. </summary>
     public sealed class ClassiCubeBeat : Heartbeat {
         string proxyUrl;
         public override string URL { get { return Server.Config.HeartbeatURL; } }
         
         public override void Init() {
+            string hostUrl = "";
             try {
-                string hostUrl = new Uri(URL).Host;
+                hostUrl = new Uri(URL).Host;
                 IPAddress[] addresses = Dns.GetHostAddresses(hostUrl);
                 EnsureIPv4Url(addresses);
             } catch (Exception ex) {
-                Logger.LogError("Error retrieving DNS information for classicube.net", ex);
+                Logger.LogError("Error retrieving DNS information for " + hostUrl, ex);
             }
+            
+            // Replace www, as otherwise the 'Finding www.classicube.net url..'
+            //  message appears as a clickable link in the Logs textbox in GUI
+            hostUrl = hostUrl.Replace("www.", "");
+            Logger.Log(LogType.SystemActivity, "Finding " + hostUrl + " url..");
         }
         
         // classicube.net only supports ipv4 servers, so we need to make
@@ -59,7 +65,6 @@ namespace Supernova.Network {
         }
 
         public override string GetHeartbeatData()  {
-            if (Server.Config.PVN < 7) return "";
             string name = Server.Config.Name;
             OnSendingHeartbeatEvent.Call(this, ref name);
             name = Colors.StripUsed(name);

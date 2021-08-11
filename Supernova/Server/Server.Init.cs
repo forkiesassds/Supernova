@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -27,7 +27,7 @@ using Supernova.Tasks;
 using Supernova.Util;
 
 namespace Supernova {
-    
+
     public sealed partial class Server {
 
         static void LoadMainLevel(SchedulerTask task) {
@@ -134,7 +134,7 @@ namespace Supernova {
             Critical.QueueRepeat(ServerTasks.TickPlayers, null,
                                  TimeSpan.FromMilliseconds(20));
 
-            Logger.Log(LogType.SystemActivity, "Finished setting up server, finding classicube.net url..");
+            Logger.Log(LogType.SystemActivity, "Finished setting up server");
             SetupFinished = true;
         }
     }

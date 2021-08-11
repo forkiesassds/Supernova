@@ -21,7 +21,7 @@ using BlockID = System.UInt16;
 using BlockRaw = System.Byte;
 
 namespace Supernova.Blocks {
-    
+	
     /// <summary> Stores default properties for blocks in Minecraft Classic. (and CPE blocks). </summary>
     public static class DefaultSet {
         
@@ -104,7 +104,7 @@ namespace Supernova.Blocks {
 
         /// <summary> Gets the default step sound of a block. </summary>
         public static SoundType StepSound(BlockID b) {
-            if (b == Block.Glass) return SoundType.Stone;
+            if (b == Block.Glass) return SoundType.Glass;
             if (b == Block.Rope) return SoundType.Cloth;
             if (Draw(b) == DrawType.Sprite) return SoundType.None;
             
