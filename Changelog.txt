@@ -1,3 +1,5 @@
+v 1.0.3 -
+Fixes ClassiCube players losing ranks after reconnecting.
 v 1.0.2 -
 Update to upstream 1.9.3.4.
 Now it knows who is a ClassiCube player and who is a BetaCraft player.
