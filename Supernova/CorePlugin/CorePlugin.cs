@@ -29,7 +29,6 @@ namespace Supernova.Core {
         public override string creator { get { return Server.SoftwareName + " team"; } }
         public override string Supernova_Version { get { return Server.Version; } }
         public override string name { get { return "CorePlugin"; } }
-        SchedulerTask clearTask;
 
         public override void Load(bool startup) {
             OnPlayerConnectEvent.Register(ConnectHandler.HandleConnect, Priority.Critical);
@@ -43,8 +42,6 @@ namespace Supernova.Core {
             
             OnEcoTransactionEvent.Register(EcoHandlers.HandleEcoTransaction, Priority.Critical);
             OnModActionEvent.Register(ModActionHandler.HandleModAction, Priority.Critical);
-            clearTask = Server.Background.QueueRepeat(IPThrottler.CleanupTask, null, 
-                                                      TimeSpan.FromMinutes(10));
         }
         
         public override void Unload(bool shutdown) {
@@ -58,8 +55,7 @@ namespace Supernova.Core {
             OnChangedZoneEvent.Unregister(MiscHandlers.HandleChangedZone);
             
             OnEcoTransactionEvent.Unregister(EcoHandlers.HandleEcoTransaction);
-            OnModActionEvent.Unregister(ModActionHandler.HandleModAction);            
-            Server.Background.Cancel(clearTask);
+            OnModActionEvent.Unregister(ModActionHandler.HandleModAction);
         }
     }
 }

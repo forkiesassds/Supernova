@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -20,9 +20,9 @@ namespace Supernova.Core {
     internal static class ConnectingHandler {
         
         internal static void HandleConnecting(Player p, string mppass) {
+            if (p.cancelconnecting) return;
             bool success = HandleConnectingCore(p, mppass);
-            if (success) return;
-            p.cancelconnecting = true;
+            if (!success) p.cancelconnecting = true;
         }
         
         static bool HandleConnectingCore(Player p, string mppass) {
@@ -36,15 +36,14 @@ namespace Supernova.Core {
             if (!Authenticator.Current.VerifyLogin(p, mppass)) {
                 p.Leave(null, "Login failed! Close the game and sign in again.", true); return false;
             }
-            
-            if (!IPThrottler.CheckIP(p)) return false;
             if (!CheckTempban(p)) return false;
 
             if (Server.Config.WhitelistedOnly && !Server.whiteList.Contains(p.name)) {
                 p.Leave(null, Server.Config.DefaultWhitelistMessage, true);
                 return false;
             }
-            p.group = Group.GroupIn(p.name + (p.betacraftUser ? null : "+"));
+            
+            p.group = Group.GroupIn(p.name);
             if (!CheckBanned(p)) return false;
             if (!CheckPlayersCount(p)) return false;
             return true;

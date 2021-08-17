@@ -110,6 +110,7 @@ namespace Supernova
             LoadCorePlugin(new NotesPlugin());
             LoadCorePlugin(new DiscordPlugin());
             LoadCorePlugin(new IRCPlugin());
+            LoadCorePlugin(new IPThrottler());
             IScripting.AutoloadPlugins();
         }
         

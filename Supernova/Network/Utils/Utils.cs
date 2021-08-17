@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -13,16 +13,14 @@ or implied. See the Licenses for the specific language governing
 permissions and limitations under the Licenses.
  */
 using System;
-using System.IO;
 using System.Net;
-using System.Net.Security;
 using System.Net.Sockets;
-using System.Security.Authentication;
 
-namespace Supernova.Network {
+namespace Supernova.Network 
+{
     /// <summary> Utility methods related to IP addresses </summary>
-    public static class IPUtil {
-        
+    public static class IPUtil 
+    {
         /// <summary> Returns whether the given IP is a loopback or a LAN address </summary>
         public static bool IsPrivate(IPAddress ip) {
             if (IPAddress.IsLoopback(ip)) return true;
@@ -57,6 +55,7 @@ namespace Supernova.Network {
             return false;
         }
         
+        /// <summary> Returns whether the given IP is an IPv4 mapped IPv6 address </summary>
         public static bool IsIPv4Mapped(IPAddress ip) {
             if (ip.AddressFamily != AddressFamily.InterNetworkV6) return false;
             byte[] addr = ip.GetAddressBytes();
@@ -69,6 +68,7 @@ namespace Supernova.Network {
             return addr[10] == 0xFF && addr[11] == 0xFF;
         }
         
+        /// <summary> Converts an IPv4 mapped IPv6 address into an IPv4 address </summary>
         public static IPAddress MapToIPV4(IPAddress ip) {
             byte[] addr = ip.GetAddressBytes();
             
@@ -76,6 +76,21 @@ namespace Supernova.Network {
             byte[] ipv4 = new byte[4];
             Buffer.BlockCopy(addr, 12, ipv4, 0, 4);
             return new IPAddress(ipv4);
+        }
+    }
+    
+    /// <summary> Utility methods related to sockets </summary>
+    public static class SocketUtil 
+    { 
+        /// <summary> Forcesfully closes the given socket, swallowing any errors </summary>
+        public static void ForceClose(Socket s) {
+            try { s.Shutdown(SocketShutdown.Both); } catch { }
+            try { s.Close(); } catch { }
+        }
+
+        /// <summary> Retrieves the remote IP address associated with the given socket </summary>
+        public static IPAddress GetIP(Socket s) {
+            return ((IPEndPoint)s.RemoteEndPoint).Address;
         }
     }
 }

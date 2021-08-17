@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -108,11 +108,18 @@ namespace Supernova.Network {
             TcpSocket s = null;
             
             try {
-                Socket raw = listen.socket.EndAccept(result);
-                s = new TcpSocket(raw);
+                Socket raw = listen.socket.EndAccept(result);  
+                bool cancel = false;
                 
-                Logger.Log(LogType.UserActivity, s.IP + " connected to the server.");
-                s.Init();                
+                OnConnectionReceivedEvent.Call(raw, ref cancel);
+                if (cancel) {
+                    // intentionally non-clean connection close
+                    try { raw.Close(); } catch { }
+                } else {
+                    s = new TcpSocket(raw);
+                    Logger.Log(LogType.UserActivity, s.IP + " connected to the server.");
+                    s.Init();
+                }
             } catch (Exception ex) {
                 if (!(ex is SocketException)) Logger.LogError(ex);
                 if (s != null) s.Close();

@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -143,8 +143,8 @@ namespace Supernova.Network {
         }
         
         public override IPAddress IP {
-            get { return ((IPEndPoint)socket.RemoteEndPoint).Address; }
-        }        
+            get { return SocketUtil.GetIP(socket); }
+        }
         public override bool LowLatency { set { socket.NoDelay = value; } }
         
         
@@ -261,7 +261,7 @@ namespace Supernova.Network {
             Disconnected = true;
             pending.Remove(this);
             
-            // Try to close the socket. Sometimes socket is already closed, so just hide this.
+            // swallow errors as connection is being closed anyways
             try { socket.Shutdown(SocketShutdown.Both); } catch { }
             try { socket.Close(); } catch { }
             
