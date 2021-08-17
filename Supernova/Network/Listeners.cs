@@ -15,6 +15,7 @@ permissions and limitations under the Licenses.
 using System;
 using System.Net;
 using System.Net.Sockets;
+using Supernova.Events.ServerEvents;
 
 namespace Supernova.Network {
     
@@ -113,8 +114,7 @@ namespace Supernova.Network {
                 
                 OnConnectionReceivedEvent.Call(raw, ref cancel);
                 if (cancel) {
-                    // intentionally non-clean connection close
-                    try { raw.Close(); } catch { }
+                    SocketUtil.ForceClose(raw);
                 } else {
                     s = new TcpSocket(raw);
                     Logger.Log(LogType.UserActivity, s.IP + " connected to the server.");

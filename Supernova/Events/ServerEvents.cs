@@ -17,6 +17,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Supernova.Network;
 
 namespace Supernova.Events.ServerEvents {

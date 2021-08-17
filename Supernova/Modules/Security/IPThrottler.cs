@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2015 MCGalaxy
+    Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -19,18 +19,18 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using MCGalaxy.Events;
-using MCGalaxy.Events.PlayerEvents;
-using MCGalaxy.Events.ServerEvents;
-using MCGalaxy.Network;
-using MCGalaxy.Tasks;
+using Supernova.Events;
+using Supernova.Events.PlayerEvents;
+using Supernova.Events.ServerEvents;
+using Supernova.Network;
+using Supernova.Tasks;
 
-namespace MCGalaxy.Modules.Security
+namespace Supernova.Modules.Security
 {
     public sealed class IPThrottler : Plugin 
     {
         public override string creator { get { return Server.SoftwareName + " team"; } }
-        public override string MCGalaxy_Version { get { return Server.Version; } }
+        public override string Supernova_Version { get { return Server.Version; } }
         public override string name { get { return "IPThrottler"; } }
         
         SchedulerTask clearTask;        

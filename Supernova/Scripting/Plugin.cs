@@ -22,6 +22,7 @@ using Supernova.Core;
 using Supernova.Modules.Moderation.Notes;
 using Supernova.Modules.Relay.Discord;
 using Supernova.Modules.Relay.IRC;
+using Supernova.Modules.Security;
 using Supernova.Scripting;
 
 namespace Supernova 
