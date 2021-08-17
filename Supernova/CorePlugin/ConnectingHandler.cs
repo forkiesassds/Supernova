@@ -43,7 +43,7 @@ namespace Supernova.Core {
                 return false;
             }
             
-            p.group = Group.GroupIn(p.name);
+            p.group = Group.GroupIn(p.name + (p.betacraftUser ? null : "+"));
             if (!CheckBanned(p)) return false;
             if (!CheckPlayersCount(p)) return false;
             return true;
