@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
 Dual-licensed under the Educational Community License, Version 2.0 and
 the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -142,6 +142,7 @@ namespace Supernova {
         
         public static void MessageFrom(Player source, string msg,
                                        ChatMessageFilter filter = null, bool relay = false) {
+            // super players don't have a level
             if (source.level == null || source.level.SeesServerWideChat) {
                 MessageFrom(ChatScope.Global, source, msg, null, filter, relay);
             } else {
@@ -171,7 +172,8 @@ namespace Supernova {
 
         public static void MessageChat(Player source, string msg,
                                        ChatMessageFilter filter = null, bool relay = false) {
-            if (source.level.SeesServerWideChat) {
+            // super players don't have a level
+            if (source.level == null || source.level.SeesServerWideChat) {
                 MessageChat(ChatScope.Global, source, msg, null, filter, relay);
             } else {
                 string prefix = Server.Config.ServerWideChat ? "<Local>" : "";

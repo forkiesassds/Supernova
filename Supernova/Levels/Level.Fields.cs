@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -58,6 +58,13 @@ namespace Supernova {
         public int ReloadThreshold {
             get { return Math.Max(10000, (int)(Server.Config.DrawReloadThreshold * Width * Height * Length)); }
         }
+        
+        /// <summary> Maximum valid X coordinate (Width - 1) </summary>
+        public int MaxX { get { return Width  - 1; } }
+        /// <summary> Maximum valid Y coordinate (Height - 1) </summary>
+        public int MaxY { get { return Height - 1; } }
+        /// <summary> Maximum valid Z coordinate (Length - 1) </summary>
+        public int MaxZ { get { return Length - 1; } }
         
         public bool Changed;
          /// <summary> Whether block changes made on this level should be saved to the BlockDB and .lvl files. </summary>

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -35,7 +35,7 @@ namespace Supernova.Commands.Building {
             Brush brush = BrushFactory.Find("Replace").Construct(args);
             if (brush == null) return;
             
-            Vec3S32 max = new Vec3S32(p.level.Width - 1, p.level.Height - 1, p.level.Length - 1);
+            Vec3S32 max = new Vec3S32(p.level.MaxX, p.level.MaxY, p.level.MaxZ);
             Vec3S32[] marks = new Vec3S32[] { Vec3S32.Zero, max };
             
             MeasureDrawOp measure = new MeasureDrawOp();

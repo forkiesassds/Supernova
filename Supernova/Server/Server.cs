@@ -345,7 +345,6 @@ namespace Supernova {
             Level oldMain = mainLevel;
             mainLevel = lvl;
             Server.Config.MainLevel = lvl.name;         
-            oldMain.Config.AutoUnload = true;
             oldMain.AutoUnload();
         }
         
