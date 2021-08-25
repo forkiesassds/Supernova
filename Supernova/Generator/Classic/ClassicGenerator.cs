@@ -37,12 +37,14 @@ namespace ClassicalSharp.Generator {
 
         static bool GenFloating(Player p, Level lvl, string seed) {
             int seed_ = Supernova.Generator.MapGen.MakeInt(seed);
+            lvl.Config.EdgeLevel = 2;
             new ClassicGenerator().Generate(lvl, seed_, "floating");
             return true;
         }
 
         static bool GenFlat(Player p, Level lvl, string seed) {
             int seed_ = Supernova.Generator.MapGen.MakeInt(seed);
+            lvl.Config.HorizonBlock = Block.Grass;
             new ClassicGenerator().Generate(lvl, seed_, "flat");
             return true;
         }
@@ -83,7 +85,7 @@ namespace ClassicalSharp.Generator {
                 int height;
                 for (int z = 0; z < Length; z++) {
                     for (int x = 0; x < Width; x++) {
-                        height = Height / 2;
+                        height = Height / 2 - 1;
                         int adjHeight = (int)(height);
                         minHeight = adjHeight < minHeight ? adjHeight : minHeight;
                         hMap[index++] = (short)adjHeight;
