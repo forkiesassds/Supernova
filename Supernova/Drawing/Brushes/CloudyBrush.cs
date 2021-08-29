@@ -16,15 +16,14 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
-using Supernova.Commands;
 using Supernova.Drawing.Ops;
 using Supernova.Generator;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    
-    public sealed class CloudyBrush : Brush {
+namespace Supernova.Drawing.Brushes 
+{
+    public sealed class CloudyBrush : Brush 
+    {
         readonly BlockID[] blocks;
         readonly int[] counts;
         readonly float[] thresholds;

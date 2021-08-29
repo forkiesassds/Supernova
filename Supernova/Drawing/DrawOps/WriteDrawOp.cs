@@ -16,12 +16,13 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {   
-    public class WriteDrawOp : DrawOp { 
+namespace Supernova.Drawing.Ops 
+{
+    public class WriteDrawOp : DrawOp 
+    {
         public override string Name { get { return "Write"; } }        
         public string Text;
         public byte Scale, Spacing;

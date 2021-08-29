@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -21,10 +21,10 @@ using Supernova.Maths;
 using BlockID = System.UInt16;
 using BlockRaw = System.Byte;
 
-namespace Supernova.Drawing {
-
-    public sealed class CopyState {
-        
+namespace Supernova.Drawing 
+{
+    public sealed class CopyState 
+    {  
         byte[] blocks;
         byte[][] extBlocks;
         public int X, Y, Z;

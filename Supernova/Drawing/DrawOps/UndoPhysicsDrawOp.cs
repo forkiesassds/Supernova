@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -21,9 +21,10 @@ using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-
-    public class UndoPhysicsDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class UndoPhysicsDrawOp : DrawOp 
+    {
         public override string Name { get { return "UndoPhysics"; } }        
         internal DateTime Start;
 

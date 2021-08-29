@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -21,19 +21,21 @@
 //
 // ~Merlin33069
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {    
-    public abstract class AdvDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public abstract class AdvDrawOp : DrawOp 
+    {
         public int Radius { get { return (Max.X - Min.X) / 2; } }
         
         public bool Invert;
         public virtual bool UsesHeight { get { return true; } }
     }
     
-    public class AdvSphereDrawOp : AdvDrawOp {        
+    public class AdvSphereDrawOp : AdvDrawOp 
+    {
         public override bool UsesHeight { get { return false; } }
         public override string Name { get { return "Adv Sphere"; } }
         
@@ -58,7 +60,8 @@ namespace Supernova.Drawing.Ops {
         }
     }
     
-    public class AdvHollowSphereDrawOp : AdvDrawOp {        
+    public class AdvHollowSphereDrawOp : AdvDrawOp 
+    {
         public override bool UsesHeight { get { return false; } }
         public override string Name { get { return "Adv Hollow Sphere"; } }
         

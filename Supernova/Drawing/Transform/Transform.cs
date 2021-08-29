@@ -20,8 +20,10 @@ using Supernova.Drawing.Brushes;
 using Supernova.Drawing.Ops;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Transforms {
-    public abstract class Transform {
+namespace Supernova.Drawing.Transforms 
+{
+    public abstract class Transform 
+    {
         public abstract string Name { get; }
         public virtual void Configure(DrawOp op, Player p) { }
         

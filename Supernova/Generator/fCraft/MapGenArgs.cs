@@ -1,57 +1,59 @@
-﻿// Part of fCraft | Copyright 2009-2021 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt
+﻿// Part of fCraft | Copyright 2009-2015 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt
 using System;
 using Supernova;
 
-namespace Supernova.Generator.fCraft {
+namespace Supernova.Generator.fCraft 
+{
     /// <summary> Contains parameters for advanced map generation. </summary>
-    public sealed class fCraftMapGenArgs {
+    public sealed class fCraftMapGenArgs 
+    {
         public string MapName;
-
         public MapGenBiome Biome = MapGenBiome.Forest;
-        public int   Seed, // 0
-        MaxHeight = 20,
-        MaxDepth = 12,
-        MaxHeightVariation = 4,
-        MaxDepthVariation; // 0
+        
+        public int   Seed; // 0
+        public int   MaxHeight = 20;
+        public int   MaxDepth = 12;
+        public int   MaxHeightVariation = 4;
+        public int   MaxDepthVariation; // 0
 
-        public bool  AddWater = true,
-        MatchWaterCoverage; // false
+        public bool  AddWater = true;
+        public bool  MatchWaterCoverage; // false
         public int   WaterLevel = 48;
         public float WaterCoverage = .5f;
 
-        public bool  UseBias,        // false
-        DelayBias;      // false
+        public bool  UseBias;        // false
+        public bool  DelayBias;      // false
         public float Bias;           // 0
-        public int   RaisedCorners,  // 0
-        LoweredCorners, // 0
-        MidPoint;       // 0
+        public int   RaisedCorners;  // 0
+        public int   LoweredCorners; // 0
+        public int   MidPoint;       // 0
 
-        public int   DetailScale = 7,
-        FeatureScale = 1;
+        public int   DetailScale = 7;
+        public int   FeatureScale = 1;
         public float Roughness = .5f;
-        public bool  MarbledHeightmap, // false
-        InvertHeightmap;  // false
-        public float AboveFuncExponent = 1,
-        BelowFuncExponent = 1;
+        public bool  MarbledHeightmap; // false
+        public bool  InvertHeightmap;  // false
+        public float AboveFuncExponent = 1;
+        public float BelowFuncExponent = 1;
 
-        public bool  AddTrees = true,
-        AddGiantTrees; // false
-        public int   TreeSpacingMin = 7,
-        TreeSpacingMax = 11,
-        TreeHeightMin = 5,
-        TreeHeightMax = 7;
+        public bool  AddTrees = true;
+        public bool  AddGiantTrees; // false
+        public int   TreeSpacingMin = 7;
+        public int   TreeSpacingMax = 11;
+        public int   TreeHeightMin = 5;
+        public int   TreeHeightMax = 7;
 
         public bool  AddSnow; // false
-        public int   SnowAltitude = 70,
-        SnowTransition = 7;
+        public int   SnowAltitude = 70;
+        public int   SnowTransition = 7;
 
-        public bool  AddCliffs = true,
-        CliffSmoothing = true;
+        public bool  AddCliffs = true;
+        public bool  CliffSmoothing = true;
         public float CliffThreshold = 1;
 
         public bool  AddBeaches; // false
-        public int   BeachExtent = 6,
-        BeachHeight = 2;
+        public int   BeachExtent = 6;
+        public int   BeachHeight = 2;
 
         public fCraftMapGenArgs() {
             Seed = (new Random()).Next();
@@ -114,6 +116,31 @@ namespace Supernova.Generator.fCraft {
                     gen.bBedrock = Block.Stone;
                     gen.bCliff = Block.Stone;
                     break;
+            }
+        }
+        
+        public void ApplyEnv( EnvConfig env ) {
+            switch( Biome ) {
+                case MapGenBiome.Arctic:
+                    env.CloudColor   = "#8E8E8E";
+                    env.SkyColor     = "#8E8E8E";
+                    env.FogColor     = "#AFAFAF";
+                    break;
+                    
+                case MapGenBiome.Desert:
+                    env.CloudColor   = "#FFEE88";
+                    env.SkyColor     = "#FFEE88";
+                    env.FogColor     = "#FFEE88";
+                    env.HorizonBlock = Block.Sand;
+                    break;
+                    
+                case MapGenBiome.Hell:
+                    env.CloudColor   = "#000000";
+                    env.SkyColor     = "#FFCC00";
+                    env.FogColor     = "#FF6600";
+                    env.HorizonBlock = Block.StillLava;
+                    break;
+                    // TODO swamp env
             }
         }
 

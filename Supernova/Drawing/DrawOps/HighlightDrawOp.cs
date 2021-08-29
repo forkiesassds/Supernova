@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,17 +16,15 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
-using System.IO;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
-using Supernova.Undo;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-    
-    public class HighlightDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{    
+    public class HighlightDrawOp : DrawOp 
+    {
         public override string Name { get { return "Highlight"; } }
         
         // Some servers like to set custom default highlight blocks due to using custom blocks

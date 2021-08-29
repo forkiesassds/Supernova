@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -20,8 +20,10 @@ using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {    
-    public class PasteDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class PasteDrawOp : DrawOp 
+    {
         public override string Name { get { return "Paste"; } }        
         public CopyState CopyState;
         

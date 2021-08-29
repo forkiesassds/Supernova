@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -23,9 +23,10 @@ using System.Net;
 using Supernova.Network;
 using Supernova.Drawing;
 
-namespace Supernova.Generator {
-    public static class HeightmapGen {
-        
+namespace Supernova.Generator 
+{
+    public static class HeightmapGen 
+    {       
         static void OnDecodeError(Player p, Bitmap bmp) {
             if (bmp != null) bmp.Dispose();
             // TODO failed to decode the image. make sure you are using the URL of the image directly, not just the webpage it is hosted on              

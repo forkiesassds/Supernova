@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,16 +16,15 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-    
-    public class ReplaceDrawOp : DrawOp {
-        
+namespace Supernova.Drawing.Ops 
+{
+    public class ReplaceDrawOp : DrawOp 
+    {       
         public BlockID Include;
         
         public ReplaceDrawOp(BlockID include) {
@@ -46,14 +45,14 @@ namespace Supernova.Drawing.Ops {
                 for (ushort z = p1.Z; z <= p2.Z; z++)
                     for (ushort x = p1.X; x <= p2.X; x++)
             {
-                BlockID block = Level.GetBlock(x, y, z);
+                BlockID block = Level.GetBlock(x, y, z); // TODO fastGetblock?
                 if (block == Include) output(Place(x, y, z, brush));
             }
         }
     }
     
-    public class ReplaceNotDrawOp : DrawOp {
-        
+    public class ReplaceNotDrawOp : DrawOp 
+    {       
         public BlockID Exclude;
         
         public ReplaceNotDrawOp(BlockID exclude) {

@@ -20,8 +20,10 @@ using Supernova.DB;
 using Supernova.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    public sealed class SimplePasteBrush : Brush {
+namespace Supernova.Drawing.Brushes 
+{
+    public sealed class SimplePasteBrush : Brush 
+    {
         readonly CopyState state;
         
         public SimplePasteBrush(CopyState state) { this.state = state; }
@@ -46,7 +48,9 @@ namespace Supernova.Drawing.Brushes {
         }
     }
     
-    public sealed class PasteBrush : Brush {
+	// TODO merge with SimplePasteBrush
+    public sealed class PasteBrush : Brush 
+    {
         readonly CopyState state;
         public BlockID[] Include;
         
@@ -77,7 +81,8 @@ namespace Supernova.Drawing.Brushes {
     }
     
     
-    public sealed class PasteNotBrush : Brush {
+    public sealed class PasteNotBrush : Brush 
+    {
         readonly CopyState state;
         public BlockID[] Exclude;
         

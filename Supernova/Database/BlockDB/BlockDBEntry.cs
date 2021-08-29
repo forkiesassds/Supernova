@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -81,7 +81,7 @@ namespace Supernova.DB {
         public const ushort UndoOther   = 1 << 8;
         public const ushort UndoSelf    = 1 << 9;
         public const ushort RedoSelf    = 1 << 10;        
-        public const ushort Unused      = 1 << 11;
+        public const ushort FixGrass    = 1 << 11;
         
         public const ushort OldExtended2 = 1 << 12;
         public const ushort NewExtended2 = 1 << 13;        

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -20,14 +20,14 @@ using System.Collections.Generic;
 using Supernova.Commands.Building;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
-using Supernova.Util;
 using Supernova.Maths;
+using Supernova.Util;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-    
-    public class FillDrawOp : DrawOp {
-        
+namespace Supernova.Drawing.Ops
+{
+    public class FillDrawOp : DrawOp 
+    {      
         public List<int> Positions;
         
         public FillDrawOp() {

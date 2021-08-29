@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,12 +16,13 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {
-    public class TorusDrawOp : DrawOp {      
+namespace Supernova.Drawing.Ops 
+{
+    public class TorusDrawOp : DrawOp 
+    {
         public override string Name { get { return "Torus"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {

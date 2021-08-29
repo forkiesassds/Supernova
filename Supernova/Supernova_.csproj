@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -454,6 +454,7 @@
     <Compile Include="Drawing\DrawOps\DrawOpPerformer.cs" />
     <Compile Include="Drawing\DrawOps\DrawOp.cs" />
     <Compile Include="Drawing\DrawOps\FillDrawOp.cs" />
+    <Compile Include="Drawing\DrawOps\FixGrassDrawOp.cs" />
     <Compile Include="Drawing\DrawOps\HighlightDrawOp.cs" />
     <Compile Include="Drawing\DrawOps\LineDrawOp.cs" />
     <Compile Include="Drawing\DrawOps\MazeDrawOp.cs" />

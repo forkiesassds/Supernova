@@ -16,14 +16,14 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
-using Supernova.Commands.Building;
 using Supernova.DB;
 using Supernova.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {    
-    public sealed class ReplaceBrush : Brush {
+namespace Supernova.Drawing.Brushes 
+{
+    public sealed class ReplaceBrush : Brush 
+    {
         readonly BlockID[] include;
         readonly BlockID target;
         
@@ -48,7 +48,8 @@ namespace Supernova.Drawing.Brushes {
         }
     }
     
-    public sealed class ReplaceNotBrush : Brush {
+    public sealed class ReplaceNotBrush : Brush 
+    {
         readonly BlockID[] exclude;
         readonly BlockID target;
         

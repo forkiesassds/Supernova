@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,29 +16,28 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Blocks.Physics;
-using Supernova.Commands;
 using Supernova.Drawing.Brushes;
 using Supernova.Drawing.Ops;
-using Supernova.Network;
-using Supernova.Undo;
 using Supernova.Maths;
-using BlockRaw = System.Byte;
+using Supernova.Undo;
 using BlockID = System.UInt16;
+using BlockRaw = System.Byte;
 
-namespace Supernova.Drawing {
-    internal struct PendingDrawOp {
+namespace Supernova.Drawing 
+{
+    internal struct PendingDrawOp 
+    {
         public DrawOp Op;
         public Brush Brush;
         public Vec3S32[] Marks;
     }
 }
 
-namespace Supernova.Drawing.Ops {
-    
-    public static class DrawOpPerformer {
-        
+namespace Supernova.Drawing.Ops 
+{
+    public static class DrawOpPerformer 
+    {     
         static bool CannotBuildIn(Player p, Level lvl) {
             Zone[] zones = lvl.Zones.Items;
             for (int i = 0; i < zones.Length; i++) {

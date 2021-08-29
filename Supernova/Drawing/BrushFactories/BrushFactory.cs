@@ -17,12 +17,12 @@
  */
 using System;
 using System.Collections.Generic;
-using Supernova.Commands;
-using Supernova.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    public abstract class BrushFactory {
+namespace Supernova.Drawing.Brushes 
+{
+    public abstract class BrushFactory 
+    {
         public abstract string Name { get; }
         public abstract string[] Help { get; }
         
@@ -49,7 +49,8 @@ namespace Supernova.Drawing.Brushes {
         }
     }
     
-    public struct BrushArgs {
+    public struct BrushArgs 
+    {
         /// <summary> Player that is providing arguments. </summary>
         public Player Player;
         

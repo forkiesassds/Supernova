@@ -19,8 +19,10 @@ using System;
 using Supernova.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    public abstract class Brush {
+namespace Supernova.Drawing.Brushes 
+{
+    public abstract class Brush 
+    {
         public abstract string Name { get; }
         public virtual void Configure(DrawOp op, Player p) { }
         

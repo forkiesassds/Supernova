@@ -17,15 +17,14 @@
  */
 using System;
 using Supernova.Commands;
-using Supernova.Commands.Building;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    
+namespace Supernova.Drawing.Brushes 
+{  
     /// <summary> Contains helper methods for brushes that have blocks with
     /// optional frequency counts (e.g. random and cloudy brushes) </summary>
-    public static class FrequencyBrush {
-        
+    public static class FrequencyBrush 
+    {       
         public static BlockID[] GetBlocks(BrushArgs args, out int[] count,
                                           Predicate<string> argFilter, Predicate<string> argHandler) {
             string[] parts = args.Message.SplitSpaces();
@@ -91,7 +90,8 @@ namespace Supernova.Drawing.Brushes {
         }
     }
     
-    public sealed class RandomBrushFactory : BrushFactory {
+    public sealed class RandomBrushFactory : BrushFactory 
+    {
         public override string Name { get { return "Random"; } }
         public override string[] Help { get { return HelpString; } }
         

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -17,10 +17,12 @@
  */
 using System;
 
-namespace Supernova.Generator.Realistic {
+namespace Supernova.Generator.Realistic 
+{
     public delegate ushort CalcLiquidLevel(ushort lvlHeight);
     
-    public sealed class RealisticMapGenArgs {
+    public sealed class RealisticMapGenArgs 
+    {
         public float RangeLow = 0.2f;
         public float RangeHigh = 0.8f;
         public bool SimpleColumns = false, IslandColumns = false;

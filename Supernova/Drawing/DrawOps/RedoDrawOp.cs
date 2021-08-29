@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -18,13 +18,13 @@
 using System;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
-using Supernova.Undo;
 using Supernova.Maths;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-    
-    public class RedoSelfDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class RedoSelfDrawOp : DrawOp 
+    {
         public override string Name { get { return "RedoSelf"; } }
         
         /// <summary> Point in time that the /undo should go backwards up to. </summary>

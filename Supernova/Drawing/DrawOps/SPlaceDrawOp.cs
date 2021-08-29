@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,8 +19,10 @@ using System;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops { 
-    public class SPlaceDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class SPlaceDrawOp : DrawOp 
+    {
         public override string Name { get { return "SPlace"; } }
         public int Distance, Interval;
         

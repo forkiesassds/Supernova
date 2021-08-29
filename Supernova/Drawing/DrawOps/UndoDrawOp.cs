@@ -17,17 +17,15 @@
  */
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
-using Supernova.Undo;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-
-    public class UndoSelfDrawOp : UndoDrawOp {
-        
+namespace Supernova.Drawing.Ops 
+{
+    public class UndoSelfDrawOp : UndoDrawOp 
+    {       
         public UndoSelfDrawOp() {
             Flags = BlockDBFlags.UndoSelf;
         }
@@ -35,7 +33,8 @@ namespace Supernova.Drawing.Ops {
         public override string Name { get { return "UndoSelf"; } }
     }
     
-    public class UndoDrawOp : DrawOp {
+    public class UndoDrawOp : DrawOp 
+    {
         public override string Name { get { return "Undo"; } }
         
         /// <summary> Point in time that the /undo should go backwards up to. </summary>

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,10 +19,11 @@ using System.Collections.Generic;
 using System.IO;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing {
-    
+namespace Supernova.Drawing 
+{ 
     /// <summary> Represents a mapping of block ids to RGB colors. </summary>
-    public sealed class ImagePalette {
+    public sealed class ImagePalette 
+    {
         public string Name;
         public string FileName { get { return "extra/palettes/" + Name + ".pal"; } }
         public PaletteEntry[] Entries;

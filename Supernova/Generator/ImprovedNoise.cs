@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -17,11 +17,11 @@
  */
 using System;
 
-namespace Supernova.Generator {
-    
+namespace Supernova.Generator 
+{    
     /// <summary> Implements improved perlin noise as described in http://mrl.nyu.edu/~perlin/noise/ </summary>
-    public sealed class ImprovedNoise {
-        
+    public sealed class ImprovedNoise 
+    {    
         public float Frequency = 1;
         public float Amplitude = 1;
         public float Lacunarity = 2;

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,11 +19,11 @@ using System;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
-using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Ops {
-
-    public class RestoreSelectionDrawOp : DrawOp {        
+namespace Supernova.Drawing.Ops 
+{
+    public class RestoreSelectionDrawOp : DrawOp 
+    {
         public override string Name { get { return "RestoreSelection"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {

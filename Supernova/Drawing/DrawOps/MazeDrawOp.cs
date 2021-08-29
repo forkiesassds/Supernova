@@ -21,8 +21,10 @@ using System.Security.Cryptography;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {    
-    public class MazeDrawOp : CuboidHollowsDrawOp {       
+namespace Supernova.Drawing.Ops 
+{
+    public class MazeDrawOp : CuboidHollowsDrawOp 
+    {
         public override string Name { get { return "Maze"; } }
         
         internal int randomizer = 0;

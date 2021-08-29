@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -24,8 +24,10 @@ using System;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {
-    public class AdvPyramidDrawOp : AdvDrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class AdvPyramidDrawOp : AdvDrawOp 
+    {
         public override string Name { get { return "Adv Pyramid"; } }
         public AdvPyramidDrawOp(bool invert = false) { Invert = invert; }
         
@@ -57,7 +59,8 @@ namespace Supernova.Drawing.Ops {
         }
     }
     
-    public class AdvHollowPyramidDrawOp : AdvDrawOp {
+    public class AdvHollowPyramidDrawOp : AdvDrawOp 
+    {
         public override string Name { get { return "Adv Hollow Pyramid"; } }
         public AdvHollowPyramidDrawOp(bool invert = false) { Invert = invert; }
         

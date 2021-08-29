@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,19 +16,19 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Drawing;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing {
-
-    public interface IPaletteMatcher {
+namespace Supernova.Drawing 
+{
+    public interface IPaletteMatcher 
+    {
         void SetPalette(PaletteEntry[] front, PaletteEntry[] back);
         BlockID BestMatch(byte R, byte G, byte B);
         BlockID BestMatch(byte R, byte G, byte B, out bool backLayer);
     }
     
-    public sealed class RgbPaletteMatcher : IPaletteMatcher {
-        
+    public sealed class RgbPaletteMatcher : IPaletteMatcher 
+    {   
         PaletteEntry[] front, back;
         public void SetPalette(PaletteEntry[] front, PaletteEntry[] back) {
             this.front = front; this.back = back;
@@ -65,8 +65,8 @@ namespace Supernova.Drawing {
         }
     }
     
-    public sealed class LabPaletteMatcher : IPaletteMatcher {
-        
+    public sealed class LabPaletteMatcher : IPaletteMatcher 
+    {      
         LabColor[] palette;
         public void SetPalette(PaletteEntry[] front, PaletteEntry[] back) {
             this.palette = new LabColor[front.Length];

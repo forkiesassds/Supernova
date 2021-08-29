@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,8 +19,10 @@ using System;
 using Supernova.Commands;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    public sealed class CloudyBrushFactory : BrushFactory {       
+namespace Supernova.Drawing.Brushes 
+{
+    public sealed class CloudyBrushFactory : BrushFactory 
+    {
         public override string Name { get { return "Cloudy"; } }        
         public override string[] Help { get { return HelpString; } }
         
@@ -81,7 +83,8 @@ namespace Supernova.Drawing.Brushes {
         }
     }
     
-    public struct NoiseArgs {
+    public struct NoiseArgs 
+    {
         public int Octaves, Seed;
         public float Frequency, Amplitude, Persistence, Lacunarity;
     }

@@ -29,8 +29,10 @@ using Supernova.Drawing;
 using Supernova.Drawing.Ops;
 using Supernova.Generator.Foliage;
 
-namespace Supernova.Generator.Realistic {    
-    public sealed class RealisticMapGen {
+namespace Supernova.Generator.Realistic 
+{
+    public sealed class RealisticMapGen 
+    {
         float[] terrain, overlay, overlay2;
         float treeDens;
         short treeDist;

@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,12 +16,13 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {
-    public class EllipsoidDrawOp : DrawOp {        
+namespace Supernova.Drawing.Ops 
+{
+    public class EllipsoidDrawOp : DrawOp 
+    {
         public override string Name { get { return "Ellipsoid"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {
@@ -47,8 +48,8 @@ namespace Supernova.Drawing.Ops {
         }
     }
     
-    public class EllipsoidHollowDrawOp : DrawOp {
-        
+    public class EllipsoidHollowDrawOp : DrawOp 
+    {       
         public override string Name { get { return "Ellipsoid Hollow"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {
@@ -80,7 +81,8 @@ namespace Supernova.Drawing.Ops {
         }
     }
     
-    public class CylinderDrawOp : DrawOp {       
+    public class CylinderDrawOp : DrawOp 
+    {
         public override string Name { get { return "Cylinder"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {

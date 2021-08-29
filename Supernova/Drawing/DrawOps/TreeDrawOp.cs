@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -30,8 +30,10 @@ using Supernova.Drawing.Brushes;
 using Supernova.Generator.Foliage;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {
-    public class TreeDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class TreeDrawOp : DrawOp 
+    {
         public override string Name { get { return "Tree"; } }
         
         public Random random = new Random();

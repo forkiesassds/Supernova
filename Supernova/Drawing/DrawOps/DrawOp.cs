@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,27 +16,27 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.DB;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 using BlockID = System.UInt16;
 
-namespace Supernova {
-    
-    public struct DrawOpBlock {
+namespace Supernova 
+{
+    public struct DrawOpBlock 
+    {
         public ushort X, Y, Z;
         public BlockID Block;
     }
 }
 
-namespace Supernova.Drawing.Ops {
-    
+namespace Supernova.Drawing.Ops 
+{    
     /// <summary> Performs on action on a block output from a draw operation. </summary>
     public delegate void DrawOpOutput(DrawOpBlock block);
     
-    public abstract partial class DrawOp {
-        
+    public abstract class DrawOp 
+    {        
         //public long TotalAffected; // blocks affected by the draw operation
         public long TotalModified; // blocks actually modified (e.g. some may not be due to permissions)
         

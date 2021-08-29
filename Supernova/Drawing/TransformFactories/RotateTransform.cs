@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,9 +19,10 @@ using System;
 using Supernova.Commands;
 using Supernova.Commands.Building;
 
-namespace Supernova.Drawing.Transforms {
-    
-    public sealed class RotateTransformFactory : TransformFactory {
+namespace Supernova.Drawing.Transforms 
+{
+    public sealed class RotateTransformFactory : TransformFactory 
+    {
         public override string Name { get { return "Rotate"; } }
         public override string[] Help { get { return HelpString; } }
         

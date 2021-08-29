@@ -16,12 +16,13 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {    
-    public class TriangleDrawOp : DrawOp {        
+namespace Supernova.Drawing.Ops 
+{
+    public class TriangleDrawOp : DrawOp 
+    {
         public override string Name { get { return "Triangle"; } }
         
         public override long BlocksAffected(Level lvl, Vec3S32[] marks) {

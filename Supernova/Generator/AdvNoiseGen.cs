@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
     
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -19,8 +19,10 @@ using System;
 using System.Collections.Generic;
 using LibNoise;
 
-namespace Supernova.Generator {
-    public static class AdvNoiseGen {
+namespace Supernova.Generator 
+{
+    public static class AdvNoiseGen 
+    {
         const string defHelp = "&HSeed affects how terrain is generated. If seed is the same, the generated level will be the same.";
         
         public static void RegisterGenerators() {

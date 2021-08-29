@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -20,10 +20,10 @@ using Supernova.Drawing.Brushes;
 using Supernova.Drawing.Ops;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Transforms {
-    
-    public sealed class RotateTransform : Transform {
-        
+namespace Supernova.Drawing.Transforms 
+{
+    public sealed class RotateTransform : Transform 
+    {        
         public override string Name { get { return "Rotate"; } }
         public bool CentreOrigin;
         double cosX, cosY, cosZ, sinX, sinY, sinZ;

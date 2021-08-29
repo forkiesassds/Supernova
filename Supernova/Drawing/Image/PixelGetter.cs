@@ -20,13 +20,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Supernova.Drawing.Ops;
 
-namespace Supernova.Drawing {
-    
+namespace Supernova.Drawing 
+{
     public delegate Pixel PixelGet(int x, int y);
     public struct Pixel { public byte A, R, G, B; }
     
-    public unsafe sealed class PixelGetter : IDisposable {
-        
+    public unsafe sealed class PixelGetter : IDisposable 
+    {  
         Bitmap bmp;
         BitmapData data;
         byte* scan0;

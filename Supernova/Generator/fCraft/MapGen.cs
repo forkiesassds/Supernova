@@ -1,4 +1,4 @@
-﻿// Part of fCraft | Copyright 2009-2021 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt
+﻿// Part of fCraft | Copyright 2009-2015 Matvei Stefarov <me@matvei.org> | BSD-3 | See LICENSE.txt
 using System;
 using Supernova.Commands;
 using BlockID = System.UInt16;
@@ -439,6 +439,7 @@ namespace Supernova.Generator.fCraft {
             args.WaterLevel = (lvl.Height - 1) / 2;
 
             new fCraftMapGen(args).Generate(lvl);
+            args.ApplyEnv(lvl.Config);
             return true;
         }
     }

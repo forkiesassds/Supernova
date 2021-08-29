@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2011 MCForge
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -20,8 +20,10 @@ using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops { 
-    public class LineDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public class LineDrawOp : DrawOp 
+    {
         public override string Name { get { return "Line"; } }
         public bool WallsMode;
         public int MaxLength = int.MaxValue;

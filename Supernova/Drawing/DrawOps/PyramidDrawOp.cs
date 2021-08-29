@@ -1,4 +1,4 @@
-﻿/*
+/*
     Copyright 2021 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
@@ -16,13 +16,13 @@
     permissions and limitations under the Licenses.
  */
 using System;
-using System.Collections.Generic;
 using Supernova.Drawing.Brushes;
 using Supernova.Maths;
 
-namespace Supernova.Drawing.Ops {
-
-    public abstract class PyramidDrawOp : DrawOp {
+namespace Supernova.Drawing.Ops 
+{
+    public abstract class PyramidDrawOp : DrawOp 
+    {
         protected DrawOp baseOp;
         protected int yDir;
         
@@ -62,22 +62,22 @@ namespace Supernova.Drawing.Ops {
         }
     }
     
-    public class PyramidSolidDrawOp : PyramidDrawOp {
-
+    public class PyramidSolidDrawOp : PyramidDrawOp 
+    {
         public PyramidSolidDrawOp() : base(new CuboidDrawOp(), 1) { }
         
         public override string Name { get { return "Pyramid solid"; } }
     }
     
-    public class PyramidHollowDrawOp : PyramidDrawOp {      
-
+    public class PyramidHollowDrawOp : PyramidDrawOp 
+    {
         public PyramidHollowDrawOp() : base(new CuboidWallsDrawOp(), 1) { }
         
         public override string Name { get { return "Pyramid hollow"; } }
     }
     
-    public class PyramidReverseDrawOp : PyramidDrawOp {
-
+    public class PyramidReverseDrawOp : PyramidDrawOp 
+    {
         DrawOp wallOp;
         Brush airBrush;
         public PyramidReverseDrawOp() : base(new CuboidDrawOp(), -1) {

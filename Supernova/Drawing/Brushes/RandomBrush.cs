@@ -19,9 +19,10 @@ using System;
 using Supernova.Drawing.Ops;
 using BlockID = System.UInt16;
 
-namespace Supernova.Drawing.Brushes {
-    
-    public sealed class RandomBrush : Brush {
+namespace Supernova.Drawing.Brushes 
+{   
+    public sealed class RandomBrush : Brush 
+    {
         readonly BlockID[] blocks;
         readonly int seed;
         
