@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
     Copyright 2011 MCForge
         
     Dual-licensed under the    Educational Community License, Version 2.0 and
@@ -148,7 +148,7 @@ namespace Supernova.Games {
                 }
                 
                 Entities.Spawn(pl, pl, pos, pl.Rot);
-                pl.SendPos(Entities.SelfID, pos, pl.Rot);
+                pl.SendPosition(pos, pl.Rot);
             }
         }
 

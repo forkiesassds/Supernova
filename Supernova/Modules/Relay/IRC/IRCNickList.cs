@@ -54,7 +54,7 @@ namespace Supernova.Modules.Relay.IRC
                     chans.Value[index] = prefix + newNick;
                 } else {
                     // should never happen, but just in case
-                    bot.connection.SendNames(chans.Key);
+                    bot.conn.SendNames(chans.Key);
                 }
             }
         }

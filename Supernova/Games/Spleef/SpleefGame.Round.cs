@@ -120,7 +120,7 @@ namespace Supernova.Games {
                 }
                 
                 Entities.Spawn(pl, pl, pos, pl.Rot);
-                pl.SendPos(Entities.SelfID, pos, pl.Rot);
+                pl.SendPosition(pos, pl.Rot);
             }
         }
 

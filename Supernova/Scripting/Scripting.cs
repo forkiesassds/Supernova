@@ -24,11 +24,12 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace Supernova.Scripting {
+namespace Supernova.Scripting 
+{
     
     /// <summary> Utility methods for loading assemblies, commands, and plugins </summary>
-    public static class IScripting {
-        
+    public static class IScripting 
+    {     
         public const string AutoloadFile = "text/cmdautoload.txt";
         public const string DllDir = "extra/commands/dll/";
         
@@ -42,7 +43,8 @@ namespace Supernova.Scripting {
         public static List<T> LoadTypes<T>(Assembly lib) {
             List<T> instances = new List<T>();
             
-            foreach (Type t in lib.GetTypes()) {
+            foreach (Type t in lib.GetTypes()) 
+            {
                 if (t.IsAbstract || t.IsInterface || !t.IsSubclassOf(typeof(T))) continue;
                 object instance = Activator.CreateInstance(t);
                 
@@ -79,38 +81,61 @@ namespace Supernova.Scripting {
             if (!File.Exists(AutoloadFile)) { File.Create(AutoloadFile); return; }
             string[] list = File.ReadAllLines(AutoloadFile);
             
-            foreach (string cmdName in list) {
+            foreach (string cmdName in list) 
+            {
                 if (cmdName.IsCommentLine()) continue;
                 string path  = CommandPath(cmdName);
-                string error = LoadCommands(path);
+                string error;
+                List<Command> cmds = LoadCommands(path, out error);
                 
-                if (error != null) { Logger.Log(LogType.Warning, error); continue; }
-                Logger.Log(LogType.SystemActivity, "AUTOLOAD: Loaded Cmd{0}.dll", cmdName);
+                if (error != null) { 
+                    Logger.Log(LogType.Warning, error);
+                } else {
+                    Logger.Log(LogType.SystemActivity, "AUTOLOAD: Loaded {0} from Cmd{1}.dll", 
+                               cmds.Join(c => "/" + c.name), cmdName);
+                }
             }
         }
         
-        /// <summary> Loads and registers all the commands from the given .dll path. </summary>
-        public static string LoadCommands(string path) {
+        /// <summary> Loads and registers all the commands from the given .dll path </summary>
+        /// <param name="error"> If an error occurs, set to a string describing the error </param>
+        /// <returns> The list of commands loaded </returns>
+        public static List<Command> LoadCommands(string path, out string error) {
+            error = null;
             try {
                 Assembly lib = LoadAssembly(path);
                 List<Command> commands = LoadTypes<Command>(lib);
+                if (commands.Count == 0) error = "&WNo commands in " + path;
                 
-                if (commands.Count == 0) return "No commands in dll file";
-                foreach (Command cmd in commands) { Command.Register(cmd); }
-            } catch (Exception ex) {
-                Logger.LogError("Error loading commands from " + path, ex);
-                
-                string file = Path.GetFileName(path);
-                if (ex is FileNotFoundException) {
-                    return file + " does not exist in the DLL folder, or is missing a dependency. Details in the error log.";
-                } else if (ex is BadImageFormatException) {
-                    return file + " is not a valid assembly, or has an invalid dependency. Details in the error log.";
-                } else if (ex is FileLoadException) {
-                    return file + " or one of its dependencies could not be loaded. Details in the error log.";
+                foreach (Command cmd in commands) 
+                {
+                    if (Command.Find(cmd.name) != null) {
+                        error = "/" + cmd.name + " is already loaded";
+                        return null;
+                    }
+                    
+                    Command.Register(cmd);
                 }
-                return "An unknown error occured. Details in the error log.";
+                return commands;
+            } catch (Exception ex) {
+                error = DescribeLoadError(path, ex);
+                return null;
             }
-            return null;
+        }
+        
+        static string DescribeLoadError(string path, Exception ex) {
+            if (ex is FileNotFoundException)
+                return "File &9" + path + " &Snot found.";
+            
+            Logger.LogError("Error loading commands from " + path, ex);
+            string file = Path.GetFileName(path);
+            
+            if (ex is BadImageFormatException) {
+                return "&W" + file + " is not a valid assembly, or has an invalid dependency. Details in the error log.";
+            } else if (ex is FileLoadException) {
+                return "&W" + file + " or one of its dependencies could not be loaded. Details in the error log.";
+            }
+            return "&WAn unknown error occured. Details in the error log.";
         }
         
         
@@ -142,8 +167,8 @@ namespace Supernova.Scripting {
     }
     
     /// <summary> Compiles source code files for a particular programming language into a .dll </summary>
-    public abstract class ICompiler {
-        
+    public abstract class ICompiler 
+    {   
         public const string SourceDir = "extra/commands/source/";
         public const string ErrorPath = "logs/errors/compiler.log";
         
@@ -192,11 +217,15 @@ namespace Supernova.Scripting {
             return string.Format(source, args);
         }
         
+        /// <summary> Generates source code for an example command, 
+        /// preformatted with the given command name </summary>
         public string GenExampleCommand(string cmdName) {
             cmdName = cmdName.ToLower().Capitalize();
             return FormatSource(CommandSkeleton, cmdName);
         }
         
+        /// <summary> Generates source code for an example plugin, 
+        /// preformatted with the given name and creator </summary>
         public string GenExamplePlugin(string plugin, string creator) {
             return FormatSource(PluginSkeleton, plugin, creator, Server.Version);
         }
@@ -224,9 +253,10 @@ namespace Supernova.Scripting {
             sb.AppendLine("############################################################");
             sb.AppendLine();
             
-            foreach (CompilerError err in results.Errors) {
+            foreach (CompilerError err in results.Errors) 
+            {
                 string type = err.IsWarning ? "Warning" : "Error";
-                sb.AppendLine(type + " on line " + err.Line + ":");
+                sb.AppendLine(DescribeError(err, srcPaths, "") + ":");
                 
                 if (err.Line > 0) sb.AppendLine(sources.Get(err.FileName, err.Line - 1));
                 if (err.Column > 0) sb.Append(' ', err.Column - 1);
@@ -247,36 +277,62 @@ namespace Supernova.Scripting {
         protected abstract CompilerResults DoCompile(string[] srcPaths, string dstPath);
         
         
-        public bool TryCompile(Player p, string type, string[] srcs, string dst) {
+        /// <summary> Attempts to compile the given source code files into a .dll </summary>
+        /// <param name="p"> Player to send messages to </param>
+        /// <param name="type"> Type of files being compiled (e.g. Plugin, Command) </param>
+        /// <param name="srcs"> Path of the source code files </param>
+        /// <param name="dst"> Path to the destination .dll </param>
+        /// <returns> The compiled assembly, or null if compilation failed </returns>
+        /// <remarks> If dstPath is null, compiles to an in-memory .dll instead. </remarks>
+        public Assembly Compile(Player p, string type, string[] srcs, string dst) {
+            foreach (string path in srcs) 
+            {
+                if (File.Exists(path)) continue;
+                
+                p.Message("File &9{0} &Snot found.", path);
+                return null;
+            }
+            
             CompilerResults results = Compile(srcs, dst);
             if (!results.Errors.HasErrors) {
                 p.Message("{0} compiled successfully.", type);
-                return true;
+                return results.CompiledAssembly;
             }
             
-            SummariseErrors(results, p);
-            p.Message("&WCompilation error. See " + ErrorPath + " for more information.");
-            return false;
+            SummariseErrors(results, srcs, p);
+            return null;
         }
         
-        /// <summary> Messages a summary of warnings and errors to the given player. </summary>
-        public static void SummariseErrors(CompilerResults results, Player p) {
+        static void SummariseErrors(CompilerResults results, string[] srcs, Player p) {
             int logged = 0;
-            foreach (CompilerError err in results.Errors) {
-                string type = err.IsWarning ? "Warning" : "Error";
-                p.Message("&W{0} #{1} on line {2} - {3}", type, err.ErrorNumber, err.Line, err.ErrorText);
-                
+            foreach (CompilerError err in results.Errors) 
+            {
+            	p.Message("&W{1} - {0}", err.ErrorText,
+            	          DescribeError(err, srcs, " #" + err.ErrorNumber));
                 logged++;
                 if (logged >= maxLog) break;
             }
             
-            if (results.Errors.Count <= maxLog) return;
-            p.Message(" &W.. and {0} more", results.Errors.Count - maxLog);
+            if (results.Errors.Count > maxLog) {
+                p.Message(" &W.. and {0} more", results.Errors.Count - maxLog);
+            }
+            p.Message("&WCompilation error. See " + ErrorPath + " for more information.");
+        }
+        
+        static string DescribeError(CompilerError err, string[] srcs, string text) {
+            string type = err.IsWarning ? "Warning" : "Error";
+            string file = Path.GetFileName(err.FileName);
+            // TODO line 0 shouldn't appear
+            
+            // Include filename if compiling multiple source code files
+            return string.Format("{0}{1} on line {2}{3}", type, text, err.Line,
+                                 srcs.Length > 1 ? " in " + file : "");
         }
     }
     
     /// <summary> Compiles source code files from a particular language into a .dll file, using a CodeDomProvider for the compiler. </summary>
-    public abstract class ICodeDomCompiler : ICompiler {
+    public abstract class ICodeDomCompiler : ICompiler 
+    {
         readonly object compilerLock = new object();
         CodeDomProvider compiler;
         
@@ -284,9 +340,9 @@ namespace Supernova.Scripting {
         protected abstract CodeDomProvider CreateProvider();
         /// <summary> Adds language-specific default arguments to list of arguments. </summary>
         protected abstract void PrepareArgs(CompilerParameters args);
-        /// <summary> Returns the prefix for an assembly reference line </summary>
-        /// <example> For C# this prefix is "//reference "" </example>
-        protected virtual string ReferenceLine { get { return "//reference "; } }
+        /// <summary> Returns the starting characters for a comment </summary>
+        /// <example> For C# this is "//" </example>
+        protected virtual string CommentPrefix { get { return "//"; } }
         
         // Lazy init compiler when it's actually needed
         void InitCompiler() {
@@ -305,7 +361,7 @@ namespace Supernova.Scripting {
         void AddReferences(string path, CompilerParameters args) {
             // Allow referencing other assemblies using '//reference [assembly name]' at top of the file
             using (StreamReader r = new StreamReader(path)) {               
-                string refPrefix = ReferenceLine;
+                string refPrefix = CommentPrefix + "reference ";
                 string line;
                 
                 while ((line = r.ReadLine()) != null) {
@@ -328,7 +384,8 @@ namespace Supernova.Scripting {
             if (dstPath != null) args.OutputAssembly   = dstPath;
             if (dstPath == null) args.GenerateInMemory = true;
             
-            for (int i = 0; i < srcPaths.Length; i++) {
+            for (int i = 0; i < srcPaths.Length; i++) 
+            {
                 // CodeDomProvider doesn't work properly with relative paths
                 string path = Path.GetFullPath(srcPaths[i]);
                 
@@ -343,7 +400,8 @@ namespace Supernova.Scripting {
         }
     }
     
-    class SourceMap {
+    class SourceMap 
+    {
         readonly string[] files;
         readonly List<string>[] sources;
         

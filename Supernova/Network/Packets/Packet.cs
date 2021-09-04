@@ -165,7 +165,7 @@ namespace Supernova.Network {
                                         byte mods, bool hasCP437) {
             // per spec, \n should cause client to automatically send hotkey
             input = input.Replace('\n', '◙');
-        	
+            
             byte[] buffer = new byte[134];
             buffer[0] = Opcode.CpeSetTextHotkey;
             NetUtils.Write(label, buffer, 1, hasCP437);

@@ -17,6 +17,7 @@
 */
 using System.IO;
 using Supernova.Scripting;
+using System.Collections.Generic;
 
 namespace Supernova.Commands.Scripting {
     public sealed class CmdCmdLoad : Command2 {
@@ -26,19 +27,17 @@ namespace Supernova.Commands.Scripting {
         public override bool MessageBlockRestricted { get { return true; } }
         
         public override void Use(Player p, string cmdName, CommandData data) {
-            if (!Formatter.ValidName(p, cmdName, "command")) return;
-            if (Command.Find(cmdName) != null) {
-                p.Message("That command is already loaded!"); return;
-            }
-            
+            if (cmdName.Length == 0) { Help(p); return; }
+            if (!Formatter.CheckFilenameOnly(p, cmdName)) return;
             string path = IScripting.CommandPath(cmdName);
-            if (!File.Exists(path)) {
-                p.Message("File &9{0} &Snot found.", path); return;
-            }
+            string error;
+            List<Command> cmds = IScripting.LoadCommands(path, out error);
             
-            string error = IScripting.LoadCommands(path);
-            if (error != null) { p.Message("&W" + error); return; }
-            p.Message("Command was successfully loaded.");
+            if (error != null) { 
+                p.Message(error);
+            } else {
+                p.Message("Successfully loaded {0}", cmds.Join(c => "/" + c.name));
+            }
         }
 
         public override void Help(Player p) {

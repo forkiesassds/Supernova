@@ -1,4 +1,4 @@
-/*
+﻿/*
     Copyright 2010 MCSharp team (Modified for use with MCZall/MCLawl/Supernova)
     
     Dual-licensed under the    Educational Community License, Version 2.0 and
@@ -56,14 +56,14 @@ namespace Supernova.Commands.Fun {
                 pos.Y = FindYAbove(who.level, (ushort)x, (ushort)y, (ushort)z);
                 if (pos.Y != -1) {
                     Chat.MessageFromLevel(who, "λNICK &Swas slapped into the roof by " + p.ColoredName);
-                    who.SetPosAsync(pos, who.Rot);
+                    who.SendPosition(pos, who.Rot);
                     return;
                 }
             }
             
             pos.Y = 1000 * 32;
             Chat.MessageFromLevel(who, "λNICK &Swas slapped sky high by " + p.ColoredName);
-            who.SetPosAsync(pos, who.Rot);
+            who.SendPosition(pos, who.Rot);
         }
         
         static int FindYAbove(Level lvl, ushort x, ushort y, ushort z) {

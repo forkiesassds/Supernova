@@ -1,5 +1,5 @@
-/*
-    Copyright 2021 Supernova
+﻿/*
+    Copyright 2015 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -15,7 +15,6 @@
     or implied. See the Licenses for the specific language governing
     permissions and limitations under the Licenses.
  */
- 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +41,7 @@ namespace Supernova.Modules.Relay.Discord
 
         public override string RelayName { get { return "Discord"; } }
         public override bool Enabled     { get { return Config.Enabled; } }
+        public override string UserID    { get { return botUserID; } }
         public DiscordConfig Config;
         
         TextFile replacementsFile = new TextFile("text/discord/replacements.txt",
@@ -238,9 +238,14 @@ namespace Supernova.Modules.Relay.Discord
             sb.Replace("\uFE0F", "");
             
             // unescape \ escaped characters
-            for (int i = sb.Length - 1; i >= 0; i--) {
+            //  -1 in case message ends with a \
+            int length = sb.Length - 1;
+            for (int i = 0; i < length; i++) 
+            {
                 if (sb[i] != '\\') continue;
-                if (IsEscaped(sb[i + 1])) sb.Remove(i, 1);
+                if (!IsEscaped(sb[i + 1])) continue;
+                
+                sb.Remove(i, 1); length--;
             }
             return sb.ToString();
         }

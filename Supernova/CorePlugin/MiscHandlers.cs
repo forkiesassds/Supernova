@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright 2021 Supernova
+    Copyright 2015 Supernova
         
     Dual-licensed under the Educational Community License, Version 2.0 and
     the GNU General Public License, Version 3 (the "Licenses"); you may
@@ -36,7 +36,7 @@ namespace Supernova.Core {
             bool movedZ = Math.Abs(next.Z - p.Pos.Z) > 4;  // moved more than 0.125 blocks horizontally
             p.SetYawPitch(yaw, pitch);
             
-            if (movedX || movedY || movedZ) { p.SendPos(Entities.SelfID, p.Pos, p.Rot); }
+            if (movedX || movedY || movedZ) { p.SendPosition(p.Pos, p.Rot); }
             p.cancelmove = true;
         }
         
@@ -63,9 +63,9 @@ namespace Supernova.Core {
                 p.Message("BlockDB is disabled here, &Wyou will not be able to /undo or /redo");
             }
         }
-		
-		internal static void HandleChangedZone(Player p) {
-			if (p.Supports(CpeExt.InstantMOTD)) p.SendMapMotd();
+        
+        internal static void HandleChangedZone(Player p) {
+            if (p.Supports(CpeExt.InstantMOTD)) p.SendMapMotd();
             p.SendCurrentEnv();
             
             if (p.isFlying && !Hacks.CanUseFly(p)) {

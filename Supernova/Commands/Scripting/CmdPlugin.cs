@@ -44,7 +44,7 @@ namespace Supernova.Commands.Scripting {
             if (args.Length == 1) { Help(p); return; }
             
             string cmd = args[0], name = args[1];
-            if (!Formatter.ValidName(p, name, "plugin")) return;
+            if (!Formatter.CheckFilenameOnly(p, name)) return;
             string language = args.Length > 2 ? args[2] : "";
             
             if (cmd.CaselessEq("load")) {
@@ -61,21 +61,17 @@ namespace Supernova.Commands.Scripting {
         }
         
         static void CompilePlugin(Player p, string name, string language) {
-            ICompiler engine = ICompiler.Lookup(language, p);
-            if (engine == null) return;
+            ICompiler compiler = ICompiler.Lookup(language, p);
+            if (compiler == null) return;
             
             // either "source" or "source1,source2,source3"
             string[] paths = name.SplitComma();
-            string dstPath = IScripting.PluginPath(name);
+            string dstPath = IScripting.PluginPath(paths[0]);
             
             for (int i = 0; i < paths.Length; i++) {
-                string srcPath = engine.PluginPath(paths[i]);
-                if (File.Exists(srcPath)) { paths[i] = srcPath; continue; }
-                
-                p.Message("File &9{0} &Snot found.", srcPath);
-                return;
+                 paths[i] = compiler.PluginPath(paths[i]);
             }
-            engine.TryCompile(p, "Plugin", paths, dstPath);
+            compiler.Compile(p, "Plugin", paths, dstPath);
         }
         
         static void LoadPlugin(Player p, string name) {

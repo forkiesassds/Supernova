@@ -49,7 +49,7 @@ namespace Supernova.Games {
             int freezeZ = p.Extras.GetInt("NOVA_CD_Z");
             if (next.X != freezeX || next.Z != freezeZ) {
                 next.X = freezeX; next.Z = freezeZ;
-                p.SendPos(Entities.SelfID, next, new Orientation(yaw, pitch));
+                p.SendPosition(next, new Orientation(yaw, pitch));
             }
             
             p.Pos = next;

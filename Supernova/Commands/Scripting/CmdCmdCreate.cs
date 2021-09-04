@@ -29,6 +29,7 @@ namespace Supernova.Commands.Scripting {
         public override void Use(Player p, string message, CommandData data) {
             if (message.Length == 0) { Help(p); return; }
             string[] args = message.SplitSpaces();
+            if (!Formatter.CheckFilenameOnly(p, args[0])) return;
 
             string language  = args.Length > 1 ? args[1] : "";
             ICompiler engine = ICompiler.Lookup(language, p);
@@ -40,8 +41,8 @@ namespace Supernova.Commands.Scripting {
             }
             
             try {
-            	string source = engine.GenExampleCommand(args[0]);
-            	File.WriteAllText(path, source);
+                string source = engine.GenExampleCommand(args[0]);
+                File.WriteAllText(path, source);
             } catch (Exception ex) {
                 Logger.LogError("Error saving new command to " + path, ex);
                 p.Message("An error occurred creating the command.");
