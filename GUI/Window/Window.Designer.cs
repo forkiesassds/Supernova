@@ -165,7 +165,7 @@ namespace Supernova.Gui
             this.tabZS = new System.Windows.Forms.TabPage();
             this.zs_separator = new System.Windows.Forms.Panel();
             this.zs_grpInvZombie = new System.Windows.Forms.GroupBox();
-            this.zs_numInvZombieSecs = new MCGalaxy.Gui.TimespanUpDown();
+            this.zs_numInvZombieSecs = new Supernova.Gui.TimespanUpDown();
             this.zs_numInvZombieMax = new System.Windows.Forms.NumericUpDown();
             this.zs_lblInvZombieDur = new System.Windows.Forms.Label();
             this.zs_lblInvZombieMax = new System.Windows.Forms.Label();
@@ -175,7 +175,7 @@ namespace Supernova.Gui
             this.zs_lblModel = new System.Windows.Forms.Label();
             this.zs_lblName = new System.Windows.Forms.Label();
             this.zs_grpRevive = new System.Windows.Forms.GroupBox();
-            this.zs_numReviveLimit = new MCGalaxy.Gui.TimespanUpDown();
+            this.zs_numReviveLimit = new Supernova.Gui.TimespanUpDown();
             this.zs_lblSuccess = new System.Windows.Forms.Label();
             this.zs_numSuccess = new System.Windows.Forms.NumericUpDown();
             this.zs_lblReviveRound = new System.Windows.Forms.Label();
@@ -184,7 +184,7 @@ namespace Supernova.Gui
             this.zs_numReviveMax = new System.Windows.Forms.NumericUpDown();
             this.zs_lblReviveMax = new System.Windows.Forms.Label();
             this.zs_grpInvHuman = new System.Windows.Forms.GroupBox();
-            this.zs_numInvHumanSecs = new MCGalaxy.Gui.TimespanUpDown();
+            this.zs_numInvHumanSecs = new Supernova.Gui.TimespanUpDown();
             this.zs_numInvHumanMax = new System.Windows.Forms.NumericUpDown();
             this.zs_lblInvHumanDur = new System.Windows.Forms.Label();
             this.zs_lblInvHumanMax = new System.Windows.Forms.Label();
@@ -194,9 +194,9 @@ namespace Supernova.Gui
             this.zs_btnStart = new System.Windows.Forms.Button();
             this.zs_grpMap = new System.Windows.Forms.GroupBox();
             this.zs_grpTime = new System.Windows.Forms.GroupBox();
-            this.zs_numFloodTime = new MCGalaxy.Gui.TimespanUpDown();
-            this.zs_numLayerTime = new MCGalaxy.Gui.TimespanUpDown();
-            this.zs_numRoundTime = new MCGalaxy.Gui.TimespanUpDown();
+            this.zs_numFloodTime = new Supernova.Gui.TimespanUpDown();
+            this.zs_numLayerTime = new Supernova.Gui.TimespanUpDown();
+            this.zs_numRoundTime = new Supernova.Gui.TimespanUpDown();
             this.zs_lblLayerTime = new System.Windows.Forms.Label();
             this.zs_lblFloodTime = new System.Windows.Forms.Label();
             this.zs_lblRoundTime = new System.Windows.Forms.Label();
@@ -1990,9 +1990,9 @@ namespace Supernova.Gui
             this.zs_grpMaps.PerformLayout();
             this.ResumeLayout(false);
         }
-        private MCGalaxy.Gui.TimespanUpDown zs_numInvHumanSecs;
-        private MCGalaxy.Gui.TimespanUpDown zs_numReviveLimit;
-        private MCGalaxy.Gui.TimespanUpDown zs_numInvZombieSecs;
+        private Supernova.Gui.TimespanUpDown zs_numInvHumanSecs;
+        private Supernova.Gui.TimespanUpDown zs_numReviveLimit;
+        private Supernova.Gui.TimespanUpDown zs_numInvZombieSecs;
         private System.Windows.Forms.Panel zs_separator;
         private System.Windows.Forms.Label zs_lblInvZombieMax;
         private System.Windows.Forms.Label zs_lblInvZombieDur;
@@ -2031,9 +2031,9 @@ namespace Supernova.Gui
         private System.Windows.Forms.Label zs_lblRoundTime;
         private System.Windows.Forms.Label zs_lblFloodTime;
         private System.Windows.Forms.Label zs_lblLayerTime;
-        private MCGalaxy.Gui.TimespanUpDown zs_numRoundTime;
-        private MCGalaxy.Gui.TimespanUpDown zs_numLayerTime;
-        private MCGalaxy.Gui.TimespanUpDown zs_numFloodTime;
+        private Supernova.Gui.TimespanUpDown zs_numRoundTime;
+        private Supernova.Gui.TimespanUpDown zs_numLayerTime;
+        private Supernova.Gui.TimespanUpDown zs_numFloodTime;
         private System.Windows.Forms.GroupBox zs_grpTime;
         private System.Windows.Forms.GroupBox zs_grpMap;
         private System.Windows.Forms.Button zs_btnStart;
