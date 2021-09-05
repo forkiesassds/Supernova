@@ -201,7 +201,10 @@ namespace Supernova.Blocks {
         }
         
         static bool IsDefaultBlock(Level lvl, BlockID b) {
-            return Block.IsPhysicsType(b) || lvl.CustomBlockDefs[b] == BlockDefinition.GlobalDefs[b];
+        	if (lvl.CustomBlockDefs != null && BlockDefinition.GlobalDefs != null) {
+        		return Block.IsPhysicsType(b) || lvl.CustomBlockDefs[b] == BlockDefinition.GlobalDefs[b];
+        	}
+        	return Block.IsPhysicsType(b);
         }
         
         public static void ApplyChanges(BlockProps[] scope, Level lvl_, BlockID block, bool save) {

@@ -28,7 +28,6 @@ namespace Supernova.Gui {
         public PropertyWindow() {
             InitializeComponent();
             zsSettings.LoadFromServer();
-            propsZG.SelectedObject = zsSettings;
         }
         
         public void RunOnUI_Async(Action act) { BeginInvoke(act); }
@@ -36,9 +35,6 @@ namespace Supernova.Gui {
         void PropertyWindow_Load(object sender, EventArgs e) {
             // try to use same icon as main window
             try { Icon = _icon; } catch { }
-            
-            OnMapsChangedEvent.Register(HandleMapsChanged, Priority.Low);
-            OnStateChangedEvent.Register(HandleStateChanged, Priority.Low);
             GuiPerms.UpdateRankNames();
             rank_cmbDefault.Items.AddRange(GuiPerms.RankNames);
             rank_cmbOsMap.Items.AddRange(GuiPerms.RankNames);
@@ -54,13 +50,9 @@ namespace Supernova.Gui {
             } catch (Exception ex) {
                 Logger.LogError("Error loading commands and blocks", ex);
             }
-
-            LoadGameProps();
         }
 
         void PropertyWindow_Unload(object sender, EventArgs e) {
-            OnMapsChangedEvent.Unregister(HandleMapsChanged);
-            OnStateChangedEvent.Unregister(HandleStateChanged);
             Window.hasPropsForm = false;
         }
 
@@ -106,8 +98,7 @@ namespace Supernova.Gui {
             SaveRanks();
             SaveCommands();
             SaveBlocks();
-            SaveGameProps();
-            
+
             try { ZSGame.Config.Save(); }
             catch { Logger.Log(LogType.Warning, "Error saving Zombie Survival settings!"); }
 

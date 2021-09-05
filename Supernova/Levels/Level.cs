@@ -58,8 +58,12 @@ namespace Supernova {
             if (length < 1) length = 1;
             Width = width; Height = height; Length = length;
             
-            for (int i = 0; i < CustomBlockDefs.Length; i++) {
-                CustomBlockDefs[i] = BlockDefinition.GlobalDefs[i];
+            if(CustomBlockDefs != null) {
+            	for (int i = 0; i < CustomBlockDefs.Length; i++) {
+            		if(CustomBlockDefs[i] != null) {
+                		CustomBlockDefs[i] = BlockDefinition.GlobalDefs[i];
+            		}
+            	}
             }
             if (blocks == null) blocks = new byte[width * height * length];
             

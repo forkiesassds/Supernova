@@ -70,10 +70,10 @@ namespace Supernova.Gui {
             if (rankSupressEvents) return;
             curGroup = null;
             if (rank_list.SelectedIndex == -1) return;
-            
+	            
             Group grp = copiedGroups[rank_list.SelectedIndex];
             curGroup = grp;
-            
+	            
             rank_txtName.Text = grp.Name;
             rank_numPerm.Value = (int)grp.Permission;
             chat_ParseColor(grp.Color, rank_btnColor);
@@ -81,7 +81,7 @@ namespace Supernova.Gui {
             rank_txtPrefix.Text = grp.Prefix;
             rank_cbAfk.Checked = grp.AfkKicked;
             rank_numAfk.Value = grp.AfkKickTime;
-            
+	            
             rank_numDraw.Value = grp.DrawLimit;
             rank_numUndo.Value = grp.MaxUndo;
             rank_numMaps.Value = grp.OverseerMaps;

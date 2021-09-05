@@ -109,9 +109,6 @@
       <DependentUpon>PropertyWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="PropertyWindow\PropertyWindow.Economy.cs" />
-    <Compile Include="PropertyWindow\PropertyWindow.Games.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PropertyWindow\PropertyWindow.General.cs" />
     <Compile Include="PropertyWindow\PropertyWindow.Relay.cs" />
     <Compile Include="PropertyWindow\PropertyWindow.Misc.cs" />
@@ -133,6 +130,9 @@
     <Compile Include="Window\Window.Main.cs" />
     <Compile Include="Window\Window.Map.cs" />
     <Compile Include="Window\Window.Players.cs" />
+    <EmbeddedResource Include="PropertyWindow\PropertyWindow.resx">
+      <DependentUpon>PropertyWindow.Designer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window\Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
       <SubType>Designer</SubType>

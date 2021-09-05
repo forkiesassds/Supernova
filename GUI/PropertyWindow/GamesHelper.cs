@@ -44,6 +44,18 @@ namespace Supernova.Gui {
             del.Click += DelMap_Click;
         }
         
+        public GamesHelper(RoundsGame game,
+                           CheckBox start_, CheckBox main,
+                           Button start, Button stop, Button end) {
+            this.game = game;
+            cbStart = start_; cbMain = main;
+            btnStart = start; btnStop = stop; btnEnd = end;
+            
+            start.Click += StartGame_Click;
+            stop.Click  += StopGame_Click;
+            end.Click   += EndRound_Click;
+        }
+        
         public void Load(string[] allMaps) {
             RoundsGameConfig cfg = game.GetConfig();
             cbStart.Checked = cfg.StartImmediately;
@@ -53,6 +65,15 @@ namespace Supernova.Gui {
             UpdateButtons();
             UpdateUsedMaps();
             UpdateNotUsedMaps(allMaps);
+        }
+        
+        public void Load() {
+            RoundsGameConfig cfg = game.GetConfig();
+            cbStart.Checked = cfg.StartImmediately;
+            if(cbMap != null) cbMap.Checked   = cfg.MapInHeartbeat;
+            cbMain.Checked  = cfg.SetMainLevel;
+            
+            UpdateButtons();
         }
         
         public void Save() {
@@ -145,7 +166,6 @@ namespace Supernova.Gui {
             lbNotUsed.SelectedIndex = -1;
             object selected = lbNotUsed.SelectedItem;
             lbNotUsed.Items.Clear();
-            
             // relatively expensive, so avoid if possible
             if (allMaps == null) allMaps = LevelInfo.AllMapNames();
             List<string> maps = game.GetConfig().Maps;

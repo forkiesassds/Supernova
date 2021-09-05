@@ -116,6 +116,7 @@ namespace Supernova {
             GlobalDespawn(p, true);
             
             if (!bots) return;
+            if (p.level == null) return;
             PlayerBot[] botsList = p.level.Bots.Items;
             foreach (PlayerBot b in botsList) { Despawn(p, b); }
         }

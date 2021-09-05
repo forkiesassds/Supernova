@@ -24,8 +24,8 @@ using Supernova.Commands.World;
 namespace Supernova {
     public static class PlayerActions {
         
-        public static bool ChangeMap(Player p, string name) { return ChangeMap(p, null, name); }
-        public static bool ChangeMap(Player p, Level lvl)   { return ChangeMap(p, lvl, null); }
+		public static bool ChangeMap(Player p, string name) { if (p.level != null) { return ChangeMap(p, null, name); } return false; }
+		public static bool ChangeMap(Player p, Level lvl)   { if (p.level != null) { return ChangeMap(p, lvl, null); } return false; }
         
         static bool ChangeMap(Player p, Level lvl, string name) {
             if (Interlocked.CompareExchange(ref p.UsingGoto, 1, 0) == 1) {
