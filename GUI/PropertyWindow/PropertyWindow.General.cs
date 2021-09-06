@@ -68,7 +68,7 @@ namespace Supernova.Gui {
         }        
         
         
-        const string warnMsg = "Disabling name verification means players\ncan login as anyone, including YOU\n\n" +
+        const string warnMsg = "Disabling name verification means players\ncan login as anyone, including YOU!\n\nAnd using such configuration can cause problems!\n" +
             "Are you sure you want to disable name verification?";
         void chkVerify_CheckedChanged(object sender, EventArgs e) {
             if (!warnDisabledVerification || adv_chkVerify.Checked) return;            

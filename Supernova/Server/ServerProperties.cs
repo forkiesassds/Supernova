@@ -31,6 +31,7 @@ namespace Supernova {
                 Server.SettingsUpdate();
             
             CountdownGame.Config.Load();
+            SpleefGame.Config.Load();
             ZSGame.Config.Load();
             LSGame.Config.Load();
             CTFGame.Config.Load();

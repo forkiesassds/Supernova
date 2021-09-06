@@ -179,6 +179,13 @@ namespace Supernova {
             ImagePalette.Load();
             
             SrvProperties.Load();
+            if (!Server.Config.VerifyNames) {
+                Logger.Log(LogType.Warning, "%c********************* NAME VERIFICATION IS DISABLED *********************");
+                Logger.Log(LogType.Warning, "%c         This means players can login as anyone, including YOU!");
+                Logger.Log(LogType.Warning, "%c  This also means you won't get support from the Supernova developers,");
+                Logger.Log(LogType.Warning, "%c           due to the unsupported configuration, bugs can occur.");
+                Logger.Log(LogType.Warning, "%c********************* NAME VERIFICATION IS DISABLED *********************");
+            }
             Group.LoadAll();
             CommandPerms.Load();
             Command.InitAll();
