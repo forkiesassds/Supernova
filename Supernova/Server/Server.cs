@@ -73,6 +73,9 @@ namespace Supernova {
         
         internal static ConfigElement[] serverConfig, levelConfig, zoneConfig;
         public static void Start() {
+            #if NETSTANDARD
+                Logger.Log(LogType.Warning, "The .NET Core version is not supported by upstream! There WILL be bugs and problems!");
+            #endif
             serverConfig = ConfigElement.GetAll(typeof(ServerConfig));
             levelConfig  = ConfigElement.GetAll(typeof(LevelConfig));
             zoneConfig   = ConfigElement.GetAll(typeof(ZoneConfig));

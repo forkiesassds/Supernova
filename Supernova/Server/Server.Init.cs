@@ -124,6 +124,7 @@ namespace Supernova {
         
         static void InitRest(SchedulerTask task) {
             CountdownGame.Instance.AutoStart();
+            SpleefGame.Instance.AutoStart();
             ZSGame.Instance.AutoStart();
             LSGame.Instance.AutoStart();
             CTFGame.Instance.AutoStart();
