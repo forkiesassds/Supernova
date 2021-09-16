@@ -30,7 +30,10 @@ namespace Supernova.Network
         /// <summary> The max number of retries attempted for a heartbeat. </summary>
         public const int MAX_RETRIES = 3;
         /// <summary> List of all heartbeats to pump. </summary>
-        public static List<Heartbeat> Heartbeats = new List<Heartbeat>() { new ClassiCubeBeat(), new BetaCraftBeat() };
+        public static List<Heartbeat> Heartbeats = new List<Heartbeat>() { 
+            (Server.Config.EnableClassicCubeHeartbeat && Server.Config.PVN == 7 ? new ClassiCubeBeat() : null),
+            (Server.Config.EnableBetaCraftHeartbeat ? new BetaCraftBeat() : null)
+        };
 
         
         /// <summary> Gets the URL the heartbeat is sent to. </summary>
@@ -52,8 +55,11 @@ namespace Supernova.Network
         /// <summary> Initialises all heartbeats. </summary>
         public static void InitHeartbeats() {
             foreach (Heartbeat beat in Heartbeats) {
-                beat.Init();
-                Pump(beat);
+                //ugly hack to prevent errors if beat is null due to disabling a certain heartbeat.
+                if(beat != null) {
+                    beat.Init();
+                    Pump(beat);
+                }
             }
             
             if (heartbeatTask != null) return;

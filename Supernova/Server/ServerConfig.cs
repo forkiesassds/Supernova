@@ -65,6 +65,10 @@ namespace Supernova {
         public string SslCertPass = "";
         [ConfigString("HeartbeatURL", "Other", "http://www.classicube.net/heartbeat.jsp", false, ":/.")]
         public string HeartbeatURL = "http://www.classicube.net/heartbeat.jsp";
+        [ConfigBool("enable-classicube-heartbeat", "Other", true)]
+        public bool EnableClassicCubeHeartbeat = true;
+        [ConfigBool("enable-betacraft-heartbeat", "Other", true)]
+        public bool EnableBetaCraftHeartbeat = true;
         
         [ConfigBool("restart-on-error", "Error handling", true)]
         public bool restartOnError = true;
