@@ -69,7 +69,7 @@ namespace Supernova.Network
         
         static SchedulerTask heartbeatTask;
         static void OnBeat(SchedulerTask task) {
-            foreach (Heartbeat beat in Heartbeats) { Pump(beat); }
+            foreach (Heartbeat beat in Heartbeats) { if(beat != null) { Pump(beat); } }
         }
         
 
